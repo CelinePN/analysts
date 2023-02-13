@@ -1,5 +1,13 @@
 //import com.squareup.okhttp.*;
+import com.mongodb.ConnectionString;
+import com.mongodb.MongoClientSettings;
+import com.mongodb.ServerApi;
+import com.mongodb.ServerApiVersion;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
+import com.mongodb.client.MongoDatabase;
 import okhttp3.*;
+
 
 import java.io.IOException;
 
@@ -18,4 +26,8 @@ class Main {
                 .build();
         Response response = client.newCall(request).execute();
     }
+    ConnectionString connectionString = new ConnectionString("mongodb+srv://ProjetBigData:Book4nalystsBigData:)@cluster0.vbrsyzp.mongodb.net/?retryWrites=true&w=majority");
+    MongoClientSettings settings = MongoClientSettings.builder().applyConnectionString(connectionString).serverApi(ServerApi.builder().version(ServerApiVersion.V1).build()).build();
+    MongoClient mongoClient = MongoClients.create(settings);
+    MongoDatabase database = mongoClient.getDatabase("bookAnalysts");
 }
