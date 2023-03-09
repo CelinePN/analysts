@@ -6,12 +6,12 @@ import java.io.IOException;
 
 public class Database {
 
-    public void createDb() throws IOException {
+    public void getAllDocuments() throws IOException {
         OkHttpClient client = new OkHttpClient().newBuilder().build();
         MediaType mediaType = MediaType.parse("application/json");
         RequestBody body = RequestBody.create("{\n    \"collection\":\"bibliotheques_paris\",\n    \"database\":\"book_analysts\",\n    \"dataSource\":\"Cluster0\"\n}", mediaType);
         Request request = new Request.Builder()
-        .url("https://data.mongodb-api.com/app/data-moehb/endpoint/data/v1/action/findOne")
+        .url("https://data.mongodb-api.com/app/data-moehb/endpoint/data/v1/action/find")
         .method("POST", body)
         .addHeader("Content-Type", "application/json")
         .addHeader("Access-Control-Request-Headers", "*")

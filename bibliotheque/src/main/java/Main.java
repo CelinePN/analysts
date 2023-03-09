@@ -7,6 +7,6 @@ import java.io.IOException;
 class Main {
     public static void main(String[] args) throws IOException {
         Database db = new Database();
-        db.createDb();;
+        db.getAllDocuments();
     }
 }
