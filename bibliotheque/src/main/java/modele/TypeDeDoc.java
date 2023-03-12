@@ -1,5 +1,7 @@
 package modele;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +12,4 @@ public class TypeDeDoc {
     static List jeux = new ArrayList();
     static List cd = new ArrayList();  // autres catégories
     static List vide = new ArrayList();
-
-
-
 }
