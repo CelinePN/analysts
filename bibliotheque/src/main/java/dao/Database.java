@@ -16,6 +16,8 @@ public class Database {
     OkHttpClient client = new OkHttpClient().newBuilder().build();
     MediaType mediaType = MediaType.parse("application/json");
 
+    //mettre constructeur pour client et mediaType
+
     public Request getRequest(String val){
         RequestBody body = RequestBody.create("{\n" +
                 "      \"dataSource\": \"Cluster0\",\n" +
