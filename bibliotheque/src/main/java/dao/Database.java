@@ -1,6 +1,7 @@
 package dao;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import modele.Document;
 import modele.parametre.Parametre;
 import modele.parametre.ParametreWrapper;
 import modele.parametre.TypesParametre;
@@ -12,6 +13,7 @@ import java.util.List;
 import static modele.parametre.TypesParametre.*;
 
 public class Database {
+
 
     OkHttpClient client = new OkHttpClient().newBuilder().build();
     MediaType mediaType = MediaType.parse("application/json");
@@ -47,7 +49,7 @@ public class Database {
                 .build();
     }
 
-    public void getAllDocuments() throws IOException {
+    public List<Document> getAllDocuments() throws IOException {
 
         RequestBody body = RequestBody.create("{\n    \"collection\":\"bibliotheques_paris\",\n    \"database\":\"book_analysts\",\n    \"dataSource\":\"Cluster0\"\n}", mediaType);
         Request request = new Request.Builder()
@@ -60,7 +62,7 @@ public class Database {
         Response response = client.newCall(request).execute();
     }
 
-    public void getLanguages() throws IOException {
+    public List<Parametre> getLanguages() throws IOException {
 
         Response response = client.newCall(getRequest("Langue")).execute();
         String jsonData = response.body().string(); // Store response body in a variable
@@ -69,33 +71,34 @@ public class Database {
     }
 
 
-     public void getTypdeDoc() throws IOException {
-
+     public List<Parametre> getTypeDeDoc() throws IOException {
         Response response = client.newCall(getRequest("Type de document")).execute();
         String jsonData = response.body().string(); // Store response body in a variable
         serializeParam(jsonData, TYPE_DE_DOC);
         response.close();
   }
 
-    public void getAuteur() throws IOException {
+    public List<Parametre> getAuteur() throws IOException {
+        //match par type de doc
         Response response = client.newCall(getRequest("Auteur Nom")).execute();
         String jsonData = response.body().string(); // Store response body in a variable
         serializeParam(jsonData, AUTEUR);
         response.close();
     }
 
-    public void getCategorie() throws IOException {
-
+    public List<Parametre> getCategorie() throws IOException {
+        //match par type de doc
         Response response = client.newCall(getRequest("Catégorie statistique 1")).execute();
         String jsonData = response.body().string(); // Store response body in a variable
         serializeParam(jsonData, CATEGORIE);
         response.close();    }
 
-    public void getNBTypDoc() throws IOException {
+    public void getListTypesDoc() throws IOException {
         Response response = client.newCall(getRequest("Catégorie statistique 1")).execute();
         String jsonData = response.body().string(); // Store response body in a variable
         serializeParam(jsonData, CATEGORIE);
         response.close();    }
+
 
     public void serializeParam(String json, TypesParametre type) throws IOException{
         ObjectMapper objectMapper = new ObjectMapper();
