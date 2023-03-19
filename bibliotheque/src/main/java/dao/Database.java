@@ -21,9 +21,6 @@ public class Database {
          mediaType = MediaType.parse("application/json");
     }
 
-
-    //mettre constructeur pour client et mediaType
-
     public Request getRequest(String val){
         RequestBody body = RequestBody.create("{\n" +
                 "      \"dataSource\": \"Cluster0\",\n" +
