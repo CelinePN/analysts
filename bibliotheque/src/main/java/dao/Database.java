@@ -99,6 +99,7 @@ public class Database {
         //match par type de doc
         Response response = client.newCall(getRequest("Catégorie statistique 1")).execute();
         String jsonData = response.body().string(); // Store response body in a variable
+        //System.out.println(jsonData);
         response.close();
         return serializeParam(jsonData, CATEGORIE);
     }
@@ -106,6 +107,7 @@ public class Database {
     public List<Parametre> getListTypesDoc() throws IOException {
         Response response = client.newCall(getRequest("Catégorie statistique 1")).execute();
         String jsonData = response.body().string(); // Store response body in a variable
+        System.out.println(jsonData);
         response.close();
         return serializeParam(jsonData, CATEGORIE);
     }

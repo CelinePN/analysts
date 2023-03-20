@@ -51,9 +51,21 @@ public class DatabaseTest {
     }
 
     @Test
+    public void testGetLanguagesNombre() throws IOException {
+        Database db = new Database();
+        assertEquals(14, db.getLanguages().get(1).getCount());
+    }
+
+    @Test
     public void testGetTypeDeDoc() {
         Database db = new Database();
         assertDoesNotThrow(() -> db.getTypeDeDoc());
+    }
+
+    @Test
+    public void testGetTypeDeDocNombre() throws IOException {
+        Database db = new Database();
+        assertEquals(45, db.getTypeDeDoc().get(1).getCount());
     }
 
     @Test
@@ -63,9 +75,21 @@ public class DatabaseTest {
     }
 
     @Test
+    public void testGetAuteurNombre() throws IOException {
+        Database db = new Database();
+        assertEquals(2, db.getAuteur().get(40).getCount());
+    }
+
+    @Test
     public void testGetCategorie() {
         Database db = new Database();
         assertDoesNotThrow(() -> db.getCategorie());
+    }
+
+    @Test
+    public void testGetCategorieNombre() throws IOException {
+        Database db = new Database();
+        assertEquals(745, db.getCategorie().get(1).getCount());
     }
 
     @Test
