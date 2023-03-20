@@ -27,6 +27,12 @@ public class Database {
                 "      \"database\": \"book_analysts\",\n" +
                 "      \"collection\": \"bibliotheques_paris\",\n" +
                 "      \"pipeline\": [ \n" +
+                "            {\n" +
+                "            \"$match\": { \n" +
+                "            \n" +
+                "            \""+ val + "\": {\"$ne\": null}\n"+
+                "            }\n"+
+                "            },\n"+
                 "          {\n" +
                 "            \"$group\": { \n" +
                 "                \n" +
@@ -67,6 +73,7 @@ public class Database {
 
         Response response = client.newCall(getRequest("Langue")).execute();
         String jsonData = response.body().string(); // Store response body in a variable
+        System.out.println(jsonData);
         response.close();
 
         return serializeParam(jsonData, LANGUE);

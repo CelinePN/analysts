@@ -9,6 +9,7 @@ class Main {
         Database db = new Database();
         //db.getAllDocuments();
         db.getLanguages();
+        System.out.println(db.getLanguages().get(0).getTotalExemplaires());
         //db.getTypdeDoc();
         //db.getAuteur();
         //db.getCategorie();
