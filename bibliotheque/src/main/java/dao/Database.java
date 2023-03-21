@@ -1,6 +1,7 @@
 package dao;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import modele.TypeDeDocEnum;
 import modele.parametre.Parametre;
 import modele.parametre.ParametreWrapper;
 import modele.parametre.TypesParametre;
@@ -20,7 +21,7 @@ public class Database {
          client = new OkHttpClient().newBuilder().build();
          mediaType = MediaType.parse("application/json");
     }
-
+    //3 chaine de caracetre static final
     public Request getRequest(String val){
         RequestBody body = RequestBody.create("{\n" +
                 "      \"dataSource\": \"Cluster0\",\n" +
@@ -45,6 +46,41 @@ public class Database {
                 "          {\n" +
                 "              \"$sort\": { \"_id\": 1 }\n" +
                 "          }\n" +
+                "      ]\n" +
+                "  }", mediaType);
+        return new Request.Builder()
+                .url("https://data.mongodb-api.com/app/data-moehb/endpoint/data/v1/action/aggregate")
+                .method("POST", body)
+                .addHeader("Content-Type", "application/json")
+                .addHeader("Access-Control-Request-Headers", "*")
+                .addHeader("api-key", "xALvC4U1PdzK3K5y48tsvdpQar51gpnLLmKiNPQU4t2wOt11TqbyQ1mAabx8wAi6")
+                .build();
+    }
+
+    public Request getRequestMatchBy(String valGroup, String valMatch){
+        RequestBody body = RequestBody.create("{\n" +
+                "      \"dataSource\": \"{{DATA_SOURCE}}\",\n" +
+                "      \"database\": \"{{DATABASE}}\",\n" +
+                "      \"collection\": \"{{COLLECTION}}\",\n" +
+                "      \"pipeline\": [ \n" +
+                "          {\n" +
+                "              \"$match\": { \"$or\": ["+valMatch+"]}\n" +
+                "          },\n" +
+                "          {\n" +
+                "          \n" +
+                "            \"$group\": { \n" +
+                "                \n" +
+                "                  \"_id\": \"$"+valGroup+"\",\n" +
+                "                  \"count\" : { \"$sum\": 1 },\n" +
+                "                  \"total_prets\" : { \"$sum\": \"$Nombre de prêt total\"},\n" +
+                "                  \"total_exemplaires\" : { \"$sum\": \"$Nombre d'exemplaires\"}\n" +
+                "               }\n" +
+                "          },\n" +
+                "\n" +
+                "          {\n" +
+                "              \"$sort\": { \"_id\": 1 }\n" +
+                "          }\n" +
+                "\n" +
                 "      ]\n" +
                 "  }", mediaType);
         return new Request.Builder()
@@ -87,17 +123,18 @@ public class Database {
          return serializeParam(jsonData, TYPE_DE_DOC);
   }
 
-    public List<Parametre> getAuteur() throws IOException {
+    public List<Parametre> getAuteurByTypeDeDoc(TypeDeDocEnum expression) throws IOException {
         //match par type de doc
-        Response response = client.newCall(getRequest("Auteur Nom")).execute();
+        Response response = client.newCall(getRequestMatchBy("Auteur Nom", expression.enumToString())).execute();
+
         String jsonData = response.body().string(); // Store response body in a variable
         response.close();
         return serializeParam(jsonData, AUTEUR);
     }
 
-    public List<Parametre> getCategorie() throws IOException {
+    public List<Parametre> getCategorieByTypeDeDoc(TypeDeDocEnum expression) throws IOException {
         //match par type de doc
-        Response response = client.newCall(getRequest("Catégorie statistique 1")).execute();
+        Response response = client.newCall(getRequestMatchBy("Catégorie statistique 1", expression.enumToString())).execute();
         String jsonData = response.body().string(); // Store response body in a variable
         //System.out.println(jsonData);
         response.close();
