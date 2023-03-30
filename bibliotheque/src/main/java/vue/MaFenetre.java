@@ -6,15 +6,29 @@ public class MaFenetre extends JFrame {
     public MaFenetre() {
         super("Les bibliothèques de PARIS"); // Titre de la fenêtre
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Fermer la fenêtre en cliquant sur la croix
-        setSize(400, 350); // Taille de la fenêtre
+        setSize(550, 350); // Taille de la fenêtre
         setLocationRelativeTo(null); // Centrer la fenêtre sur l'écran
         JPanel panel = new JPanel();
 
-        setLayout(new FlowLayout(FlowLayout.CENTER));
+        /*JComponent component1 = new JPanel();
+        //component1.setSize(450, 25);
+        component1.setAlignmentX(LEFT_ALIGNMENT);
+        JComponent component2 = new JPanel();
+        component2.setSize(450, 300);
+        component2.setAlignmentX(CENTER_ALIGNMENT);
+        JComponent component3 = new JPanel();
+        component3.setSize(450, 25);
+        component3.setAlignmentX(RIGHT_ALIGNMENT);
 
-        panel.setLayout(new GridLayout(10, 3,10, 10));
+        panel.add(component1);
+        panel.add(component2);
+        panel.add(component3);*/
+        //setLayout(new FlowLayout(FlowLayout.CENTER));
+
+        panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
 
         JLabel label = new JLabel("Choisir entre les différentes possibilités");
+        label.setAlignmentX(RIGHT_ALIGNMENT);
         JLabel labelDemande = new JLabel("Les demandes");
         JLabel labelOffres = new JLabel("Les offres");
         JLabel labelOD = new JLabel("Les liens entre offres et demandes");
@@ -39,6 +53,7 @@ public class MaFenetre extends JFrame {
 
         //bouton de validation
         JButton valider = new JButton("Valider");
+        valider.setAlignmentX(panel.RIGHT_ALIGNMENT);
 
         //groupement des boutons de demandes
         ButtonGroup bg = new ButtonGroup();
@@ -68,6 +83,8 @@ public class MaFenetre extends JFrame {
         panel.add(labelOD);
         panel.add(boutonOD1);
         panel.add(boutonOD2);
+
+        panel.add(valider);
 
         getContentPane().add(panel);
 
