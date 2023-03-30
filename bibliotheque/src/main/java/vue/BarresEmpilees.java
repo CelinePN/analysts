@@ -5,21 +5,25 @@ import java.awt.*;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
-import org.jfree.data.general.DefaultPieDataset;
+import org.jfree.data.category.DefaultCategoryDataset;
 
-public class Graphique extends JFrame {
+public class BarresEmpilees extends JFrame {
 
-    public Graphique() {
+    public BarresEmpilees() {
         // Création des données
-        DefaultPieDataset dataset = new DefaultPieDataset();
-        dataset.setValue("Partie 1", 40);
-        dataset.setValue("Partie 2", 20);
-        dataset.setValue("Partie 3", 30);
-        dataset.setValue("Partie 4", 10);
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        dataset.addValue(40, "Série 1", "Catégorie 1");
+        dataset.addValue(20, "Série 2", "Catégorie 1");
+        dataset.addValue(10, "Série 1", "Catégorie 2");
+        dataset.addValue(30, "Série 2", "Catégorie 2");
+        dataset.addValue(20, "Série 1", "Catégorie 3");
+        dataset.addValue(10, "Série 2", "Catégorie 3");
 
-        // Création du graphique en camembert
-        JFreeChart chart = ChartFactory.createPieChart(
-                "Mon graphique en camembert", // Titre du graphique
+        // Création du graphique en barres empilées
+        JFreeChart chart = ChartFactory.createStackedBarChart(
+                "Mon graphique en barres empilées", // Titre du graphique
+                "Catégories", // Titre de l'axe des abscisses
+                "Valeurs", // Titre de l'axe des ordonnées
                 dataset // Données à afficher
         );
 
@@ -48,8 +52,8 @@ public class Graphique extends JFrame {
 
         // Création du panel principal contenant le graphique, la liste déroulante et les boutons
         JPanel mainPanel = new JPanel(new BorderLayout());
-        mainPanel.add(selectionPanel, BorderLayout.CENTER);
-        mainPanel.add(chartPanel, BorderLayout.WEST);
+        mainPanel.add(selectionPanel, BorderLayout.WEST);
+        mainPanel.add(chartPanel, BorderLayout.CENTER);
         mainPanel.add(buttonPanel, BorderLayout.SOUTH);
 
         // Ajout du panel principal à la fenêtre
@@ -57,7 +61,7 @@ public class Graphique extends JFrame {
     }
 
     public static void main(String[] args) {
-        Graphique myChart = new Graphique();
+        BarresEmpilees myChart = new BarresEmpilees();
         myChart.pack();
         myChart.setVisible(true);
     }

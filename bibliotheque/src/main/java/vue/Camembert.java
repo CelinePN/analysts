@@ -2,26 +2,27 @@ package vue;
 
 import javax.swing.*;
 import java.awt.*;
+
+import dao.Database;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
-import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
 
-public class Histogramme extends JFrame {
+public class Camembert extends JFrame {
 
-    public Histogramme() {
+    public Camembert() {
         // Création des données
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        dataset.addValue(40, "Série 1", "Catégorie 1");
-        dataset.addValue(20, "Série 1", "Catégorie 2");
-        dataset.addValue(30, "Série 1", "Catégorie 3");
-        dataset.addValue(10, "Série 1", "Catégorie 4");
+        Database db = new Database();
+        DefaultPieDataset dataset = new DefaultPieDataset();
+        dataset.setValue("Partie 1", 40); //db.getLanguages()
+        dataset.setValue("Partie 2", 20);
+        dataset.setValue("Partie 3", 30);
+        dataset.setValue("Partie 4", 10);
 
-        // Création du graphique en barres
-        JFreeChart chart = ChartFactory.createBarChart(
-                "Mon graphique en barres", // Titre du graphique
-                "Catégories", // Titre de l'axe des abscisses
-                "Valeurs", // Titre de l'axe des ordonnées
+        // Création du graphique en camembert
+        JFreeChart chart = ChartFactory.createPieChart(
+                "Mon graphique en camembert", // Titre du graphique
                 dataset // Données à afficher
         );
 
@@ -30,8 +31,8 @@ public class Histogramme extends JFrame {
         chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
 
         // Création des boutons
-        JButton buttonLeft = new JButton("Retour Menu");
-        JButton buttonRight = new JButton("Fermer");
+        JButton buttonLeft = new JButton("Bouton gauche");
+        JButton buttonRight = new JButton("Bouton droit");
 
         // Création de la liste déroulante
         String[] options = {"Option 1", "Option 2", "Option 3", "Option 4"};
@@ -50,8 +51,8 @@ public class Histogramme extends JFrame {
 
         // Création du panel principal contenant le graphique, la liste déroulante et les boutons
         JPanel mainPanel = new JPanel(new BorderLayout());
-        mainPanel.add(selectionPanel, BorderLayout.WEST);
-        mainPanel.add(chartPanel, BorderLayout.CENTER);
+        mainPanel.add(selectionPanel, BorderLayout.CENTER);
+        mainPanel.add(chartPanel, BorderLayout.WEST);
         mainPanel.add(buttonPanel, BorderLayout.SOUTH);
 
         // Ajout du panel principal à la fenêtre
@@ -59,7 +60,7 @@ public class Histogramme extends JFrame {
     }
 
     public static void main(String[] args) {
-        Histogramme myChart = new Histogramme();
+        Camembert myChart = new Camembert();
         myChart.pack();
         myChart.setVisible(true);
     }
