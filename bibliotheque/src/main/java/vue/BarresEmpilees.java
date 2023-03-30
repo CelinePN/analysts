@@ -6,8 +6,11 @@ import java.io.IOException;
 import java.util.List;
 
 import dao.Database;
-import modele.TypeDeDocEnum;
+//import modele.TypeDeDocEnum;
 import modele.parametre.Parametre;
+import modele.parametre.ParametreType;
+import modele.utils.SortBy;
+import modele.utils.TypeDeDocGrouping;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -79,7 +82,7 @@ public class BarresEmpilees extends JFrame {
 
     public static void main(String[] args) throws IOException {
         Database db = new Database();
-        List<Parametre> listeCategorie = db.getCategorieByTypeDeDoc(TypeDeDocEnum.FILMS);
+        List<Parametre> listeCategorie = db.getParamByTypeDeDoc(ParametreType.GENRE, TypeDeDocGrouping.LIVRES, SortBy.EXEMPLAIRES,5);
         BarresEmpilees myChart = new BarresEmpilees(listeCategorie);
         myChart.pack();
         myChart.setVisible(true);

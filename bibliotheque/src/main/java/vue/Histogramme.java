@@ -7,12 +7,15 @@ import java.util.List;
 
 import dao.Database;
 import modele.parametre.Parametre;
+import modele.parametre.ParametreType;
+import modele.utils.SortBy;
+import modele.utils.TypeDeDocGrouping;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.category.DefaultCategoryDataset;
 
-import static modele.TypeDeDocEnum.FILMS;
+//import static modele.TypeDeDocEnum.FILMS;
 
 public class Histogramme extends JFrame {
 
@@ -77,7 +80,7 @@ public class Histogramme extends JFrame {
 
     public static void main(String[] args) throws IOException {
         Database db = new Database();
-        List<Parametre> listeCategorie= db.getCategorieByTypeDeDoc(FILMS);
+        List<Parametre> listeCategorie= db.getParamByTypeDeDoc(ParametreType.AUTEUR, TypeDeDocGrouping.LIVRES, SortBy.EMPRUNTS,5);
         Histogramme myChart = new Histogramme(listeCategorie);
         myChart.pack();
         myChart.setVisible(true);

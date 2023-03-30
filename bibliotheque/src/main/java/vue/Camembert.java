@@ -7,6 +7,10 @@ import java.util.List;
 
 import dao.Database;
 import modele.parametre.Parametre;
+import modele.parametre.ParametreType;
+import modele.utils.SortBy;
+import modele.utils.TypeDeDocGrouping;
+import org.intellij.lang.annotations.Language;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -75,7 +79,8 @@ public class Camembert extends JFrame {
 
     public static void main(String[] args) throws IOException {
         Database db = new Database();
-        List<Parametre> listeLanguages= db.getLanguages();
+        List<Parametre> listeLanguages= db.getParamByTypeDeDoc(ParametreType.LANGUE, TypeDeDocGrouping.LIVRES, SortBy.EXEMPLAIRES,5);
+        //ParametreType typeParam, TypeDeDocGrouping typeDeDocEnum, SortBy sortBy, int limit
         Camembert myChart = new Camembert(listeLanguages);
         myChart.pack();
         myChart.setVisible(true);
