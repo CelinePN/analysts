@@ -21,6 +21,16 @@ public class Histogramme extends JPanel {
             chartPanel.setPreferredSize(new Dimension(500, 300));
             add(chartPanel);
 
+        JButton boutonRetour = new JButton("Retour");
+        /*boutonRetour.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Code pour revenir à la fenêtre précédente
+            }
+        });*/
+
+        JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        panel.add(boutonRetour);
+       // getContentPane().add(panel, BorderLayout.SOUTH);
 
 
 
