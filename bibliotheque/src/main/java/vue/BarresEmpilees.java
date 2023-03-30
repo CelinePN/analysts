@@ -2,6 +2,12 @@ package vue;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
+import java.util.List;
+
+import dao.Database;
+import modele.TypeDeDocEnum;
+import modele.parametre.Parametre;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -9,15 +15,26 @@ import org.jfree.data.category.DefaultCategoryDataset;
 
 public class BarresEmpilees extends JFrame {
 
-    public BarresEmpilees() {
+    /**
+     *
+     * Classe pour afficher un graphique de type Barres Empilees
+     * à partir de la liste de paramètre récupérée de nos données
+     *
+     * @author  Alice Hué
+     * @version 1.0
+     * @since   2023-03-30
+     *
+     **/
+    public BarresEmpilees(List<Parametre> liste){
         // Création des données
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        dataset.addValue(40, "Série 1", "Catégorie 1");
-        dataset.addValue(20, "Série 2", "Catégorie 1");
-        dataset.addValue(10, "Série 1", "Catégorie 2");
-        dataset.addValue(30, "Série 2", "Catégorie 2");
-        dataset.addValue(20, "Série 1", "Catégorie 3");
-        dataset.addValue(10, "Série 2", "Catégorie 3");
+        for (Parametre param : liste){
+            dataset.setValue(param.getTotalExemplaires(), "Offre", param.getNom()); //Offre
+            dataset.setValue(param.getTotalPrets(), "Demande", param.getNom()); //Demande
+        }
+        // Exemple :
+        // dataset.addValue(40, "Offre", "Roman Policier");
+        // dataset.addValue(20, "Demande", "Roman Policier");
 
         // Création du graphique en barres empilées
         JFreeChart chart = ChartFactory.createStackedBarChart(
@@ -60,8 +77,10 @@ public class BarresEmpilees extends JFrame {
         setContentPane(mainPanel);
     }
 
-    public static void main(String[] args) {
-        BarresEmpilees myChart = new BarresEmpilees();
+    public static void main(String[] args) throws IOException {
+        Database db = new Database();
+        List<Parametre> listeCategorie = db.getCategorieByTypeDeDoc(TypeDeDocEnum.FILMS);
+        BarresEmpilees myChart = new BarresEmpilees(listeCategorie);
         myChart.pack();
         myChart.setVisible(true);
     }

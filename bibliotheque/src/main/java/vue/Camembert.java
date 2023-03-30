@@ -2,8 +2,11 @@ package vue;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
+import java.util.List;
 
 import dao.Database;
+import modele.parametre.Parametre;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -11,14 +14,25 @@ import org.jfree.data.general.DefaultPieDataset;
 
 public class Camembert extends JFrame {
 
-    public Camembert() {
+    /**
+     *
+     * Classe pour afficher un graphique de type Camembert
+     * à partir de la liste de paramètre récupérée de nos données
+     *
+     * @author  Alice Hué
+     * @version 1.0
+     * @since   2023-03-30
+     *
+     **/
+
+    public Camembert(List<Parametre> liste) {
+
         // Création des données
-        Database db = new Database();
         DefaultPieDataset dataset = new DefaultPieDataset();
-        dataset.setValue("Partie 1", 40); //db.getLanguages()
-        dataset.setValue("Partie 2", 20);
-        dataset.setValue("Partie 3", 30);
-        dataset.setValue("Partie 4", 10);
+        for (Parametre param : liste){
+            dataset.setValue(param.getNom(), param.getTotalExemplaires()); //db.getLanguages()
+        }
+
 
         // Création du graphique en camembert
         JFreeChart chart = ChartFactory.createPieChart(
@@ -59,8 +73,10 @@ public class Camembert extends JFrame {
         setContentPane(mainPanel);
     }
 
-    public static void main(String[] args) {
-        Camembert myChart = new Camembert();
+    public static void main(String[] args) throws IOException {
+        Database db = new Database();
+        List<Parametre> listeLanguages= db.getLanguages();
+        Camembert myChart = new Camembert(listeLanguages);
         myChart.pack();
         myChart.setVisible(true);
     }

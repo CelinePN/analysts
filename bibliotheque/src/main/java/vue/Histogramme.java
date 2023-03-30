@@ -2,20 +2,37 @@ package vue;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
+import java.util.List;
+
+import dao.Database;
+import modele.parametre.Parametre;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.category.DefaultCategoryDataset;
 
+import static modele.TypeDeDocEnum.FILMS;
+
 public class Histogramme extends JFrame {
 
-    public Histogramme() {
+    /**
+     *
+     * Classe pour afficher un graphique de type Histogramme
+     * à partir de la liste de paramètre récupérée de nos données
+     *
+     * @authors  Alice Hué & Mathilde Paquelier
+     * @version 1.0
+     * @since   2023-03-30
+     *
+     **/
+
+    public Histogramme(List<Parametre> liste) {
         // Création des données
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        dataset.addValue(40, "Série 1", "Catégorie 1");
-        dataset.addValue(20, "Série 1", "Catégorie 2");
-        dataset.addValue(30, "Série 1", "Catégorie 3");
-        dataset.addValue(10, "Série 1", "Catégorie 4");
+        for (Parametre param : liste){
+            dataset.setValue(param.getTotalPrets(), "Nombre d'emprunt",param.getNom());
+        }
 
         // Création du graphique en barres
         JFreeChart chart = ChartFactory.createBarChart(
@@ -58,8 +75,10 @@ public class Histogramme extends JFrame {
         setContentPane(mainPanel);
     }
 
-    public static void main(String[] args) {
-        Histogramme myChart = new Histogramme();
+    public static void main(String[] args) throws IOException {
+        Database db = new Database();
+        List<Parametre> listeCategorie= db.getCategorieByTypeDeDoc(FILMS);
+        Histogramme myChart = new Histogramme(listeCategorie);
         myChart.pack();
         myChart.setVisible(true);
     }
