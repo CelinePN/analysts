@@ -13,7 +13,7 @@ public class MaFenetre extends JFrame {
 
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
-        JLabel label = new JLabel("Choisir entre les différentes posibilités");
+        JLabel label = new JLabel("Choisir entre les différentes possibilités");
         panel.add(label);
 
         JButton bouton1 = new JButton("Offre ");
