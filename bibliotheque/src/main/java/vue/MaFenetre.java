@@ -6,16 +6,18 @@ public class MaFenetre extends JFrame {
     public MaFenetre() {
         super("Les bibliothèques de PARIS"); // Titre de la fenêtre
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Fermer la fenêtre en cliquant sur la croix
-        //setSize(500, 500); // Taille de la fenêtre
+        setSize(400, 350); // Taille de la fenêtre
         setLocationRelativeTo(null); // Centrer la fenêtre sur l'écran
         JPanel panel = new JPanel();
+
         setLayout(new FlowLayout(FlowLayout.CENTER));
 
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.setLayout(new GridLayout(10, 3,10, 10));
 
         JLabel label = new JLabel("Choisir entre les différentes possibilités");
         JLabel labelDemande = new JLabel("Les demandes");
         JLabel labelOffres = new JLabel("Les offres");
+        JLabel labelOD = new JLabel("Les liens entre offres et demandes");
 
 
         /*JButton bouton1 = new JButton("Offre ");
@@ -31,6 +33,10 @@ public class MaFenetre extends JFrame {
         JRadioButton boutonOffre1 = new JRadioButton("Types de documents possédés");
         JRadioButton boutonOffre2 = new JRadioButton("Langues les plus proposées");
 
+        //boutons des offres et demandes
+        JRadioButton boutonOD1 = new JRadioButton("Offres et demandes par genre et type de documents");
+        JRadioButton boutonOD2 = new JRadioButton("Types de documents les plus rentables");
+
         //bouton de validation
         JButton valider = new JButton("Valider");
 
@@ -44,6 +50,10 @@ public class MaFenetre extends JFrame {
         bg.add(boutonOffre1);
         bg.add(boutonOffre2);
 
+        //groupement des boutons d'offres
+        bg.add(boutonOD1);
+        bg.add(boutonOD2);
+
         //affichage
         panel.add(label);
         panel.add(labelDemande);
@@ -55,6 +65,9 @@ public class MaFenetre extends JFrame {
         panel.add(boutonOffre1);
         panel.add(boutonOffre2);
 
+        panel.add(labelOD);
+        panel.add(boutonOD1);
+        panel.add(boutonOD2);
 
         getContentPane().add(panel);
 
