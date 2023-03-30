@@ -109,10 +109,11 @@ public class Database {
 
         Response response = client.newCall(getRequest("Langue")).execute();
         String jsonData = response.body().string(); // Store response body in a variable
-        System.out.println(jsonData);
+        //System.out.println(jsonData);
         response.close();
-
-        return serializeParam(jsonData, LANGUE);
+        List<Parametre> allLanguages = serializeParam(jsonData, LANGUE);
+        List<Parametre> firstFiveLanguages = allLanguages.subList(0, Math.min(5, allLanguages.size()));
+        return firstFiveLanguages;
     }
 
 
