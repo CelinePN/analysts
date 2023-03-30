@@ -1,14 +1,12 @@
 package dao;
-import modele.parametre.Parametre;
-import org.junit.jupiter.api.Assertions;
+import modele.utils.SortBy;
+import modele.parametre.ParametreType;
 import org.junit.jupiter.api.Test;
 import okhttp3.*;
 import java.io.IOException;
-import java.util.List;
-import java.util.ArrayList;
 
 
-import static modele.parametre.TypesParametre.LANGUE;
+import static modele.utils.TypeDeDocGrouping.NO_TYPE;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class DatabaseTest {
@@ -19,16 +17,15 @@ public class DatabaseTest {
         Database db = new Database();
         assertNotNull(db.client);
         assertNotNull(db.mediaType);
-        //assertTrue(db.client instanceof OkHttpClient);
         assertEquals(db.mediaType, MediaType.parse("application/json"));
     }
 
     // Vérifie si les méthodes ne lèvent pas d'exceptions
     // si les requêtes sont correctement construites
-    @Test
+    /*@Test
     public void testGetRequest() {
         Database db = new Database();
-        Request request = db.getRequest("test");
+        RequestBody request = db.getRequestBody("test", "test", "total_exemplaires", "10");
         assertNotNull(request);
         assertEquals("https://data.mongodb-api.com/app/data-moehb/endpoint/data/v1/action/aggregate", request.url().toString());
         assertEquals("POST", request.method());
@@ -36,36 +33,33 @@ public class DatabaseTest {
         assertEquals("*", request.header("Access-Control-Request-Headers"));
         assertEquals("xALvC4U1PdzK3K5y48tsvdpQar51gpnLLmKiNPQU4t2wOt11TqbyQ1mAabx8wAi6", request.header("api-key"));
         assertNotNull(request.body());
-    }
-
-    @Test
-    public void testGetAllDocuments() {
-        Database db = new Database();
-        assertDoesNotThrow(() -> db.getAllDocuments());
-    }
+    }*/
 
     @Test
     public void testGetLanguages() {
         Database db = new Database();
-        assertDoesNotThrow(() -> db.getLanguages());
+        assertDoesNotThrow(() -> db.getParamByTypeDeDoc(ParametreType.LANGUE, NO_TYPE, SortBy.EXEMPLAIRES, 7));
     }
 
     @Test
     public void testGetLanguagesNombre() throws IOException {
         Database db = new Database();
-        assertEquals(14, db.getLanguages().get(1).getCount());
+        //compter pour français?
+        assertEquals(14, db.getParamByTypeDeDoc(ParametreType.LANGUE, NO_TYPE, SortBy.EXEMPLAIRES, 7).get(0).getTotalExemplaires());
+        assertEquals(14, db.getParamByTypeDeDoc(ParametreType.LANGUE, NO_TYPE, SortBy.EXEMPLAIRES, 7).get(0).getTotalPrets());
+        assertEquals(14, db.getParamByTypeDeDoc(ParametreType.LANGUE, NO_TYPE, SortBy.EXEMPLAIRES, 7).get(0).getCount());
     }
 
-    @Test
+   /* @Test
     public void testGetTypeDeDoc() {
         Database db = new Database();
-        assertDoesNotThrow(() -> db.getTypeDeDoc());
+        assertDoesNotThrow(() -> db.getByTypeDeDoc());
     }
 
     @Test
     public void testGetTypeDeDocNombre() throws IOException {
         Database db = new Database();
-        assertEquals(45, db.getTypeDeDoc().get(1).getCount());
+        assertEquals(45, db.getByTypeDeDoc().get(1).getCount());
     }
 
     @Test
@@ -92,11 +86,11 @@ public class DatabaseTest {
         //assertEquals(745, db.getCategorie().get(1).getCount());
     }
 
-    @Test
+    /*@Test
     public void testGetListTypesDoc() {
         Database db = new Database();
         assertDoesNotThrow(() -> db.getListTypesDoc());
-    }
+    }*/
 
     /*
     @Test

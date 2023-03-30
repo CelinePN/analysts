@@ -2,18 +2,36 @@ package modele.parametre;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ *  <h1> Paramètre </h1>
+ *
+ * <p>
+ *     C'est un modèle représentant l'élément (paramètre) qui sera analysé dans un graphique.
+ *     Un paramètre est qualifié par son type ParametreType, attribué à l'issue de sa sérialization
+ * </p>
+ *
+ * @Author: Marine
+ * @Version: 1.0
+ * @since: 30/03/2023
+ */
 public class Parametre {
 
-    private TypesParametre type_param;
+    /** Le type du paramètre (LANGUE, GENRE, AUTEUR...) */
+    private ParametreType type;
 
+    /** Le nom de ce paramètre ("Jules Verne" pour un type AUTEUR, "anglais" pour un type LANGUE etc.) */
     @JsonProperty("_id")
     private String nom;
 
+    /** Le nombre d'occurrence de ce paramètre dans la base
+     * Donc, le nombre total de documents qui portent le nom du paramètre */
     private int count;
 
+    /** La somme calculée du nombre de prêts total pour ce paramètre (tout documents confondus) */
     @JsonProperty("total_prets")
     private int totalPrets;
 
+    /** La somme calculée du nombre d'exemplaires total pour ce paramètre (tout documents confondus) */
     @JsonProperty("total_exemplaires")
     private int totalExemplaires;
 
@@ -25,12 +43,12 @@ public class Parametre {
         this.nom = nom;
     }
 
-    public TypesParametre getType_param() {
-        return type_param;
+    public ParametreType getType_param() {
+        return type;
     }
 
-    public void setType_param(TypesParametre type_param) {
-        this.type_param = type_param;
+    public void setType_param(ParametreType type_param) {
+        this.type = type_param;
     }
 
     public int getCount() {

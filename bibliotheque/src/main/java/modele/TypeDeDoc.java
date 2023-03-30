@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class TypeDeDoc {
+/*public class TypeDeDoc {
 
     static List films = new ArrayList<String>();
     static List bd = new ArrayList();
@@ -20,4 +20,4 @@ public class TypeDeDoc {
         bd.addAll(Arrays.asList("BD adulte non réservable", "BD jeunesse non réservable", "Bande dessinée jeunesse", "Bande dessinée jeunesse >12 ans", "Bande dessinée pour adulte"));
     }
 
-}
+}*/

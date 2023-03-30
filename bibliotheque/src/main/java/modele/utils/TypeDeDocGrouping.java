@@ -1,11 +1,23 @@
-package modele;
+package modele.utils;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public enum TypeDeDocEnum {
+/**
+ *  <h1> TypeDeDocGrouping </h1>
+ *
+ * <p>
+ *     Cette énumération regroupe des types de document (trop) spécifiques dans des catégories plus larges.
+ *     Permet de choisir sur l'interface un type de document sans avoir une liste trop longue à dérouler
+ * </p>
+ *
+ * @Author: Marine
+ * @Version: 1.0
+ * @since: 30/03/2023
+ */
+public enum TypeDeDocGrouping {
 
+    NO_TYPE(Arrays.asList()),
     FILMS(Arrays.asList("Adaptation en Langue des Signes Française", "Cassette vidéo VHS > 12 ans", "Cassette vidéo VHS tous publics", "DVD jeunesse", "DVD nouveautés tous publics", "DVD- vidéo > 12 ans", "DVD- vidéo > 18 ans", "DVD-vidéo > 16 ans", "DVD-vidéo tous publics")),
     BD(Arrays.asList("BD adulte non réservable", "BD jeunesse non réservable", "Bande dessinée jeunesse", "Bande dessinée jeunesse >12 ans", "Bande dessinée pour adulte")),
     MUSIQUE(Arrays.asList("CD Rom revue", "Disque compact", "Enregistrement musical pour la jeunesse", "Instrument de musique", "Nouveauté disque compact", "Partition", "Vinyle")),
@@ -14,18 +26,27 @@ public enum TypeDeDocEnum {
     REVUES(Arrays.asList("Revue de Fonds spécialisés", "Revue jeunesse", "Revue pour ado", "Revue pour adulte")),
     AUTRES(Arrays.asList("Carte ou plan", "Diapositives jeunesse", "Documents numériques et multimédia adulte", "Documents numériques et multimédia jeunesse", "Dossier", "Image, fiche cuisine …", "Non empruntable", "Nouveauté", "Nouveauté jeunesse", "Usuels")),
     ;
-    private List<String> type;
 
-
-    TypeDeDocEnum(List<String> a) {
-        this.type=a;
+    public List<String> getListTypes() {
+        return listTypes;
     }
+
+    private List<String> listTypes;
+
+
+    TypeDeDocGrouping(List<String> a) {
+        this.listTypes=a;
+    }
+
+    /** @return String: Cette méthode retourne une chaîne de caractères regroupant tous
+     * les types englobés dans un TypeDeDocGrouping. Cette chaîne servira au body de la
+     * requête en MongoDB. */
 
     public String enumToString(){
         String string="";
-        for(int i=0; i<this.type.size();i++){
-            string+="{Type de document: "+this.type.get(i)+"}";
-            if(i!=this.type.size()-1){
+        for(int i=0; i<this.listTypes.size();i++){
+            string+="{\"Type de document\": \""+this.listTypes.get(i)+"\"}";
+            if(i!=this.listTypes.size()-1){
                 string+=",";
             }
         }
