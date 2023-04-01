@@ -9,9 +9,25 @@ import java.io.IOException;
 import static modele.utils.TypeDeDocGrouping.NO_TYPE;
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ *  <h1> Test database </h1>
+ *
+ * <p>
+ *     Cette classe permet de tester la classe database et les données récupérées
+ * </p>
+ *
+ * @Author: Céline et Alice
+ * @Version: 2.0
+ * @since: 01/04/2023
+ */
+
 public class DatabaseTest {
 
     // Variables initialisées correctement
+    /**
+     * Permet de tester le constructeur
+     * @return un booléen en fonction de si les deux parties sont identiques ou non
+     **/
     @Test
     public void testConstructeur() {
         Database db = new Database();
