@@ -54,20 +54,31 @@ public class Database {
      * */
     public List<Parametre> getParamByTypeDeDoc(ParametreType typeParam, TypeDeDocGrouping typeDeDocEnum, SortBy sortBy, int limit) throws IOException {
 
-        RequestBody body = getRequestBody(typeParam.getString(), typeDeDocEnum.enumToString(), sortBy.getSortingString(), String.valueOf(limit));
+        if(typeParam == null || typeDeDocEnum == null || sortBy == null || limit == 0 ){
+            throw new IllegalArgumentException("Erreur: Les paramètres ne peuvent pas être null ou la limite ne peut pas être 0");
+        }
+        String jsonData;
+        try {
+            RequestBody body = getRequestBody(typeParam.getString(), typeDeDocEnum.enumToString(), sortBy.getSortingString(), String.valueOf(limit));
+            Request request = new Request.Builder()
+                    .url("https://data.mongodb-api.com/app/data-moehb/endpoint/data/v1/action/aggregate")
+                    .method("POST", body)
+                    .addHeader("Content-Type", "application/json")
+                    .addHeader("Access-Control-Request-Headers", "*")
+                    .addHeader("api-key", "xALvC4U1PdzK3K5y48tsvdpQar51gpnLLmKiNPQU4t2wOt11TqbyQ1mAabx8wAi6")
+                    .build();
+            Response response = client.newCall(request).execute();
+            jsonData = response.body().string(); // Store response body in a variable
+            //System.out.println(jsonData);
+            response.close();
+            return serializeParam(jsonData, typeParam);
+        }
 
-        Request request = new Request.Builder()
-                .url("https://data.mongodb-api.com/app/data-moehb/endpoint/data/v1/action/aggregate")
-                .method("POST", body)
-                .addHeader("Content-Type", "application/json")
-                .addHeader("Access-Control-Request-Headers", "*")
-                .addHeader("api-key", "xALvC4U1PdzK3K5y48tsvdpQar51gpnLLmKiNPQU4t2wOt11TqbyQ1mAabx8wAi6")
-                .build();
-        Response response = client.newCall(request).execute();
-        String jsonData = response.body().string(); // Store response body in a variable
-        //System.out.println(jsonData);
-        response.close();
-        return serializeParam(jsonData, typeParam);
+        catch(IllegalArgumentException illegalArgumentException){
+
+            System.out.println(illegalArgumentException.getMessage());
+            return null;
+        }
     }
 
     /**
