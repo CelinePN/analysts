@@ -53,7 +53,9 @@ public class Database {
      * @param limit: le nombre de paramètre que l'on veut récupérer au maximum dans notre liste
      * */
     public List<Parametre> getParamByTypeDeDoc(ParametreType typeParam, TypeDeDocGrouping typeDeDocEnum, SortBy sortBy, int limit) throws IOException {
-        RequestBody body = getRequestBody(typeParam.getString(), typeDeDocEnum.enumToString(), sortBy.getSortingType(), String.valueOf(limit));
+
+        RequestBody body = getRequestBody(typeParam.getString(), typeDeDocEnum.enumToString(), sortBy.getSortingString(), String.valueOf(limit));
+
         Request request = new Request.Builder()
                 .url("https://data.mongodb-api.com/app/data-moehb/endpoint/data/v1/action/aggregate")
                 .method("POST", body)
@@ -92,8 +94,10 @@ public class Database {
                 "      \"collection\": \"bibliotheques_paris\",\n" +
                 "      \"pipeline\": [ \n" +
                 "          {\n" +
+                // tout ce dont on ne veut pas
                 "              \"$match\": { \"$and\": [ { \""+valGroup+"\": {\"$ne\": null}}, { \""+valGroup+"\": {\"$ne\": \"sans\"}}, {\""+valGroup+"\": {\"$ne\": \"langue indéterminée\"}}]}\n" +
                 "          },\n" +
+                // match par type de document
                             valMatch +
                 "          {\n" +
                 "          \n" +

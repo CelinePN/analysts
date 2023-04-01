@@ -20,7 +20,7 @@ public enum SortBy {
     COUNT("count"),
     ALPHABETIQUE("_id");
 
-    public String getSortingType() {
+    public String getSortingString() {
         return sortingType;
     }
 
