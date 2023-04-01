@@ -19,6 +19,7 @@ import java.util.List;
 public class FirstScreen2 extends JFrame {
     private JLabel label;
     private JProgressBar progressBar;
+    public static DoubleKeyCache cache;
 
     public FirstScreen2() {
         super("Ecran de chargement"); // Titre de la fenêtre
@@ -43,7 +44,7 @@ public class FirstScreen2 extends JFrame {
         Thread thread = new Thread() {
             public void run() {
                 // Perform data loading here
-                DoubleKeyCache cache = new DoubleKeyCache();
+                cache = new DoubleKeyCache();
                 int i=0;
                 int totalIterations = ParametreType.values().length * TypeDeDocGrouping.values().length;
                 for (ParametreType parametreType : ParametreType.values()) {
