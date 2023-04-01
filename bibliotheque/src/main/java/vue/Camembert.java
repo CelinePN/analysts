@@ -79,7 +79,7 @@ public class Camembert extends JFrame {
 
     public static void main(String[] args) throws IOException {
         Database db = new Database();
-        List<Parametre> listeLanguages= db.getParamByTypeDeDoc(ParametreType.LANGUE, TypeDeDocGrouping.LIVRES, SortBy.EXEMPLAIRES,5);
+        List<Parametre> listeLanguages= db.getParamByTypeDeDoc(ParametreType.LANGUE, TypeDeDocGrouping.LIVRES);
         //ParametreType typeParam, TypeDeDocGrouping typeDeDocEnum, SortBy sortBy, int limit
         Camembert myChart = new Camembert(listeLanguages);
         myChart.pack();

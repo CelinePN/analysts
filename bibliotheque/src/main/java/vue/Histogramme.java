@@ -80,7 +80,7 @@ public class Histogramme extends JFrame {
 
     public static void main(String[] args) throws IOException {
         Database db = new Database();
-        List<Parametre> listeCategorie= db.getParamByTypeDeDoc(ParametreType.AUTEUR, TypeDeDocGrouping.LIVRES, SortBy.EMPRUNTS,5);
+        List<Parametre> listeCategorie= db.getParamByTypeDeDoc(ParametreType.AUTEUR, TypeDeDocGrouping.LIVRES);
         Histogramme myChart = new Histogramme(listeCategorie);
         myChart.pack();
         myChart.setVisible(true);

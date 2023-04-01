@@ -12,7 +12,7 @@ import java.util.List;
 class Main {
     public static void main(String[] args) throws IOException {
         Database db = new Database();
-        List<Parametre> liste = db.getParamByTypeDeDoc(ParametreType.LANGUE, TypeDeDocGrouping.BD, SortBy.EMPRUNTS, 5);
+        List<Parametre> liste = db.getParamByTypeDeDoc(ParametreType.LANGUE, TypeDeDocGrouping.BD);
         for (Parametre param : liste){
             System.out.println("---");
             System.out.println(param.getCount());

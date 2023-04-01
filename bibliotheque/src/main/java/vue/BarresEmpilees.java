@@ -82,7 +82,7 @@ public class BarresEmpilees extends JFrame {
 
     public static void main(String[] args) throws IOException {
         Database db = new Database();
-        List<Parametre> listeCategorie = db.getParamByTypeDeDoc(ParametreType.GENRE, TypeDeDocGrouping.LIVRES, SortBy.EXEMPLAIRES,5);
+        List<Parametre> listeCategorie = db.getParamByTypeDeDoc(ParametreType.GENRE, TypeDeDocGrouping.LIVRES);
         BarresEmpilees myChart = new BarresEmpilees(listeCategorie);
         myChart.pack();
         myChart.setVisible(true);

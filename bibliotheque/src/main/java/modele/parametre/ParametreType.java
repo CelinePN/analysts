@@ -1,20 +1,28 @@
 package modele.parametre;
 
 public enum ParametreType {
-    LANGUE("Langue"),
-    AUTEUR("Auteur Nom"),
-    TYPE_DE_DOC("Type de document"),
-    GENRE("Catégorie statistique 1");
+    LANGUE("Langue", 0),
+    AUTEUR("Auteur Nom", 1),
+    TYPE_DE_DOC("Type de document", 2),
+    GENRE("Catégorie statistique 1", 3);
 
     public String getString() {
-        return string;
+        return value;
     }
 
-    private String string;
+    private String value;
+
+    public int getIndice() {
+        return indice;
+    }
+
+    private int indice;
 
 
-    ParametreType(String a) {
-        this.string=a;
+    ParametreType(String v, int i) {
+
+        this.value=v;
+        this.indice = i;
     }
 
 }

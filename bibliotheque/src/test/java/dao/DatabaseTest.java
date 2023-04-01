@@ -54,16 +54,16 @@ public class DatabaseTest {
     @Test
     public void testGetLanguages() {
         Database db = new Database();
-        assertDoesNotThrow(() -> db.getParamByTypeDeDoc(ParametreType.LANGUE, NO_TYPE, SortBy.EXEMPLAIRES, 7));
+        assertDoesNotThrow(() -> db.getParamByTypeDeDoc(ParametreType.LANGUE, NO_TYPE));
     }
 
     @Test
     public void testGetLanguagesNombre() throws IOException {
         Database db = new Database();
         //compter pour français?
-        assertEquals(14, db.getParamByTypeDeDoc(ParametreType.LANGUE, NO_TYPE, SortBy.EXEMPLAIRES, 7).get(0).getTotalExemplaires());
-        assertEquals(14, db.getParamByTypeDeDoc(ParametreType.LANGUE, NO_TYPE, SortBy.EXEMPLAIRES, 7).get(0).getTotalPrets());
-        assertEquals(14, db.getParamByTypeDeDoc(ParametreType.LANGUE, NO_TYPE, SortBy.EXEMPLAIRES, 7).get(0).getCount());
+        assertEquals(14, db.getParamByTypeDeDoc(ParametreType.LANGUE, NO_TYPE).get(0).getTotalExemplaires());
+        assertEquals(14, db.getParamByTypeDeDoc(ParametreType.LANGUE, NO_TYPE).get(0).getTotalPrets());
+        assertEquals(14, db.getParamByTypeDeDoc(ParametreType.LANGUE, NO_TYPE).get(0).getCount());
     }
 
    /* @Test

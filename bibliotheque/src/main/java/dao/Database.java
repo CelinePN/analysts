@@ -52,14 +52,14 @@ public class Database {
      * @param sortBy: l'ordre dans lequel on veut trier notre liste
      * @param limit: le nombre de paramètre que l'on veut récupérer au maximum dans notre liste
      * */
-    public List<Parametre> getParamByTypeDeDoc(ParametreType typeParam, TypeDeDocGrouping typeDeDocEnum, SortBy sortBy, int limit) throws IOException {
+    public List<Parametre> getParamByTypeDeDoc(ParametreType typeParam, TypeDeDocGrouping typeDeDocEnum) throws IOException {
 
-        if(typeParam == null || typeDeDocEnum == null || sortBy == null || limit == 0 ){
+        if(typeParam == null || typeDeDocEnum == null ){
             throw new IllegalArgumentException("Erreur: Les paramètres ne peuvent pas être null ou la limite ne peut pas être 0");
         }
         String jsonData;
         try {
-            RequestBody body = getRequestBody(typeParam.getString(), typeDeDocEnum.enumToString(), sortBy.getSortingString(), String.valueOf(limit));
+            RequestBody body = getRequestBody(typeParam.getString(), typeDeDocEnum.enumToString());
             Request request = new Request.Builder()
                     .url("https://data.mongodb-api.com/app/data-moehb/endpoint/data/v1/action/aggregate")
                     .method("POST", body)
@@ -89,7 +89,7 @@ public class Database {
      * @param  sortBy : la manière dont on trie les données
      * @param  limit: le nombre maximum de données dans la liste
      * */
-    public RequestBody getRequestBody(String valGroup, String typeDeDocGroupMatch, String sortBy, String limit){
+    public RequestBody getRequestBody(String valGroup, String typeDeDocGroupMatch){
         String valMatch;
         if(!Objects.equals(typeDeDocGroupMatch, "")){
             valMatch = "           {\n" +
@@ -121,11 +121,11 @@ public class Database {
                 "               }\n" +
                 "          },\n" +
                 "          {\n" +
-                "              \"$sort\": { \""+sortBy+"\": -1 }\n" +
-                "          },\n" +
+                "              \"$sort\": { \"_id\": 1 }\n" +
+                "          }"       /* + ",\n" +
                 "          {\n" +
-                "              \"$limit\": "+limit+"\n" +
-                "          }\n" +
+                "              \"$limit\": 50 \n" +
+                "          }\n"     */ +
                 "\n" +
                 "      ]\n" +
                 "  }", mediaType);
