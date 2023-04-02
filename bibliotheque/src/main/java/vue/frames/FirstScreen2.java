@@ -1,11 +1,12 @@
-package vue;
+package vue.frames;
 
 import dao.Database;
-import modele.Cache;
+import modele.DoubleKeyCache;
 import modele.parametre.Parametre;
 import modele.parametre.ParametreType;
 import modele.utils.SortBy;
 import modele.utils.TypeDeDocGrouping;
+import vue.panels.graphs.Histogramme;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -15,11 +16,17 @@ import java.util.List;
  * Ecran de lancement de l'application
  * Permet de charger les données dans un cache pour y avoir accès en tout temps une fois le réseau coupé
  */
-public class FirstScreen extends JFrame {
+public class FirstScreen2 extends JFrame {
     private JLabel label;
     private JProgressBar progressBar;
 
-    public FirstScreen() {
+    public static DoubleKeyCache getCache() {
+        return cache;
+    }
+
+    private static DoubleKeyCache cache;
+
+    public FirstScreen2() {
         super("Ecran de chargement"); // Titre de la fenêtre
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Fermer la fenêtre en cliquant sur la croix
         setSize(550, 350); // Taille de la fenêtre
@@ -42,7 +49,7 @@ public class FirstScreen extends JFrame {
         Thread thread = new Thread() {
             public void run() {
                 // Perform data loading here
-                Cache.initCache();
+                cache = new DoubleKeyCache();
                 int i=0;
                 int totalIterations = ParametreType.values().length * TypeDeDocGrouping.values().length;
                 for (ParametreType parametreType : ParametreType.values()) {
@@ -52,7 +59,7 @@ public class FirstScreen extends JFrame {
                         try {
                             //Thread.sleep(100);
                             List<Parametre> listeLanguages= db.getParamByTypeDeDoc(parametreType, typeDeDocGrouping);
-                            Cache.data_tab.get(i).set(j, listeLanguages);
+                            cache.put(parametreType, typeDeDocGrouping, listeLanguages);
                             j++;
                         }  catch (IOException e) {
                             throw new RuntimeException(e);
@@ -67,8 +74,18 @@ public class FirstScreen extends JFrame {
                 // Done loading data, hide progress bar
                 progressBar.setVisible(false);
 
-                //lance la fenêtre menu (ou main)
-                /*List<Parametre> list = Cache.getList(ParametreType.AUTEUR, TypeDeDocGrouping.FILMS, SortBy.EXEMPLAIRES, 5);
+                //List<Parametre> liste= FirstScreen2.getCache().get(ParametreType.LANGUE, TypeDeDocGrouping.LIVRES, SortBy.EXEMPLAIRES, 5);
+                List<Parametre> liste= FirstScreen2.getCache().get(ParametreType.AUTEUR, TypeDeDocGrouping.FILMS, SortBy.EMPRUNTS, 10);
+
+                //Camembert myChart = new Camembert(liste);
+                Histogramme myChart = new Histogramme(liste);
+
+                myChart.pack();
+                myChart.setVisible(true);
+                setVisible(false);
+                dispose();
+
+                /*List<Parametre> list = cache.get(ParametreType.AUTEUR, TypeDeDocGrouping.FILMS, SortBy.EXEMPLAIRES, 5);
                 for( Parametre el : list)
                 {
                     System.out.println(el.getTotalExemplaires());
@@ -79,11 +96,10 @@ public class FirstScreen extends JFrame {
             }
         };
         thread.start();
-        //return cache;
     }
 
     public static void main(String[] args) {
-        new FirstScreen();
+        new FirstScreen2();
     }
 
 

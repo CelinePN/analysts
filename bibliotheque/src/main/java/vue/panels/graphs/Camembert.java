@@ -1,16 +1,11 @@
-package vue;
+package vue.panels.graphs;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 import java.util.List;
 
-import dao.Database;
 import modele.parametre.Parametre;
-import modele.parametre.ParametreType;
-import modele.utils.SortBy;
-import modele.utils.TypeDeDocGrouping;
-import org.intellij.lang.annotations.Language;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -75,14 +70,5 @@ public class Camembert extends JFrame {
 
         // Ajout du panel principal à la fenêtre
         setContentPane(mainPanel);
-    }
-
-    public static void main(String[] args) throws IOException {
-        Database db = new Database();
-        List<Parametre> listeLanguages= db.getParamByTypeDeDoc(ParametreType.LANGUE, TypeDeDocGrouping.LIVRES);
-        //ParametreType typeParam, TypeDeDocGrouping typeDeDocEnum, SortBy sortBy, int limit
-        Camembert myChart = new Camembert(listeLanguages);
-        myChart.pack();
-        myChart.setVisible(true);
     }
 }

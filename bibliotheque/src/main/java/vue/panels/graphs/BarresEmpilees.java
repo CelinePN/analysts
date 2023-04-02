@@ -1,4 +1,4 @@
-package vue;
+package vue.panels.graphs;
 
 import javax.swing.*;
 import java.awt.*;
@@ -6,40 +6,41 @@ import java.io.IOException;
 import java.util.List;
 
 import dao.Database;
+//import modele.TypeDeDocEnum;
 import modele.parametre.Parametre;
 import modele.parametre.ParametreType;
-import modele.utils.SortBy;
 import modele.utils.TypeDeDocGrouping;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.category.DefaultCategoryDataset;
 
-//import static modele.TypeDeDocEnum.FILMS;
-
-public class Histogramme extends JFrame {
+public class BarresEmpilees extends JFrame {
 
     /**
      *
-     * Classe pour afficher un graphique de type Histogramme
+     * Classe pour afficher un graphique de type Barres Empilees
      * à partir de la liste de paramètre récupérée de nos données
      *
-     * @authors  Alice Hué & Mathilde Paquelier
+     * @author  Alice Hué
      * @version 1.0
      * @since   2023-03-30
      *
      **/
-
-    public Histogramme(List<Parametre> liste) {
+    public BarresEmpilees(List<Parametre> liste){
         // Création des données
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         for (Parametre param : liste){
-            dataset.setValue(param.getTotalPrets(), "Nombre d'emprunt",param.getNom());
+            dataset.setValue(param.getTotalExemplaires(), "Offre", param.getNom()); //Offre
+            dataset.setValue(param.getTotalPrets(), "Demande", param.getNom()); //Demande
         }
+        // Exemple :
+        // dataset.addValue(40, "Offre", "Roman Policier");
+        // dataset.addValue(20, "Demande", "Roman Policier");
 
-        // Création du graphique en barres
-        JFreeChart chart = ChartFactory.createBarChart(
-                "Mon graphique en barres", // Titre du graphique
+        // Création du graphique en barres empilées
+        JFreeChart chart = ChartFactory.createStackedBarChart(
+                "Mon graphique en barres empilées", // Titre du graphique
                 "Catégories", // Titre de l'axe des abscisses
                 "Valeurs", // Titre de l'axe des ordonnées
                 dataset // Données à afficher
@@ -50,8 +51,8 @@ public class Histogramme extends JFrame {
         chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
 
         // Création des boutons
-        JButton buttonLeft = new JButton("Retour Menu");
-        JButton buttonRight = new JButton("Fermer");
+        JButton buttonLeft = new JButton("Bouton gauche");
+        JButton buttonRight = new JButton("Bouton droit");
 
         // Création de la liste déroulante
         String[] options = {"Option 1", "Option 2", "Option 3", "Option 4"};
@@ -80,8 +81,8 @@ public class Histogramme extends JFrame {
 
     public static void main(String[] args) throws IOException {
         Database db = new Database();
-        List<Parametre> listeCategorie= db.getParamByTypeDeDoc(ParametreType.AUTEUR, TypeDeDocGrouping.LIVRES);
-        Histogramme myChart = new Histogramme(listeCategorie);
+        List<Parametre> listeCategorie = db.getParamByTypeDeDoc(ParametreType.GENRE, TypeDeDocGrouping.LIVRES);
+        BarresEmpilees myChart = new BarresEmpilees(listeCategorie);
         myChart.pack();
         myChart.setVisible(true);
     }

@@ -1,9 +1,8 @@
-package vue;
+package vue.frames;
 import javax.swing.*;
-import java.awt.*;
 
-public class MaFenetre extends JFrame {
-    public MaFenetre() {
+public class Menu extends JFrame {
+    public Menu() {
         super("Les bibliothèques de PARIS"); // Titre de la fenêtre
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Fermer la fenêtre en cliquant sur la croix
         setSize(550, 350); // Taille de la fenêtre
@@ -96,6 +95,6 @@ public class MaFenetre extends JFrame {
     }
 
     public static void main(String[] args) {
-        new MaFenetre();
+        new Menu();
     }
 }

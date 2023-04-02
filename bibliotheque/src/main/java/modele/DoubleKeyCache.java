@@ -14,6 +14,7 @@ public class DoubleKeyCache {
     private static Map<ParametreType, Map<TypeDeDocGrouping, List<Parametre>>> cacheMap;
 
     public DoubleKeyCache() {
+
         cacheMap = new HashMap<>();
     }
 
