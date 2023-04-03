@@ -11,7 +11,10 @@ import java.util.List;
 import java.util.Map;
 
 public class DoubleKeyCache {
-    private static Map<ParametreType, Map<TypeDeDocGrouping, List<Parametre>>> cacheMap;
+    //public cachemap
+    private static Map<ParametreType, Map<TypeDeDocGrouping, List<Parametre>>> cacheMap; //=new..
+
+    //Methode en statique
 
     public DoubleKeyCache() {
 
@@ -35,9 +38,17 @@ public class DoubleKeyCache {
 
     private List<Parametre> sort(SortBy sort, List<Parametre> listToSort){
         switch(sort){
-            case EXEMPLAIRES: listToSort.sort(comparator_exemplaires);
-            case EMPRUNTS: listToSort.sort(comparator_emprunts);
-            default: listToSort.sort(comparator_exemplaires);
+            case EXEMPLAIRES:
+                listToSort.sort(comparator_exemplaires);
+                break;
+
+            case EMPRUNTS:
+                listToSort.sort(comparator_emprunts);
+                break;
+
+            default:
+                listToSort.sort(comparator_exemplaires);
+                break;
         }
         return listToSort;
     }
