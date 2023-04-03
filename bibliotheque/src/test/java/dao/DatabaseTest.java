@@ -103,6 +103,12 @@ public class DatabaseTest {
         assertEquals("Erreur: Les paramètres ne peuvent pas être null ou la limite ne peut pas être 0", exception.getMessage());
     }
 
+    @Test
+    public void testNoNetwork() throws IOException {
+        Database db = new Database();
+        Exception exception = assertThrows(IOException.class, () -> db.getParamByTypeDeDoc(ParametreType.LANGUE, TypeDeDocGrouping.NO_TYPE));
+        assertEquals("Hôte inconnu (data.mongodb-api.com)", exception.getMessage());
+    }
 
     /*
     @Test

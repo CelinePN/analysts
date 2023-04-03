@@ -49,8 +49,6 @@ public class Database {
      * @return une List<Parametre> serialisée de la réponse en json de la requête
      * @param typeParam : le paramètre choisi (ex: LANGUE)
      * @param typeDeDocEnum : le type de document sur lequel on veut se centrer uniquement (ex: LIVRE)
-     * @param sortBy: l'ordre dans lequel on veut trier notre liste
-     * @param limit: le nombre de paramètre que l'on veut récupérer au maximum dans notre liste
      * */
     public List<Parametre> getParamByTypeDeDoc(ParametreType typeParam, TypeDeDocGrouping typeDeDocEnum) throws IOException {
 
