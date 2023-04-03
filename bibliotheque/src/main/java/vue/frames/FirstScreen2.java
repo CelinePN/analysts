@@ -79,11 +79,11 @@ public class FirstScreen2 extends JFrame {
                 //List<Parametre> liste= FirstScreen2.getCache().get(ParametreType.LANGUE, TypeDeDocGrouping.LIVRES, SortBy.EXEMPLAIRES, 5);
                 List<Parametre> liste= FirstScreen2.getCache().get(ParametreType.AUTEUR, TypeDeDocGrouping.FILMS, SortBy.EMPRUNTS, 10);
                 List<Parametre> liste1= FirstScreen2.getCache().get(ParametreType.LANGUE, TypeDeDocGrouping.LIVRES, SortBy.EMPRUNTS, 5);
-                List<Parametre> liste2= FirstScreen2.getCache().get(ParametreType.GENRE, TypeDeDocGrouping.MUSIQUE, SortBy.EXEMPLAIRES, 5);
+                List<Parametre> liste2= FirstScreen2.getCache().get(ParametreType.GENRE, TypeDeDocGrouping.BD, SortBy.EXEMPLAIRES, 5);
 
                 Camembert myChart1 = new Camembert(liste1);
                 BarresEmpilees myChart2 = new BarresEmpilees(liste2);
-                Histogramme myChart = new Histogramme(liste);
+                Histogramme myChart = new Histogramme(liste, SortBy.EMPRUNTS);
 
                 myChart.pack();
                 myChart.setVisible(true);
