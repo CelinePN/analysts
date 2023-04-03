@@ -6,6 +6,8 @@ import modele.parametre.Parametre;
 import modele.parametre.ParametreType;
 import modele.utils.SortBy;
 import modele.utils.TypeDeDocGrouping;
+import vue.panels.graphs.BarresEmpilees;
+import vue.panels.graphs.Camembert;
 import vue.panels.graphs.Histogramme;
 
 import javax.swing.*;
@@ -76,12 +78,22 @@ public class FirstScreen2 extends JFrame {
 
                 //List<Parametre> liste= FirstScreen2.getCache().get(ParametreType.LANGUE, TypeDeDocGrouping.LIVRES, SortBy.EXEMPLAIRES, 5);
                 List<Parametre> liste= FirstScreen2.getCache().get(ParametreType.AUTEUR, TypeDeDocGrouping.FILMS, SortBy.EMPRUNTS, 10);
+                List<Parametre> liste1= FirstScreen2.getCache().get(ParametreType.LANGUE, TypeDeDocGrouping.LIVRES, SortBy.EMPRUNTS, 5);
+                List<Parametre> liste2= FirstScreen2.getCache().get(ParametreType.GENRE, TypeDeDocGrouping.MUSIQUE, SortBy.EXEMPLAIRES, 5);
 
-                //Camembert myChart = new Camembert(liste);
+                Camembert myChart1 = new Camembert(liste1);
+                BarresEmpilees myChart2 = new BarresEmpilees(liste2);
                 Histogramme myChart = new Histogramme(liste);
 
                 myChart.pack();
                 myChart.setVisible(true);
+
+                myChart1.pack();
+                myChart1.setVisible(true);
+
+                myChart2.pack();
+                myChart2.setVisible(true);
+
                 setVisible(false);
                 dispose();
 
