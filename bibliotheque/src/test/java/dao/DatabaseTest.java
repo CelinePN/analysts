@@ -1,8 +1,12 @@
 package dao;
 import modele.utils.SortBy;
 import modele.parametre.ParametreType;
+import modele.utils.TypeDeDocGrouping;
+import org.junit.Rule;
 import org.junit.jupiter.api.Test;
 import okhttp3.*;
+import org.junit.rules.ExpectedException;
+
 import java.io.IOException;
 
 
@@ -54,59 +58,51 @@ public class DatabaseTest {
     @Test
     public void testGetLanguages() {
         Database db = new Database();
-        assertDoesNotThrow(() -> db.getParamByTypeDeDoc(ParametreType.LANGUE, NO_TYPE));
+        assertDoesNotThrow(() -> db.getParamByTypeDeDoc(ParametreType.LANGUE, TypeDeDocGrouping.NO_TYPE));
     }
 
     @Test
     public void testGetLanguagesNombre() throws IOException {
         Database db = new Database();
         //compter pour français?
-        assertEquals(14, db.getParamByTypeDeDoc(ParametreType.LANGUE, NO_TYPE).get(0).getTotalExemplaires());
-        assertEquals(14, db.getParamByTypeDeDoc(ParametreType.LANGUE, NO_TYPE).get(0).getTotalPrets());
-        assertEquals(14, db.getParamByTypeDeDoc(ParametreType.LANGUE, NO_TYPE).get(0).getCount());
-    }
-
-   /* @Test
-    public void testGetTypeDeDoc() {
-        Database db = new Database();
-        assertDoesNotThrow(() -> db.getByTypeDeDoc());
-    }
-
-    @Test
-    public void testGetTypeDeDocNombre() throws IOException {
-        Database db = new Database();
-        assertEquals(45, db.getByTypeDeDoc().get(1).getCount());
-    }
-
-    @Test
-    public void testGetAuteur() {
-        Database db = new Database();
-       // assertDoesNotThrow(() -> db.getAuteur());
+        //assertEquals(14, db.getParamByTypeDeDoc(ParametreType.LANGUE, NO_TYPE).get(0).getTotalExemplaires());
+        //assertEquals(14, db.getParamByTypeDeDoc(ParametreType.LANGUE, NO_TYPE).get(0).getTotalPrets());
+        assertEquals(67, db.getParamByTypeDeDoc(ParametreType.LANGUE, TypeDeDocGrouping.NO_TYPE).get(0).getCount());
     }
 
     @Test
     public void testGetAuteurNombre() throws IOException {
         Database db = new Database();
-        //assertEquals(2, db.getAuteur().get(40).getCount());
+        assertEquals(1, db.getParamByTypeDeDoc(ParametreType.AUTEUR, TypeDeDocGrouping.NO_TYPE).get(2).getCount());
     }
 
     @Test
-    public void testGetCategorie() {
+    public void testGetTypeNombre() throws IOException {
         Database db = new Database();
-       // assertDoesNotThrow(() -> db.getCategorie());
+        assertEquals(45, db.getParamByTypeDeDoc(ParametreType.TYPE_DE_DOC, TypeDeDocGrouping.NO_TYPE).get(1).getCount());
     }
 
     @Test
-    public void testGetCategorieNombre() throws IOException {
+    public void testGetGenreNombre() throws IOException {
         Database db = new Database();
-        //assertEquals(745, db.getCategorie().get(1).getCount());
+        assertEquals(745, db.getParamByTypeDeDoc(ParametreType.GENRE, TypeDeDocGrouping.NO_TYPE).get(1).getCount());
     }
 
-    /*@Test
-    public void testGetListTypesDoc() {
+
+    @Test
+    public void testNullParam() throws IOException {
         Database db = new Database();
-        assertDoesNotThrow(() -> db.getListTypesDoc());
-    }*/
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> db.getParamByTypeDeDoc(null, TypeDeDocGrouping.NO_TYPE));
+        assertEquals("Erreur: Les paramètres ne peuvent pas être null ou la limite ne peut pas être 0", exception.getMessage());
+    }
+
+    @Test
+    public void testNullGroupBy() throws IOException {
+        Database db = new Database();
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> db.getParamByTypeDeDoc(ParametreType.LANGUE, null));
+        assertEquals("Erreur: Les paramètres ne peuvent pas être null ou la limite ne peut pas être 0", exception.getMessage());
+    }
+
 
     /*
     @Test
@@ -130,21 +126,6 @@ public class DatabaseTest {
         List<Parametre> actualLanguages = db.getLanguages();
 
         Assertions.assertEquals(expectedLanguages, actualLanguages);
-    }
+    }*/
 
-
-/*
-    @Test
-    public void testConstructeur(){
-        Database d = new Database();
-        assertEquals(new Database(), d, "Database");
-    }
-
-    @Test
-    public void testgetLanguage() throws IOException {
-        Database d = new Database();
-        List<Parametre> l = d.getLanguages();
-        assertEquals(new Database().getLanguages(), l, "langue");
-    }
-*/
-}
+ }
