@@ -84,8 +84,6 @@ public class Database {
      *
      * @param valGroup : valeur sur laquelle on va regrouper nos données (le type de paramètre choisi)
      * @param typeDeDocGroupMatch : valeur avec laquelle on va match nos données (le type de document). Cette chaîne de caractères inclus la liste des type de documents regroupé dans un type global (voir enum)
-     * @param  sortBy : la manière dont on trie les données
-     * @param  limit: le nombre maximum de données dans la liste
      * */
     public RequestBody getRequestBody(String valGroup, String typeDeDocGroupMatch){
         String valMatch;

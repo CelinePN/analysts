@@ -73,7 +73,7 @@ public class DatabaseTest {
     @Test
     public void testGetAuteurNombre() throws IOException {
         Database db = new Database();
-        assertEquals(1, db.getParamByTypeDeDoc(ParametreType.AUTEUR, TypeDeDocGrouping.NO_TYPE).get(2).getCount());
+        assertEquals(10, db.getParamByTypeDeDoc(ParametreType.AUTEUR, TypeDeDocGrouping.LIVRES).get(2).getCount());
     }
 
     @Test
