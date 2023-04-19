@@ -1,6 +1,5 @@
 //import com.squareup.okhttp.*;
-import dao.Database;
-import modele.utils.SortBy;
+import dao.DatabaseSpeed;
 import modele.utils.TypeDeDocGrouping;
 import modele.parametre.Parametre;
 import modele.parametre.ParametreType;
@@ -11,8 +10,8 @@ import java.util.List;
 //public class main ???
 class Main {
     public static void main(String[] args) throws IOException {
-        Database db = new Database();
-        List<Parametre> liste = db.getParamByTypeDeDoc(ParametreType.LANGUE, TypeDeDocGrouping.BD);
+        DatabaseSpeed db = new DatabaseSpeed();
+        List<Parametre> liste = db.getParamByTypeDeDoc(ParametreType.TYPE_DE_DOC, TypeDeDocGrouping.FILMS);
         for (Parametre param : liste){
             System.out.println("---");
             System.out.println(param.getCount());

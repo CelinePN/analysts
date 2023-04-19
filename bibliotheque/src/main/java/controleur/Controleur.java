@@ -1,15 +1,15 @@
 package controleur;
 
-import dao.Database;
+import dao.DatabaseSpeed;
 
 import java.io.IOException;
 
 public class Controleur {
 
-    Database db;
+    DatabaseSpeed db;
 
     public Controleur() {
-        db = new Database();
+        db = new DatabaseSpeed();
     }
 
     public void getLangues() throws IOException {

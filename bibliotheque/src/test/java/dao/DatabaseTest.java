@@ -1,5 +1,4 @@
 package dao;
-import modele.utils.SortBy;
 import modele.parametre.ParametreType;
 import org.junit.jupiter.api.Test;
 import okhttp3.*;
@@ -30,7 +29,7 @@ public class DatabaseTest {
      **/
     @Test
     public void testConstructeur() {
-        Database db = new Database();
+        DatabaseSpeed db = new DatabaseSpeed();
         assertNotNull(db.client);
         assertNotNull(db.mediaType);
         assertEquals(db.mediaType, MediaType.parse("application/json"));
@@ -53,13 +52,13 @@ public class DatabaseTest {
 
     @Test
     public void testGetLanguages() {
-        Database db = new Database();
+        DatabaseSpeed db = new DatabaseSpeed();
         assertDoesNotThrow(() -> db.getParamByTypeDeDoc(ParametreType.LANGUE, NO_TYPE));
     }
 
     @Test
     public void testGetLanguagesNombre() throws IOException {
-        Database db = new Database();
+        DatabaseSpeed db = new DatabaseSpeed();
         //compter pour français?
         assertEquals(14, db.getParamByTypeDeDoc(ParametreType.LANGUE, NO_TYPE).get(0).getTotalExemplaires());
         assertEquals(14, db.getParamByTypeDeDoc(ParametreType.LANGUE, NO_TYPE).get(0).getTotalPrets());

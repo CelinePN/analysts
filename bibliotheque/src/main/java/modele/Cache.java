@@ -1,4 +1,4 @@
-package modele;
+/*package modele;
 
 import modele.parametre.Parametre;
 import modele.parametre.ParametreType;
@@ -54,4 +54,4 @@ public class Cache {
         }
     };
 
-}
+}*/
