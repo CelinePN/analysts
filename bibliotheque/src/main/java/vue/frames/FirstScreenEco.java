@@ -112,7 +112,7 @@ public class FirstScreenEco extends JFrame {
                 liste = DoubleKeyCacheEco.get(ParametreType.AUTEUR, TypeDeDocGrouping.FILMS, SortBy.EMPRUNTS, 10);
 
                 if(!liste.isEmpty()){
-                    Histogramme myChart = new Histogramme(liste);
+                    Histogramme myChart = new Histogramme(liste, SortBy.EMPRUNTS);
                     myChart.pack();
                     myChart.setVisible(true);
                     setVisible(false);

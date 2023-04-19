@@ -64,7 +64,7 @@ public class FirstScreenSpeed extends JFrame {
 
                 List<Parametre> liste= DoubleKeySpeed.get(ParametreType.AUTEUR, TypeDeDocGrouping.FILMS, SortBy.EMPRUNTS, 10);
 
-                Histogramme myChart = new Histogramme(liste);
+                Histogramme myChart = new Histogramme(liste, SortBy.EMPRUNTS);
 
                 myChart.pack();
                 myChart.setVisible(true);
