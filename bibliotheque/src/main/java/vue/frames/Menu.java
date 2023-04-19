@@ -1,5 +1,6 @@
-package vue.frames;
+/*package vue.frames;
 import javax.swing.*;
+import java.awt.*;
 
 public class Menu extends JFrame {
     public Menu() {
@@ -7,36 +8,20 @@ public class Menu extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Fermer la fenêtre en cliquant sur la croix
         setSize(550, 350); // Taille de la fenêtre
         setLocationRelativeTo(null); // Centrer la fenêtre sur l'écran
-        JPanel panel = new JPanel();
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new BorderLayout());
 
-        /*JComponent component1 = new JPanel();
-        //component1.setSize(450, 25);
-        component1.setAlignmentX(LEFT_ALIGNMENT);
-        JComponent component2 = new JPanel();
-        component2.setSize(450, 300);
-        component2.setAlignmentX(CENTER_ALIGNMENT);
-        JComponent component3 = new JPanel();
-        component3.setSize(450, 25);
-        component3.setAlignmentX(RIGHT_ALIGNMENT);
 
-        panel.add(component1);
-        panel.add(component2);
-        panel.add(component3);*/
-        //setLayout(new FlowLayout(FlowLayout.CENTER));
-
-        panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
 
         JLabel label = new JLabel("Choisir entre les différentes possibilités");
-        label.setAlignmentX(RIGHT_ALIGNMENT);
+        label.setHorizontalAlignment(JLabel.CENTER);
+        mainPanel.add(label, BorderLayout.NORTH);
+
+
+
         JLabel labelDemande = new JLabel("Les demandes");
         JLabel labelOffres = new JLabel("Les offres");
         JLabel labelOD = new JLabel("Les liens entre offres et demandes");
-
-
-        /*JButton bouton1 = new JButton("Offre ");
-        JButton bouton2 = new JButton("Demande");
-        JButton bouton3 = new JButton("Comparaison");*/
-
         //boutons des demandes
         JRadioButton boutonDemande1 = new JRadioButton("Genres les plus empruntés");
         JRadioButton boutonDemande2 = new JRadioButton("Auteurs les plus empruntés");
@@ -50,42 +35,44 @@ public class Menu extends JFrame {
         JRadioButton boutonOD1 = new JRadioButton("Offres et demandes par genre et type de documents");
         JRadioButton boutonOD2 = new JRadioButton("Types de documents les plus rentables");
 
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.PAGE_AXIS));
+        buttonPanel.add(labelDemande);
+        buttonPanel.add(boutonDemande1);
+        buttonPanel.add(boutonDemande2);
+        buttonPanel.add(boutonDemande3);
+
+        buttonPanel.add(labelOffres);
+        buttonPanel.add(boutonOffre1);
+        buttonPanel.add(boutonOffre2);
+
+        buttonPanel.add(labelOD);
+        buttonPanel.add(boutonOD1);
+        buttonPanel.add(boutonOD2);
+
+        mainPanel.add(buttonPanel, BorderLayout.EAST);
+
+
+
+        JLabel labelImage = new JLabel(new ImageIcon("C:/Users/mathi/Documents/Cours/E4/bibliothequeParis.jpg"));
+        mainPanel.add(labelImage, BorderLayout.WEST);
+
+
+
         //bouton de validation
         JButton valider = new JButton("Valider");
-        valider.setAlignmentX(panel.RIGHT_ALIGNMENT);
+        valider.setSize(100,50);
 
-        //groupement des boutons de demandes
-        ButtonGroup bg = new ButtonGroup();
-        bg.add(boutonDemande1);
-        bg.add(boutonDemande2);
-        bg.add(boutonDemande3);
-
-        //groupement des boutons d'offres
-        bg.add(boutonOffre1);
-        bg.add(boutonOffre2);
-
-        //groupement des boutons d'offres
-        bg.add(boutonOD1);
-        bg.add(boutonOD2);
 
         //affichage
-        panel.add(label);
-        panel.add(labelDemande);
-        panel.add(boutonDemande1);
-        panel.add(boutonDemande2);
-        panel.add(boutonDemande3);
+        mainPanel.add(valider, BorderLayout.SOUTH);
 
-        panel.add(labelOffres);
-        panel.add(boutonOffre1);
-        panel.add(boutonOffre2);
+        //panel.add(label);
 
-        panel.add(labelOD);
-        panel.add(boutonOD1);
-        panel.add(boutonOD2);
 
-        panel.add(valider);
+       // panel.add(valider);
 
-        getContentPane().add(panel);
+        getContentPane().add(mainPanel);
 
 
 
@@ -98,3 +85,5 @@ public class Menu extends JFrame {
         new Menu();
     }
 }
+*/
+

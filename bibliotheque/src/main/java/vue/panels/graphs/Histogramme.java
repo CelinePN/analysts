@@ -5,6 +5,9 @@ import java.awt.*;
 import java.util.List;
 
 import modele.parametre.Parametre;
+
+import modele.utils.SortBy;
+
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -22,14 +25,26 @@ public class Histogramme extends JFrame {
      * @authors  Alice Hué & Mathilde Paquelier
      * @version 1.0
      * @since   2023-03-30
-     *
+     * @param
      **/
 
-    public Histogramme(List<Parametre> liste) {
+    public Histogramme(List<Parametre> liste, SortBy sortBy) {
         // Création des données
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         for (Parametre param : liste){
-            dataset.setValue(param.getTotalPrets(), "Nombre d'emprunt",param.getNom());
+            switch(sortBy){
+                case EXEMPLAIRES:
+                    dataset.setValue(param.getTotalExemplaires(), "Nombre d'exemplaire",param.getNom());
+                    break;
+
+                case EMPRUNTS:
+                    dataset.setValue(param.getTotalPrets(), "Nombre d'emprunt",param.getNom());
+                    break;
+
+                default:
+                    dataset.setValue(param.getCount(), "Default",param.getNom());
+                    break;
+            }
         }
 
         // Création du graphique en barres
@@ -63,6 +78,8 @@ public class Histogramme extends JFrame {
         buttonPanel.add(buttonLeft);
         buttonPanel.add(buttonRight);
 
+        //-----------------DESIGNGRID LAYOUT-------------
+
         // Création du panel principal contenant le graphique, la liste déroulante et les boutons
         JPanel mainPanel = new JPanel(new BorderLayout());
         mainPanel.add(selectionPanel, BorderLayout.WEST);
@@ -72,4 +89,5 @@ public class Histogramme extends JFrame {
         // Ajout du panel principal à la fenêtre
         setContentPane(mainPanel);
     }
+
 }
