@@ -91,4 +91,5 @@ public class Histogramme extends JFrame {
         // Ajout du panel principal à la fenêtre
         setContentPane(mainPanel);
     }
+
 }
