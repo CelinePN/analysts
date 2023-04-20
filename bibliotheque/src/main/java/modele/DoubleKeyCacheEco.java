@@ -61,4 +61,8 @@ public class DoubleKeyCacheEco {
         return new ArrayList<>();
     }
 
+    public static void clearCache(){
+        DoubleKeyCacheEco.cacheMapExemplaires.clear();
+        DoubleKeyCacheEco.cacheMapEmprunts.clear();
+    }
 }

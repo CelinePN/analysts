@@ -43,10 +43,10 @@ public class DatabaseEco {
      * */
     public static List<Parametre> getParamByTypeDeDoc(ParametreType typeParam, TypeDeDocGrouping typeDeDocEnum, SortBy sortBy) throws IOException {
 
-        if(typeParam == null || typeDeDocEnum == null ){
-            throw new IllegalArgumentException("Erreur: Les paramètres ne peuvent pas être null ou la limite ne peut pas être 0");
+        if(typeParam == null || typeDeDocEnum == null){
+            throw new IllegalArgumentException("Erreur: Les paramètres ne peuvent pas être null");
         }
-        String jsonData;
+        String jsonData="";
         try {
             RequestBody body = getRequestBody(typeParam.getString(), typeDeDocEnum.enumToString(), sortBy.getSortingString());
             Request request = new Request.Builder()
@@ -57,14 +57,16 @@ public class DatabaseEco {
                     .addHeader("api-key", "xALvC4U1PdzK3K5y48tsvdpQar51gpnLLmKiNPQU4t2wOt11TqbyQ1mAabx8wAi6")
                     .build();
             Response response = client.newCall(request).execute();
-            jsonData = response.body().string(); // Store response body in a variable
-            //System.out.println(jsonData);
+            if(response.body()!=null){
+                jsonData = response.body().string();
+            }
+            else{
+                throw new IOException("response body is null");
+            }
             response.close();
             return serializeParam(jsonData, typeParam);
         }
-
         catch(IllegalArgumentException illegalArgumentException){
-
             System.out.println(illegalArgumentException.getMessage());
             return null;
         }
@@ -126,8 +128,11 @@ public class DatabaseEco {
         ObjectMapper objectMapper = new ObjectMapper();
         ParametreWrapper wrapper = objectMapper.readValue(json, ParametreWrapper.class);
         List<Parametre> parametres = wrapper.getParametres();
-        for (int i=0; i<parametres.size(); i++){
-            parametres.get(i).setType_param(type);
+        if(parametres.isEmpty()){
+            throw new IOException("liste vide");
+        }
+        for (Parametre parametre : parametres) {
+            parametre.setType_param(type);
         }
 
         return parametres;
