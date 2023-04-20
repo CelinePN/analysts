@@ -30,7 +30,6 @@ public class HistogrammeBis extends JPanel {
                     break;
             }
         }
-
         // Création du graphique en barres
         JFreeChart chart = ChartFactory.createBarChart(
                 "Mon graphique en barres", // Titre du graphique
@@ -39,13 +38,6 @@ public class HistogrammeBis extends JPanel {
                 dataset // Données à afficher
         );
 
-      /*  // Création du panel contenant le graphique
-        ChartPanel chartPanel = new ChartPanel(chart);
-        chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
-*/
-
-        // Ajout du panel principal à la fenêtre
-       // setContentPane(mainPanel);
     }
 
 
