@@ -21,7 +21,6 @@ import java.util.List;
 public class FirstScreenEco extends JFrame {
     private final JPanel panelError;
     private final JProgressBar progressBar;
-    private List<Parametre> liste = new ArrayList<>();
 
 
     public FirstScreenEco() {
@@ -100,7 +99,6 @@ public class FirstScreenEco extends JFrame {
                             interrupt();
 
                         }
-
                         if(!listeExemplaires.isEmpty() && !listeEmprunts.isEmpty()){
                             DoubleKeyCacheEco.put(parametreType, typeDeDocGrouping, listeExemplaires, listeEmprunts);
                         }
@@ -109,7 +107,7 @@ public class FirstScreenEco extends JFrame {
                 }
                 progressBar.setVisible(false);
 
-                liste = DoubleKeyCacheEco.get(ParametreType.AUTEUR, TypeDeDocGrouping.FILMS, SortBy.EMPRUNTS, 10);
+                /*liste = DoubleKeyCacheEco.get(ParametreType.AUTEUR, TypeDeDocGrouping.FILMS, SortBy.EMPRUNTS, 10);
 
                 if(!liste.isEmpty()){
                     Histogramme myChart = new Histogramme(liste, SortBy.EMPRUNTS);
@@ -120,7 +118,13 @@ public class FirstScreenEco extends JFrame {
                 }
                 else{
                     panelError.setVisible(true);
-                }
+                }*/
+
+                MainWindow mainWindow = new MainWindow();
+                mainWindow.pack();
+                mainWindow.setVisible(true);
+                setVisible(false);
+                dispose();
             }
         };
         thread.start();
