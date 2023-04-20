@@ -2,14 +2,12 @@ package vue.panels.graphs;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
 import java.util.List;
 
-import dao.Database;
 import modele.parametre.Parametre;
-import modele.parametre.ParametreType;
+
 import modele.utils.SortBy;
-import modele.utils.TypeDeDocGrouping;
+
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;

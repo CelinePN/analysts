@@ -1,5 +1,4 @@
 package dao;
-import modele.utils.SortBy;
 import modele.parametre.ParametreType;
 import modele.utils.TypeDeDocGrouping;
 import org.junit.Rule;
@@ -34,7 +33,7 @@ public class DatabaseTest {
      **/
     @Test
     public void testConstructeur() {
-        Database db = new Database();
+        DatabaseSpeed db = new DatabaseSpeed();
         assertNotNull(db.client);
         assertNotNull(db.mediaType);
         assertEquals(db.mediaType, MediaType.parse("application/json"));
@@ -57,13 +56,13 @@ public class DatabaseTest {
 
     @Test
     public void testGetLanguages() {
-        Database db = new Database();
-        assertDoesNotThrow(() -> db.getParamByTypeDeDoc(ParametreType.LANGUE, TypeDeDocGrouping.NO_TYPE));
+        DatabaseSpeed db = new DatabaseSpeed();
+        assertDoesNotThrow(() -> db.getParamByTypeDeDoc(ParametreType.LANGUE, NO_TYPE));
     }
 
     @Test
     public void testGetLanguagesNombre() throws IOException {
-        Database db = new Database();
+        DatabaseSpeed db = new DatabaseSpeed();
         //compter pour français?
         //assertEquals(14, db.getParamByTypeDeDoc(ParametreType.LANGUE, NO_TYPE).get(0).getTotalExemplaires());
         //assertEquals(14, db.getParamByTypeDeDoc(ParametreType.LANGUE, NO_TYPE).get(0).getTotalPrets());
@@ -72,40 +71,40 @@ public class DatabaseTest {
 
     @Test
     public void testGetAuteurNombre() throws IOException {
-        Database db = new Database();
+        DatabaseSpeed db = new DatabaseSpeed();
         assertEquals(10, db.getParamByTypeDeDoc(ParametreType.AUTEUR, TypeDeDocGrouping.LIVRES).get(2).getCount());
     }
 
     @Test
     public void testGetTypeNombre() throws IOException {
-        Database db = new Database();
+        DatabaseSpeed db = new DatabaseSpeed();
         assertEquals(45, db.getParamByTypeDeDoc(ParametreType.TYPE_DE_DOC, TypeDeDocGrouping.NO_TYPE).get(1).getCount());
     }
 
     @Test
     public void testGetGenreNombre() throws IOException {
-        Database db = new Database();
+        DatabaseSpeed db = new DatabaseSpeed();
         assertEquals(745, db.getParamByTypeDeDoc(ParametreType.GENRE, TypeDeDocGrouping.NO_TYPE).get(1).getCount());
     }
 
 
     @Test
     public void testNullParam() throws IOException {
-        Database db = new Database();
+        DatabaseSpeed db = new DatabaseSpeed();
         Exception exception = assertThrows(IllegalArgumentException.class, () -> db.getParamByTypeDeDoc(null, TypeDeDocGrouping.NO_TYPE));
         assertEquals("Erreur: Les paramètres ne peuvent pas être null ou la limite ne peut pas être 0", exception.getMessage());
     }
 
     @Test
     public void testNullGroupBy() throws IOException {
-        Database db = new Database();
+        DatabaseSpeed db = new DatabaseSpeed();
         Exception exception = assertThrows(IllegalArgumentException.class, () -> db.getParamByTypeDeDoc(ParametreType.LANGUE, null));
         assertEquals("Erreur: Les paramètres ne peuvent pas être null ou la limite ne peut pas être 0", exception.getMessage());
     }
 
     @Test
     public void testNoNetwork() throws IOException {
-        Database db = new Database();
+        DatabaseSpeed db = new DatabaseSpeed();
         Exception exception = assertThrows(IOException.class, () -> db.getParamByTypeDeDoc(ParametreType.LANGUE, TypeDeDocGrouping.NO_TYPE));
         assertEquals("Hôte inconnu (data.mongodb-api.com)", exception.getMessage());
     }
