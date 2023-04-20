@@ -1,6 +1,7 @@
 package vue.frames;
 
 import vue.panels.ButtonsPanel;
+import vue.panels.graphs.HistogrammeBis;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,6 +15,12 @@ public class MainWindow extends JFrame {
         setSize(550, 350); // Taille de la fenêtre
         setLocationRelativeTo(null); // Centrer la fenêtre sur l'écran
         ButtonsPanel buttonPanel = new ButtonsPanel();
+     //   HistogrammeBis histogrammeBis = new HistogrammeBis();
+
+        ClassLoader classLoader2 = getClass().getClassLoader();
+
+        ImageIcon icon = new ImageIcon(classLoader2.getResource("livreB.jpg"));
+        setIconImage(icon.getImage());
 
 
 
