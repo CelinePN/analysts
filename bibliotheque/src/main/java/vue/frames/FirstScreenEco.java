@@ -68,6 +68,18 @@ public class FirstScreenEco extends JFrame implements ObserverFirstScreen {
         panelMain.add(labelTitle);
         panelMain.add(progressBar);
 
+        //GIF fonctionnement bizarre
+        ClassLoader classLoader = getClass().getClassLoader();
+        ImageIcon imageIcon = new ImageIcon(classLoader.getResource("sablier.gif"));
+        JLabel jLabel = new JLabel(imageIcon);
+        JPanel jPanel = new JPanel();
+        jPanel.add(jLabel);
+
+        //ICON
+        ClassLoader classLoader2 = getClass().getClassLoader();
+        ImageIcon icon = new ImageIcon(classLoader2.getResource("livreB.jpg"));
+        setIconImage(icon.getImage());
+
         //init panelError
         panelError = new JPanel();
         panelError.setVisible(false);
@@ -87,6 +99,10 @@ public class FirstScreenEco extends JFrame implements ObserverFirstScreen {
 
         getContentPane().add(panelMain);
         getContentPane().add(panelError);
+
+        getContentPane().add(jPanel);
+        setVisible(true); // Rendre la fenêtre visible
+
     }
 
     /**

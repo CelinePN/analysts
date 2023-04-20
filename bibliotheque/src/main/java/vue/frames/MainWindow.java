@@ -1,6 +1,7 @@
 package vue.frames;
 
 import vue.panels.ButtonsPanel;
+import vue.panels.graphs.HistogrammeBis;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,6 +15,16 @@ public class MainWindow extends JFrame {
         setSize(550, 350); // Taille de la fenêtre
         setLocationRelativeTo(null); // Centrer la fenêtre sur l'écran
         ButtonsPanel buttonPanel = new ButtonsPanel();
+      /// HistogrammeBis histogrammeBis = new HistogrammeBis();
+       //histogrammeBis.setPreferredSize(new java.awt.Dimension(500, 270));
+        // CamembertBis camembertBis = new CamembertBis();
+        // BarresEmpileesBis barresEmpileesBis = new BarresEmpileesBis();
+
+
+        ClassLoader classLoader2 = getClass().getClassLoader();
+
+        ImageIcon icon = new ImageIcon(classLoader2.getResource("livreB.jpg"));
+        setIconImage(icon.getImage());
 
 
 
@@ -22,8 +33,6 @@ public class MainWindow extends JFrame {
         JLabel jLabel = new JLabel(imageIcon);
         JPanel jPanel = new JPanel();
         jPanel.add(jLabel);
-        //  JPanel panelButtons; //le même que dans menu, récup les boutons d'alice dnas une classe unique extends Jpanel)
-      //  JPanel panelGraph; // récup les graph d'alice, chaque graph extends JPanel
         // if ou switch
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(buttonPanel, BorderLayout.WEST);
