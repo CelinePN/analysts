@@ -4,6 +4,8 @@ import vue.panels.ButtonsPanel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.InputStream;
+import java.net.URL;
 
 public class MainWindow extends JFrame {
     public MainWindow() {
@@ -14,18 +16,18 @@ public class MainWindow extends JFrame {
         ButtonsPanel buttonPanel = new ButtonsPanel();
 
 
-        JPanel mainPanel = new JPanel();
-        JLabel labelImage = new JLabel(new ImageIcon("C:/Users/mathi/Documents/Cours/E4/bibliothequeParis.jpg"));
-        labelImage.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        mainPanel.add(labelImage);
-
+        ClassLoader classLoader = getClass().getClassLoader();
+        ImageIcon imageIcon = new ImageIcon(classLoader.getResource("bibliothequeParis.jpg"));
+        JLabel jLabel = new JLabel(imageIcon);
+        JPanel jPanel = new JPanel();
+        jPanel.add(jLabel);
         //  JPanel panelButtons; //le même que dans menu, récup les boutons d'alice dnas une classe unique extends Jpanel)
       //  JPanel panelGraph; // récup les graph d'alice, chaque graph extends JPanel
         // if ou switch
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(buttonPanel, BorderLayout.WEST);
-        getContentPane().add(mainPanel);
+        getContentPane().add(jPanel);
 
 
         setVisible(true); // Rendre la fenêtre visible
