@@ -21,10 +21,10 @@ public class ButtonsPanel extends JPanel {
         this.add(label);
 
 
-        JLabel labelParametre = new JLabel("Paramètres");
+        JLabel labelParametre = new JLabel("Paramètre");
         JLabel labelType = new JLabel("Par type");
         JLabel labelLimite = new JLabel("Limite");
-        JLabel labelShortBy = new JLabel("ShortBy");
+        JLabel labelShortBy = new JLabel("Trier par");
         JLabel labelTypeGraph = new JLabel("Type de graphique ");
 
         //Menu déroulant pour Parametre
