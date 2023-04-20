@@ -16,6 +16,8 @@ public class MainWindow extends JFrame {
 
         JPanel mainPanel = new JPanel();
         JLabel labelImage = new JLabel(new ImageIcon("C:/Users/mathi/Documents/Cours/E4/bibliothequeParis.jpg"));
+        labelImage.setAlignmentX(Component.CENTER_ALIGNMENT);
+
         mainPanel.add(labelImage);
 
         //  JPanel panelButtons; //le même que dans menu, récup les boutons d'alice dnas une classe unique extends Jpanel)
@@ -23,7 +25,7 @@ public class MainWindow extends JFrame {
         // if ou switch
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(buttonPanel, BorderLayout.WEST);
-        getContentPane().add(mainPanel, BorderLayout.EAST);
+        getContentPane().add(mainPanel);
 
 
         setVisible(true); // Rendre la fenêtre visible
@@ -31,6 +33,7 @@ public class MainWindow extends JFrame {
 
     }
     public static void main(String[] args) {
+
         new MainWindow();
     }
 }
