@@ -1,5 +1,5 @@
 package vue.frames;
-
+/*
 import dao.DatabaseSpeed;
 import modele.DoubleKeySpeed;
 import modele.parametre.Parametre;
@@ -16,6 +16,8 @@ import java.util.List;
  * Ecran de lancement de l'application
  * Permet de charger les données dans un cache pour y avoir accès en tout temps une fois le réseau coupé
  */
+
+/*
 public class FirstScreenSpeed extends JFrame {
     private final JProgressBar progressBar;
 
@@ -81,4 +83,4 @@ public class FirstScreenSpeed extends JFrame {
     }
 
 
-}
+}*/
