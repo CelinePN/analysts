@@ -16,9 +16,8 @@ import java.util.List;
  */
 public enum SortBy {
     EXEMPLAIRES("total_exemplaires"),
-    EMPRUNTS("total_prets"),
-    COUNT("count"),
-    ALPHABETIQUE("_id");
+    EMPRUNTS("total_prets");
+
 
     public String getSortingString() {
         return sortingType;
