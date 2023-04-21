@@ -1,4 +1,4 @@
-/*package modele;
+package modele;
 
 import modele.parametre.Parametre;
 import modele.parametre.ParametreType;
@@ -6,52 +6,69 @@ import modele.utils.SortBy;
 import modele.utils.TypeDeDocGrouping;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
-
-import static modele.utils.TypeDeDocGrouping.values;
+import java.util.Map;
 
 public class Cache {
 
-    public static List<List<List<Parametre>>> data_tab = new ArrayList<>();
+    /**
+     * @Author: Marine
+     * @since: 10/04/2023
+     * @Version: 1.0
+     * Le cache permet de stocker nos données côté applicatif pour les charger une fois au démarrage
+     * et ne pas avoir à les re-télécharger à chaque appel.
+     * Sachant que l'appel aux données est limité à 100, pour ne pas charger des données inutiles,
+     * on charge 2 listes:
+     *  - 1 avec les 100premiers documents triés par exemplaires
+     *  - 1 avec les 100premiers documents triés par emprunts
+     *  Car sinon selon le tri, les 100premières valeurs ne seront pas les mêmes
+     *  On les stocke donc dans 2 maps de cache différentes
+     */
+    public static Map<ParametreType, Map<TypeDeDocGrouping, List<Parametre>>> cacheMapExemplaires = new HashMap<>();
+    public static Map<ParametreType, Map<TypeDeDocGrouping, List<Parametre>>> cacheMapEmprunts = new HashMap<>();
 
+    /**
+     * Remplit le cache
+     * @param key1 : type de paramètre
+     * @param key2  :  type de document
+     * @param valueExemplaires : liste triée par exemplaires
+     * @param valueEmprunts : liste triée par emprunts
+     *
+     * Ajoute à la map cache une key1 dont la valeur est une nouvelle map, qui est elle-même ensuite remplie par key2 et sa valeur: la liste.
+     */
+    public static void put(ParametreType key1, TypeDeDocGrouping key2, List<Parametre> valueExemplaires, List<Parametre> valueEmprunts ) {
+        Map<TypeDeDocGrouping, List<Parametre>> innerMapExemplaires;
+        Map<TypeDeDocGrouping, List<Parametre>> innerMapEmprunts;
 
-    public static void initCache(){
-        for(int i = 0; i < ParametreType.values().length; i++) {
-            List<List<Parametre>> innerList = new ArrayList<>();
-            for(int j = 0; j < TypeDeDocGrouping.values().length; j++) {
-                innerList.add(new ArrayList<>());
+        innerMapExemplaires = cacheMapExemplaires.computeIfAbsent(key1, k -> new HashMap<>());
+        innerMapEmprunts = cacheMapEmprunts.computeIfAbsent(key1, k -> new HashMap<>());
+
+        innerMapExemplaires.put(key2, valueExemplaires);
+        innerMapEmprunts.put(key2, valueEmprunts);
+    }
+
+    public static List<Parametre> get(ParametreType key1, TypeDeDocGrouping key2, SortBy sortBy, int limit) {
+        Map<TypeDeDocGrouping, List<Parametre>> innerMap = null;
+        switch(sortBy){
+            case EXEMPLAIRES: {
+                innerMap = cacheMapExemplaires.get(key1);
+                break;
             }
-            data_tab.add(innerList);
+            case EMPRUNTS: {
+                innerMap = cacheMapEmprunts.get(key1);
+                break;
+            }
         }
-    }
-    public static List<Parametre> getList(ParametreType param, TypeDeDocGrouping typeDeDocGrouping, SortBy sortBy, int limit){
-        List<Parametre> list= data_tab.get(param.getIndice()).get(typeDeDocGrouping.getIndice());
-        List<Parametre> sortedList = sort(sortBy, list);
-        return sortedList.subList(0, limit);
-    }
-
-    private static List<Parametre> sort(SortBy sort, List<Parametre> listToSort){
-        switch(sort){
-            case EXEMPLAIRES: listToSort.sort(comparator_exemplaires);
-            case EMPRUNTS: listToSort.sort(comparator_emprunts);
-            default: listToSort.sort(comparator_exemplaires);
+        if (innerMap != null) {
+            List<Parametre> list = innerMap.get(key2);
+            return list.subList(0, limit);
         }
-        return listToSort;
+        return new ArrayList<>();
     }
 
-    static Comparator<Parametre> comparator_exemplaires = new Comparator<Parametre>() {
-        @Override
-        public int compare(Parametre p1, Parametre p2) {
-            return Integer.compare(p2.getTotalExemplaires(), p1.getTotalExemplaires());
-        }
-    };
-    static Comparator<Parametre> comparator_emprunts = new Comparator<Parametre>() {
-        @Override
-        public int compare(Parametre p1, Parametre p2) {
-            return Integer.compare(p2.getTotalPrets(), p1.getTotalPrets());
-        }
-    };
-
-}*/
+    public static void clearCache(){
+        Cache.cacheMapExemplaires.clear();
+        Cache.cacheMapEmprunts.clear();
+    }
+}

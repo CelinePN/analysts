@@ -11,7 +11,7 @@ import java.util.List;
  *     Permet de choisir sur l'interface un type de document sans avoir une liste trop longue à dérouler
  * </p>
  *
- * @Author: Marine
+ * @Author: Céline
  * @Version: 1.0
  * @since: 30/03/2023
  */

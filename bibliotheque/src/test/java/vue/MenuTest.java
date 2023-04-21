@@ -1,7 +1,7 @@
 package vue;
 
 import org.junit.jupiter.api.Test;
-import vue.frames.FirstScreenEco;
+import vue.frames.FirstScreen;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.*;
 //tester de lancer la classe
 
 public class MenuTest {
-    private final FirstScreenEco firstScreenEco= new FirstScreenEco();
+    private final FirstScreen firstScreenEco= new FirstScreen();
 
     @Test
     public void testInitView() {

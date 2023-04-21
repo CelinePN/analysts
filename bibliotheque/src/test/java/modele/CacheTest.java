@@ -1,10 +1,8 @@
 package modele;
 
-import dao.DatabaseSpeed;
 import modele.parametre.Parametre;
 import modele.parametre.ParametreType;
 import modele.utils.TypeDeDocGrouping;
-import okhttp3.MediaType;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;

@@ -1,5 +1,17 @@
 package modele.parametre;
 
+/**
+ *  <h1> ParamètreType </h1>
+ *
+ * <p>
+ *     Cette énumération regroupe tous les paramètres que l'on pourra rechercher sur l'application
+ * </p>
+ *
+ * @Author: Marine
+ * @Version: 1.0
+ * @since: 30/03/2023
+ */
+
 public enum ParametreType {
     LANGUE("Langue", 0),
     AUTEUR("Auteur Nom", 1),

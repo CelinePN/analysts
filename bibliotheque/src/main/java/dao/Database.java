@@ -1,10 +1,11 @@
 package dao;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import modele.utils.TypeDeDocGrouping;
 import modele.parametre.Parametre;
-import modele.parametre.ParametreWrapper;
 import modele.parametre.ParametreType;
+import modele.parametre.ParametreWrapper;
+import modele.utils.SortBy;
+import modele.utils.TypeDeDocGrouping;
 import okhttp3.*;
 
 import java.io.IOException;
@@ -19,22 +20,15 @@ import java.util.Objects;
  *     Elle permet de faire des requêtes http sur notre BDD en passant par l'API de MongoDB Atlas
  * </p>
  *
- * @Author: Marine
+ * @Author1: Marine
+ * @Author2: Céline (pour le body de la requête)
+ * @Author3: Mathilde (pour la création de l'API MongoDB et la récupération de l'API KEY)
  * @Version: 1.0
  * @since: 10/03/2023
  */
-public class DatabaseSpeed {
-    OkHttpClient client;
-    MediaType mediaType;
-
-    /**
-     * Constructeur
-     * A l'instanciation de cette classe, on crée un client Http et on définit le mediaType en json
-     * */
-    public DatabaseSpeed()  {
-         client = new OkHttpClient().newBuilder().build();
-         mediaType = MediaType.parse("application/json");
-    }
+public class Database {
+    private static final OkHttpClient client = new OkHttpClient().newBuilder().build();
+    private static final MediaType mediaType = MediaType.parse("application/json");
 
     /**
      * Cette méthode lance une requête http POST sur l'url de notre BDD pour récupérer des données avec aggregate
@@ -49,14 +43,14 @@ public class DatabaseSpeed {
      * @param typeParam : le paramètre choisi (ex: LANGUE)
      * @param typeDeDocEnum : le type de document sur lequel on veut se centrer uniquement (ex: LIVRE)
      * */
-    public List<Parametre> getParamByTypeDeDoc(ParametreType typeParam, TypeDeDocGrouping typeDeDocEnum) throws IOException {
+    public static List<Parametre> getParamByTypeDeDoc(ParametreType typeParam, TypeDeDocGrouping typeDeDocEnum, SortBy sortBy) throws IOException {
 
-        if(typeParam == null || typeDeDocEnum == null ){
-            throw new IllegalArgumentException("Erreur: Les paramètres ne peuvent pas être null ou la limite ne peut pas être 0");
+        if(typeParam == null || typeDeDocEnum == null){
+            throw new IllegalArgumentException("Erreur: Les paramètres ne peuvent pas être null");
         }
-        String jsonData;
+        String jsonData="";
         try {
-            RequestBody body = getRequestBody(typeParam.getString(), typeDeDocEnum.enumToString());
+            RequestBody body = getRequestBody(typeParam.getString(), typeDeDocEnum.enumToString(), sortBy.getSortingString());
             Request request = new Request.Builder()
                     .url("https://data.mongodb-api.com/app/data-moehb/endpoint/data/v1/action/aggregate")
                     .method("POST", body)
@@ -65,14 +59,16 @@ public class DatabaseSpeed {
                     .addHeader("api-key", "xALvC4U1PdzK3K5y48tsvdpQar51gpnLLmKiNPQU4t2wOt11TqbyQ1mAabx8wAi6")
                     .build();
             Response response = client.newCall(request).execute();
-            jsonData = response.body().string(); // Store response body in a variable
-            //System.out.println(jsonData);
+            if(response.body()!=null){
+                jsonData = response.body().string();
+            }
+            else{
+                throw new IOException("response body is null");
+            }
             response.close();
             return serializeParam(jsonData, typeParam);
         }
-
         catch(IllegalArgumentException illegalArgumentException){
-
             System.out.println(illegalArgumentException.getMessage());
             return null;
         }
@@ -84,7 +80,7 @@ public class DatabaseSpeed {
      * @param valGroup : valeur sur laquelle on va regrouper nos données (le type de paramètre choisi)
      * @param typeDeDocGroupMatch : valeur avec laquelle on va match nos données (le type de document). Cette chaîne de caractères inclus la liste des type de documents regroupé dans un type global (voir enum)
      * */
-    public RequestBody getRequestBody(String valGroup, String typeDeDocGroupMatch){
+    public static RequestBody getRequestBody(String valGroup, String typeDeDocGroupMatch, String sort){
         String valMatch;
         if(!Objects.equals(typeDeDocGroupMatch, "")){
             valMatch = "           {\n" +
@@ -114,28 +110,31 @@ public class DatabaseSpeed {
                 "                  \"total_prets\" : { \"$sum\": \"$Nombre de prêt total\"},\n" +
                 "                  \"total_exemplaires\" : { \"$sum\": \"$Nombre d'exemplaires\"}\n" +
                 "               }\n" +
-                "          }\n" +
-                /*
+                "          },\n" +
+
                 "          {\n" +
-                "              \"$sort\": { \""+ "_id" + "\": 1 }\n" +
-                "          }\n"        +
+                "              \"$sort\": { \""+ sort + "\": -1 }\n" +
+                "          },\n"        +
 
                 "          {\n" +
                 "              \"$limit\": 100 " +
                 "          }\n"        +
-                */
+
 
                 "\n" +
                 "      ]\n" +
                 "  }", mediaType);
     }
 
-    public List<Parametre> serializeParam(String json, ParametreType type) throws IOException{
+    public static List<Parametre> serializeParam(String json, ParametreType type) throws IOException{
         ObjectMapper objectMapper = new ObjectMapper();
         ParametreWrapper wrapper = objectMapper.readValue(json, ParametreWrapper.class);
         List<Parametre> parametres = wrapper.getParametres();
-        for (int i=0; i<parametres.size(); i++){
-            parametres.get(i).setType_param(type);
+        if(parametres.isEmpty()){
+            throw new IOException("liste vide");
+        }
+        for (Parametre parametre : parametres) {
+            parametre.setType_param(type);
         }
 
         return parametres;

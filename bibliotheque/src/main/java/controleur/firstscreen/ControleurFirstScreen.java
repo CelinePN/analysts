@@ -1,7 +1,7 @@
 package controleur.firstscreen;
 
-import dao.DatabaseEco;
-import modele.DoubleKeyCacheEco;
+import dao.Database;
+import modele.Cache;
 import modele.parametre.Parametre;
 import modele.parametre.ParametreType;
 import modele.utils.SortBy;
@@ -15,7 +15,7 @@ public class ControleurFirstScreen {
 
     private boolean isDataLoaded;
 
-    private List<ObserverFirstScreen> observers ;
+    private final List<ObserverFirstScreen> observers ;
     private List<Parametre> listeExemplaires = new ArrayList<>();
     private List<Parametre> listeEmprunts = new ArrayList<>();
     Thread thread;
@@ -44,7 +44,7 @@ public class ControleurFirstScreen {
      */
 
     public void loadData() {
-        DoubleKeyCacheEco.clearCache();
+        Cache.clearCache();
         thread = new Thread() {
             public void run() {
                 // Perform data loading here
@@ -55,13 +55,13 @@ public class ControleurFirstScreen {
                     for (TypeDeDocGrouping typeDeDocGrouping : TypeDeDocGrouping.values()) {
 
                         try {
-                            listeExemplaires = DatabaseEco.getParamByTypeDeDoc(parametreType, typeDeDocGrouping, SortBy.EXEMPLAIRES);
+                            listeExemplaires = Database.getParamByTypeDeDoc(parametreType, typeDeDocGrouping, SortBy.EXEMPLAIRES);
                             completedTasks++;
                             for(ObserverFirstScreen observer : observers){
                                 observer.updateProgressBar((int) (((float) completedTasks / totalTasks) * 100));
                             }
 
-                            listeEmprunts = DatabaseEco.getParamByTypeDeDoc(parametreType, typeDeDocGrouping, SortBy.EMPRUNTS);
+                            listeEmprunts = Database.getParamByTypeDeDoc(parametreType, typeDeDocGrouping, SortBy.EMPRUNTS);
                             completedTasks++;
                             for(ObserverFirstScreen observer : observers){
                                 observer.updateProgressBar((int) (((float) completedTasks / totalTasks) * 100));
@@ -74,7 +74,7 @@ public class ControleurFirstScreen {
                             return;
                         }
 
-                        DoubleKeyCacheEco.put(parametreType, typeDeDocGrouping, listeExemplaires, listeEmprunts);
+                        Cache.put(parametreType, typeDeDocGrouping, listeExemplaires, listeEmprunts);
 
                     }
                 }

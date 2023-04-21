@@ -1,17 +1,7 @@
 package vue;
 
-import dao.DatabaseEco;
-import modele.DoubleKeyCacheEco;
-import modele.parametre.Parametre;
-import modele.parametre.ParametreType;
-import modele.utils.SortBy;
-import modele.utils.TypeDeDocGrouping;
 import org.junit.jupiter.api.Test;
-import vue.frames.FirstScreenEco;
-
-import java.io.IOException;
-import java.util.List;
-import java.util.Map;
+import vue.frames.FirstScreen;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -30,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 public class FirstScreenVueTest {
-    private final FirstScreenEco firstScreenEco= new FirstScreenEco();
+    private final FirstScreen firstScreenEco= new FirstScreen();
 
     @Test
     public void testInitView() {

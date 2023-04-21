@@ -1,8 +1,8 @@
 package controleur;
 
 import controleur.firstscreen.ControleurFirstScreen;
-import dao.DatabaseEco;
-import modele.DoubleKeyCacheEco;
+import dao.Database;
+import modele.Cache;
 import modele.parametre.Parametre;
 import modele.parametre.ParametreType;
 import modele.utils.SortBy;
@@ -12,7 +12,6 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -48,9 +47,9 @@ public class FirstScreenControleurTest {
         for(ParametreType param: ParametreType.values()){
             for(TypeDeDocGrouping typeDeDoc: TypeDeDocGrouping.values()){
                 try {
-                    List<Parametre> liste1 = DatabaseEco.getParamByTypeDeDoc(param,typeDeDoc,SortBy.EXEMPLAIRES).subList(0,10);
-                    List<Parametre> liste2 = DatabaseEco.getParamByTypeDeDoc(param,typeDeDoc,SortBy.EMPRUNTS).subList(0,10);
-                    DoubleKeyCacheEco.put(param, typeDeDoc,liste1,liste2);
+                    List<Parametre> liste1 = Database.getParamByTypeDeDoc(param,typeDeDoc,SortBy.EXEMPLAIRES).subList(0,10);
+                    List<Parametre> liste2 = Database.getParamByTypeDeDoc(param,typeDeDoc,SortBy.EMPRUNTS).subList(0,10);
+                    Cache.put(param, typeDeDoc,liste1,liste2);
 
                 } catch (IOException e) {
                     System.out.println(e.getMessage());
@@ -58,8 +57,8 @@ public class FirstScreenControleurTest {
             }
         }
 
-        cacheMapExemplairesTest = DoubleKeyCacheEco.cacheMapExemplaires;
-        cacheMapEmpruntsTest = DoubleKeyCacheEco.cacheMapEmprunts;
+        cacheMapExemplairesTest = Cache.cacheMapExemplaires;
+        cacheMapEmpruntsTest = Cache.cacheMapEmprunts;
     }
 
     /**
@@ -80,10 +79,10 @@ public class FirstScreenControleurTest {
                 e.printStackTrace();
             }
         }
-        assertNotNull(DoubleKeyCacheEco.cacheMapExemplaires);
-        assertNotNull(DoubleKeyCacheEco.cacheMapExemplaires);
-        assertFalse(DoubleKeyCacheEco.cacheMapExemplaires.isEmpty());
-        assertFalse(DoubleKeyCacheEco.cacheMapEmprunts.isEmpty());
+        assertNotNull(Cache.cacheMapExemplaires);
+        assertNotNull(Cache.cacheMapExemplaires);
+        assertFalse(Cache.cacheMapExemplaires.isEmpty());
+        assertFalse(Cache.cacheMapEmprunts.isEmpty());
 
     }
 
@@ -99,8 +98,8 @@ public class FirstScreenControleurTest {
                 e.printStackTrace();
             }
         }
-        assertEquals(cacheMapExemplairesTest, DoubleKeyCacheEco.cacheMapExemplaires) ;
-        assertEquals(cacheMapEmpruntsTest, DoubleKeyCacheEco.cacheMapEmprunts) ;
+        assertEquals(cacheMapExemplairesTest, Cache.cacheMapExemplaires) ;
+        assertEquals(cacheMapEmpruntsTest, Cache.cacheMapEmprunts) ;
 
     }
 }
