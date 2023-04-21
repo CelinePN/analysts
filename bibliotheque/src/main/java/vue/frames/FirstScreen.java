@@ -1,19 +1,12 @@
 package vue.frames;
 
-import dao.Database;
-import modele.Cache;
-import modele.parametre.Parametre;
-import modele.parametre.ParametreType;
-import modele.utils.TypeDeDocGrouping;
-
-import javax.swing.*;
-import java.io.IOException;
-import java.util.List;
 
 /**
  * Ecran de lancement de l'application
  * Permet de charger les données dans un cache pour y avoir accès en tout temps une fois le réseau coupé
  */
+
+/***
 public class FirstScreen extends JFrame {
     private JLabel label;
     private JProgressBar progressBar;
@@ -50,7 +43,7 @@ public class FirstScreen extends JFrame {
                     {
                         try {
                             //Thread.sleep(100);
-                            List<Parametre> listeLanguages= db.getParamByTypeDeDoc(parametreType, typeDeDocGrouping);
+                            //List<Parametre> listeLanguages= db.getParamByTypeDeDoc(parametreType, typeDeDocGrouping);
                             Cache.data_tab.get(i).set(j, listeLanguages);
                             j++;
                         }  catch (IOException e) {
@@ -75,7 +68,7 @@ public class FirstScreen extends JFrame {
                     System.out.println(el.getNom());
 
                 }*/
-            }
+ /*           }
         };
         thread.start();
         //return cache;
@@ -86,4 +79,4 @@ public class FirstScreen extends JFrame {
     }
 
 
-}
+}*/
