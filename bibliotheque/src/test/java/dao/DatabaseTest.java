@@ -73,7 +73,7 @@ public class DatabaseTest {
     @Test
     public void testGetAuteurNombre() throws IOException {
         Database db = new Database();
-        assertEquals(10, db.getParamByTypeDeDoc(ParametreType.AUTEUR, TypeDeDocGrouping.LIVRES).get(2).getCount());
+        assertEquals(1, db.getParamByTypeDeDoc(ParametreType.AUTEUR, TypeDeDocGrouping.LIVRES).get(0).getCount());
     }
 
     @Test
@@ -110,6 +110,11 @@ public class DatabaseTest {
         assertEquals("Hôte inconnu (data.mongodb-api.com)", exception.getMessage());
     }
 
+    @Test
+    public void testGetLangueLivre() throws IOException {
+        Database db = new Database();
+        assertEquals(2447, db.getParamByTypeDeDoc(ParametreType.LANGUE, TypeDeDocGrouping.LIVRES).get(0).getCount());
+    }
     /*
     @Test
     public void testGetLanguagesManuelle() throws IOException {
