@@ -48,6 +48,14 @@ public class Cache {
         innerMapEmprunts.put(key2, valueEmprunts);
     }
 
+    /**
+     * @return une liste de paramètres
+     * @param key1: le type de paramètre
+     * @param key2: le type de document
+     * @param limit: le nombre de paramètres que l'on veut récupérer
+     * @param sortBy: selon si on veut récupérer le cache de l'offre (exemplaires) ou de la demande (emprunts)
+     * Récupère une liste dans le cache selon ses paramètres
+     */
     public static List<Parametre> get(ParametreType key1, TypeDeDocGrouping key2, SortBy sortBy, int limit) {
         Map<TypeDeDocGrouping, List<Parametre>> innerMap = null;
         switch(sortBy){
@@ -67,6 +75,9 @@ public class Cache {
         return new ArrayList<>();
     }
 
+    /**
+     * Vide entièrement le cache
+     */
     public static void clearCache(){
         Cache.cacheMapExemplaires.clear();
         Cache.cacheMapEmprunts.clear();

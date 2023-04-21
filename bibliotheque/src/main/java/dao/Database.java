@@ -38,7 +38,7 @@ public class Database {
      * et de les match par type de document
      *
      * Elle convertie notamment les types enums en string pour la création du body de la requête
-     *
+     * @Author: Mathilde & Céline
      * @return une List<Parametre> serialisée de la réponse en json de la requête
      * @param typeParam : le paramètre choisi (ex: LANGUE)
      * @param typeDeDocEnum : le type de document sur lequel on veut se centrer uniquement (ex: LIVRE)
@@ -76,9 +76,10 @@ public class Database {
 
     /**
      * Cette méthode crée le body d'une requête correspondant aux params définis
-     *
+     * @Author: Celine & Marine
      * @param valGroup : valeur sur laquelle on va regrouper nos données (le type de paramètre choisi)
      * @param typeDeDocGroupMatch : valeur avec laquelle on va match nos données (le type de document). Cette chaîne de caractères inclus la liste des type de documents regroupé dans un type global (voir enum)
+     * @param sort : valeur par ordre duquel on va trier les données (offre ou demande)
      * */
     public static RequestBody getRequestBody(String valGroup, String typeDeDocGroupMatch, String sort){
         String valMatch;
@@ -126,6 +127,13 @@ public class Database {
                 "  }", mediaType);
     }
 
+    /**
+     * Cette méthode associe en sérialisant les données du json (éléments de la liste récupérée) à une liste de paramètres du modèle
+     * @Author: Marine
+     * @param json : contenu de la liste récupérée par la requête en json
+     * @param type : le type de paramètre des paramètres de la liste
+     *
+     * */
     public static List<Parametre> serializeParam(String json, ParametreType type) throws IOException{
         ObjectMapper objectMapper = new ObjectMapper();
         ParametreWrapper wrapper = objectMapper.readValue(json, ParametreWrapper.class);
