@@ -14,6 +14,7 @@ import javax.swing.*;
 import net.java.dev.designgridlayout.DesignGridLayout;
 
 import java.awt.*;
+import java.util.Objects;
 
 public class Menu extends JFrame {
     private JPanel panel1, panel2;
@@ -73,12 +74,12 @@ public class Menu extends JFrame {
 
         //Ajout de l'icone
         ClassLoader classLoader2 = getClass().getClassLoader();
-        ImageIcon icon = new ImageIcon(classLoader2.getResource("livreB.jpg"));
+        ImageIcon icon = new ImageIcon(Objects.requireNonNull(classLoader2.getResource("livreB.jpg")));
         setIconImage(icon.getImage());
 
         // Ajout de l'image label au panel2
         ClassLoader classLoader = getClass().getClassLoader();
-        ImageIcon imageIcon = new ImageIcon(classLoader.getResource("bibliothequeParis.jpg"));
+        ImageIcon imageIcon = new ImageIcon(Objects.requireNonNull(classLoader.getResource("bibliotheque-2.jpg")));
         JLabel jLabel = new JLabel(imageIcon);
         panel2 = new JPanel(new BorderLayout());
         panel2.setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));

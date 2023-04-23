@@ -108,7 +108,7 @@ public class FirstScreen extends JFrame implements ObserverFirstScreen {
     /**
      * fonction permettant de relancer le chargement des données du début si une erreur est survenue
      */
-    
+
 
     public JProgressBar getProgressBar() {
         return progressBar;
