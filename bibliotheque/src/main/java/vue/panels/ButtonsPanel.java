@@ -1,29 +1,35 @@
 package vue.panels;
 
 
+import controleur.firstscreen.ControleurFirstScreen;
+import controleur.mainWindow.ControleurMainWindow;
 import modele.parametre.ParametreType;
 import modele.utils.SortBy;
 import modele.utils.TypeDeDocGrouping;
 
 import javax.swing.*;
 
+import static modele.utils.SortBy.BOTH;
+
 public class ButtonsPanel extends JPanel {
-    public ButtonsPanel() {
+
+    private final ControleurMainWindow controleur;
+
+    public ButtonsPanel(ControleurMainWindow controleurMainWindow) {
+        this.controleur= controleurMainWindow;
 
         // panel utilisé pour la frame menu et la frame mainWindow
         //tous les params possibles
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-
         JLabel label = new JLabel("Choisir entre les différentes possibilités");
-       label.setHorizontalAlignment(JLabel.CENTER);
+        label.setHorizontalAlignment(JLabel.CENTER);
         this.add(label);
 
 
         JLabel labelParametre = new JLabel("Paramètre");
         JLabel labelType = new JLabel("Par type");
         JLabel labelLimite = new JLabel("Limite");
-        JLabel labelShortBy = new JLabel("Trier par");
         JLabel labelTypeGraph = new JLabel("Type de graphique ");
 
         //Menu déroulant pour Parametre
@@ -40,20 +46,11 @@ public class ButtonsPanel extends JPanel {
         JComboBox<String> comboBox3 = new JComboBox<>(limit);
         comboBox3.setSelectedIndex(0); // Option sélectionnée par défaut
 
-        //String[] shortby = {"Total des Exemplaires", "Total des Prêts"};
-        JComboBox<SortBy> comboBox4 = new JComboBox<>(SortBy.values());
-        comboBox4.setSelectedIndex(0); // Option sélectionnée par défaut
-
-       JRadioButton BarreEmpilees = new JRadioButton("BarresEmpilees");
-       JRadioButton Camembert = new JRadioButton("Camembert");
-       JRadioButton Histogramme = new JRadioButton("Histogramme");
-        // Création du panel contenant la liste déroulante
-       /* JPanel selectionPanelParam = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 5));
-      */
-
-        JButton valider = new JButton("Valider");
-        valider.setSize(100,50);
-
+        JPanel bottomButtons = new JPanel();
+        JButton validerButton = new JButton("Valider");
+        validerButton.setSize(100,50);
+        JButton menuButton = new JButton("Menu");
+        menuButton.setSize(100,50);
 
         this.add(labelParametre);
         this.add(comboBox);
@@ -64,20 +61,22 @@ public class ButtonsPanel extends JPanel {
         this.add(labelLimite);
         this.add(comboBox3);
 
-        this.add(labelShortBy);
-        this.add(comboBox4);
-
         this.add(labelTypeGraph);
-        this.add(BarreEmpilees);
-       this.add(Camembert);
-       this.add(Histogramme);
 
+        if(this.controleur.getCurrentMode()==BOTH){
+            JRadioButton barreEmpilees = new JRadioButton("BarresEmpilees");
+            this.add(barreEmpilees);
+        }
+        else{
+            JRadioButton camembert = new JRadioButton("Camembert");
+            JRadioButton histogramme = new JRadioButton("Histogramme");
+            this.add(camembert);
+            this.add(histogramme);
+        }
 
-     this.add(valider);
+        this.add(validerButton);
+        this.add(menuButton);
 
        // this.add(this, BorderLayout.EAST);
-    }
-    public static void main(String[] args) {
-        new ButtonsPanel();
     }
 }

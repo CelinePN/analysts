@@ -40,6 +40,7 @@ public class FirstScreen extends JFrame implements ObserverFirstScreen {
      */
     public FirstScreen() {
         super("Ecran de chargement"); // Titre de la fenêtre
+
         this.controleurFirstScreen=new ControleurFirstScreen();
         this.controleurFirstScreen.registerObserver(this);
 
@@ -90,9 +91,11 @@ public class FirstScreen extends JFrame implements ObserverFirstScreen {
         //init panelError components
         JLabel labelError = new JLabel("Une erreur est survenue, veuillez réessayer");
         JButton buttonRetry = new JButton("Réessayer");
+
         buttonRetry.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 controleurFirstScreen.retry();
             }
         });
@@ -126,10 +129,9 @@ public class FirstScreen extends JFrame implements ObserverFirstScreen {
 
     @Override
     public void loadingSuccess() {
-
-        MainWindow mainWindow = new MainWindow();
-        mainWindow.pack();
-        mainWindow.setVisible(true);
+        Menu menu = new Menu();
+        menu.pack();
+        menu.setVisible(true);
         setVisible(false);
         dispose();
     }

@@ -1,10 +1,5 @@
 package vue;
 
-import org.junit.Before;
-import org.junit.jupiter.api.Test;
-import vue.frames.MainWindow;
-import vue.panels.graphs.BarresEmpilees;
-
 /**
  *  <h1> Test Barres Empilees </h1>
  *
