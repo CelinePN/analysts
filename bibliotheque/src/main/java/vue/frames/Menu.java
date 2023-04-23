@@ -9,51 +9,60 @@ package vue.frames;
  * 1 JPanel: 1 photo
  * et 1 bouton valider
  */
-/*package vue.frames;
+
 import javax.swing.*;
 import net.java.dev.designgridlayout.DesignGridLayout;
 
+import java.awt.*;
+
 public class Menu extends JFrame {
+    private JPanel panel1, panel2;
+    private JButton btnDemande, btnOffre, btnComparaison;
 
     public Menu() {
-        initComponents();
-    }
-    private void initComponents() {
+        super("Mon Frame avec des panels");
 
-        JPanel buttonPanel = new JPanel();
-        JPanel emptyPanel = new JPanel();
+        // Initialisation des panels
+        panel1 = new JPanel();
+        panel2 = new JPanel();
 
-        // Ajouter les boutons au premier JPanel
-        JButton demandeButton = new JButton("Demande");
-        JButton offreButton = new JButton("Offre");
-        JButton comparaisonButton = new JButton("Comparaison Offre/demande");
+        // Initialisation des boutons
+        btnDemande = new JButton("Demande");
+        btnOffre = new JButton("Offre");
+        btnComparaison = new JButton("Comparaison Offre/demande");
 
-        buttonPanel.setLayout(new DesignGridLayout());
+        // Ajout des boutons au premier panel
+        panel1.setLayout(new GridLayout(3, 1));
+        panel1.add(btnDemande);
+        panel1.add(btnOffre);
+        panel1.add(btnComparaison);
 
-        CellConstraints cc = new CellConstraints();
+        // Création de l'image label
+        ClassLoader classLoader2 = getClass().getClassLoader();
 
-        buttonPanel.add(demandeButton, cc.xy(2, 2));
-        buttonPanel.add(offreButton, cc.xy(4, 2));
-        buttonPanel.add(comparaisonButton, cc.xy(6, 2));
+        ImageIcon icon = new ImageIcon(classLoader2.getResource("livreB.jpg"));
+        setIconImage(icon.getImage());
 
-        // Ajouter les deux JPanels au JFrame
-        getContentPane().setLayout(new FormLayout("fill:pref:grow",
-                "fill:pref:grow, fill:pref:grow"));
+        ClassLoader classLoader = getClass().getClassLoader();
+        ImageIcon imageIcon = new ImageIcon(classLoader.getResource("bibliothequeParis.jpg"));
+        JLabel jLabel = new JLabel(imageIcon);
 
-        getContentPane().add(buttonPanel, cc.xy(1, 1));
-        getContentPane().add(emptyPanel, cc.xy(1, 2));
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Exemple JFrame avec deux JPanel");
+        // Ajout de l'image label au deuxième panel
+        panel2.setLayout(new GridLayout(1, 1));
+        panel2.add(jLabel);
 
+        // Ajout des panels au frame
+        DesignGridLayout layout = new DesignGridLayout(getContentPane());
+        layout.row().grid().add(panel1).add(panel2);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         pack();
+        setLocationRelativeTo(null);
+        setVisible(true);
+
     }
 
     public static void main(String[] args) {
-        Menu frame = new Menu();
-        frame.setVisible(true);
+        new Menu();
     }
-
 }
-
-
