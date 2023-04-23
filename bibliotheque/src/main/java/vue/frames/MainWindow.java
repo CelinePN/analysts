@@ -1,6 +1,5 @@
 package vue.frames;
 
-import controleur.firstscreen.ControleurFirstScreen;
 import controleur.mainWindow.ControleurMainWindow;
 import modele.utils.SortBy;
 import vue.panels.ButtonsPanel;

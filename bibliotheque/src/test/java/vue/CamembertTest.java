@@ -1,8 +1,19 @@
 package vue;
 
+import dao.Database;
+import modele.parametre.Parametre;
+import modele.parametre.ParametreType;
+import modele.utils.SortBy;
+import modele.utils.TypeDeDocGrouping;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import vue.frames.MainWindow;
+import vue.panels.graphs.Camembert;
+
+import javax.swing.*;
+import java.io.IOException;
+import java.util.List;
+import java.util.Objects;
 
 /**
  *  <h1> Test FirstScreen </h1>
@@ -23,8 +34,14 @@ public class CamembertTest {
     /**
      * Test d'affichage visuellement que la fenêtre se lance correctement avec graphique par défaut
      */
-    public static void main(String[] args) {
-        //appeler une liste
-        // new Camembert(liste, type, SortBy);
+    public static void main(String[] args) throws IOException, InterruptedException {
+        //List<Parametre> liste = Database.getParamByTypeDeDoc(ParametreType.AUTEUR, TypeDeDocGrouping.FILMS, SortBy.EXEMPLAIRES);
+        JFrame frame = new JFrame();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Fermer la fenêtre en cliquant sur la croix
+        frame.setSize(550, 350); // Taille de la fenêtre
+        frame.setLocationRelativeTo(null);
+        frame.getContentPane().add(new Camembert(Objects.requireNonNull(Database.getParamByTypeDeDoc(ParametreType.AUTEUR, TypeDeDocGrouping.FILMS, SortBy.EXEMPLAIRES)),SortBy.EMPRUNTS));
+        Thread.sleep(10000);
+        frame.setVisible(true);
     }
 }
