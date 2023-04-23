@@ -56,7 +56,7 @@ public class DatabaseTest {
         assertNotNull(request.body());
     }*/
 
-    /*@Test
+    @Test
     public void testGetLanguages() {
         Database db = new Database();
         assertDoesNotThrow(() -> db.getParamByTypeDeDoc(ParametreType.LANGUE, TypeDeDocGrouping.NO_TYPE, SortBy.EXEMPLAIRES));
@@ -116,8 +116,8 @@ public class DatabaseTest {
         Database db = new Database();
         assertEquals(8873, db.getParamByTypeDeDoc(ParametreType.LANGUE, TypeDeDocGrouping.JEUX, SortBy.EMPRUNTS).get(0).getTotalPrets());
     }
-    /*
-    @Test
+
+    /*@Test
     public void testGetLanguagesManuelle() throws IOException {
         List<Parametre> expectedLanguages = new ArrayList<>();
         Database db = new Database();
