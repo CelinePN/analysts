@@ -16,7 +16,8 @@ import java.util.List;
  */
 public enum SortBy {
     EXEMPLAIRES("total_exemplaires"),
-    EMPRUNTS("total_prets");
+    EMPRUNTS("total_prets"),
+    BOTH("");
 
 
     public String getSortingString() {

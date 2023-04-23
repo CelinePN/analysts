@@ -53,10 +53,10 @@ public class Menu extends JFrame {
         btnValider.addActionListener(e -> {
             //controleur.gererValidation()
             if (btnDemande.isSelected()) {
-                System.out.println("Offre est sélectionné");
+                System.out.println("Demande est sélectionné");
                 //MainWindow
             } else if (btnOffre.isSelected()) {
-                System.out.println("Demande est sélectionné");
+                System.out.println("Offre est sélectionné");
             } else if (btnComparaison.isSelected()) {
                 System.out.println("Comparaison Offre/Demande est sélectionné");
             } else {
