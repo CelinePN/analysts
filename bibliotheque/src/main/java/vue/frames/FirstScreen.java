@@ -2,10 +2,12 @@ package vue.frames;
 
 import controleur.firstscreen.ControleurFirstScreen;
 import controleur.firstscreen.ObserverFirstScreen;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Objects;
 
 
 /**
@@ -28,8 +30,8 @@ import java.awt.event.ActionListener;
  */
 
 public class FirstScreen extends JFrame implements ObserverFirstScreen {
-    private JPanel panelError;
     private JProgressBar progressBar;
+    private final CardLayout cardLayout;
     private final ControleurFirstScreen controleurFirstScreen;
 
 
@@ -42,10 +44,12 @@ public class FirstScreen extends JFrame implements ObserverFirstScreen {
         this.controleurFirstScreen.registerObserver(this);
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Fermer la fenêtre en cliquant sur la croix
-        this.setSize(550, 350); // Taille de la fenêtre
         this.setLocationRelativeTo(null); // Centrer la fenêtre sur l'écran
-        this.setLayout(new FlowLayout(FlowLayout.CENTER));
+        this.setSize(500, 400);
+        this.cardLayout = new CardLayout();
+        this.setLayout(cardLayout);
         this.initView();
+        cardLayout.show(getContentPane(), "main");
 
         setVisible(true); // Rendre la fenêtre visible
 
@@ -60,7 +64,6 @@ public class FirstScreen extends JFrame implements ObserverFirstScreen {
         //init panelMain
         JPanel panelMain = new JPanel();
         panelMain.setLayout(new BoxLayout(panelMain, BoxLayout.PAGE_AXIS));
-        panelMain.setVisible(true);
 
         //init panelMain components
         JLabel labelTitle = new JLabel("Veuillez patienter un instant, nous chargeons les données pour vous");
@@ -70,19 +73,18 @@ public class FirstScreen extends JFrame implements ObserverFirstScreen {
 
         //GIF fonctionnement bizarre
         ClassLoader classLoader = getClass().getClassLoader();
-        ImageIcon imageIcon = new ImageIcon(classLoader.getResource("sablier.gif"));
+        ImageIcon imageIcon = new ImageIcon(Objects.requireNonNull(classLoader.getResource("sablier-2.gif")));
         JLabel jLabel = new JLabel(imageIcon);
         JPanel jPanel = new JPanel();
         jPanel.add(jLabel);
 
         //ICON
         ClassLoader classLoader2 = getClass().getClassLoader();
-        ImageIcon icon = new ImageIcon(classLoader2.getResource("livreB.jpg"));
+        ImageIcon icon = new ImageIcon(Objects.requireNonNull(classLoader2.getResource("livreB.jpg")));
         setIconImage(icon.getImage());
 
         //init panelError
-        panelError = new JPanel();
-        panelError.setVisible(false);
+        JPanel panelError = new JPanel();
         panelError.setLayout(new BoxLayout(panelError, BoxLayout.PAGE_AXIS));
 
         //init panelError components
@@ -97,23 +99,16 @@ public class FirstScreen extends JFrame implements ObserverFirstScreen {
         panelError.add(labelError);
         panelError.add(buttonRetry);
 
-        getContentPane().add(panelMain);
-        getContentPane().add(panelError);
-
-        getContentPane().add(jPanel);
-        setVisible(true); // Rendre la fenêtre visible
+        this.add(panelMain, "main");
+        this.add(panelError, "error");
+        this.add(jPanel, "gif");
 
     }
 
     /**
      * fonction permettant de relancer le chargement des données du début si une erreur est survenue
      */
-
-
-
-    public JPanel getPanelError() {
-        return panelError;
-    }
+    
 
     public JProgressBar getProgressBar() {
         return progressBar;
@@ -126,13 +121,11 @@ public class FirstScreen extends JFrame implements ObserverFirstScreen {
 
     @Override
     public void loadingFailed() {
-        progressBar.setVisible(false);
-        panelError.setVisible(true);
+        this.cardLayout.show(this.getContentPane(), "error");
     }
 
     @Override
     public void loadingSuccess() {
-        progressBar.setVisible(false);
 
         MainWindow mainWindow = new MainWindow();
         mainWindow.pack();
@@ -143,11 +136,15 @@ public class FirstScreen extends JFrame implements ObserverFirstScreen {
 
     @Override
     public void retry() {
-        panelError.setVisible(false);
-        progressBar.setVisible(true);
+        this.cardLayout.show(this.getContentPane(), "main");
     }
 
     public ControleurFirstScreen getControleurFirstScreen() {
         return controleurFirstScreen;
     }
+
+    public static void main(String[] args) {
+        new FirstScreen();
+    }
+
 }
