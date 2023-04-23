@@ -5,8 +5,11 @@ import modele.utils.SortBy;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.general.DefaultPieDataset;
+import org.jfree.chart.ChartPanel;
+
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.List;
 
 public class Camembert extends JPanel {
@@ -22,6 +25,8 @@ public class Camembert extends JPanel {
      *
      **/
     public Camembert(List<Parametre> liste, SortBy sortBy) {
+
+        this.setLayout(new BorderLayout());
 
         DefaultPieDataset<String> dataset = new DefaultPieDataset<>();
         for (Parametre param : liste){
@@ -41,6 +46,12 @@ public class Camembert extends JPanel {
                 "Mon graphique en camembert", // Titre du graphique
                 dataset // Données à afficher
         );
+
+        // Création du panel contenant le graphique
+        ChartPanel chartPanel = new ChartPanel(chart);
+        chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
+
+        this.add(chartPanel, BorderLayout.CENTER);
 
     }
 }

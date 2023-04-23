@@ -2,10 +2,12 @@ package vue.panels.graphs;
 
 import modele.parametre.Parametre;
 import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.category.DefaultCategoryDataset;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.List;
 
 public class BarresEmpilees extends JPanel{
@@ -25,6 +27,7 @@ public class BarresEmpilees extends JPanel{
     }
 
     public BarresEmpilees(List<Parametre> liste){
+        this.setLayout(new BorderLayout());
         String type = liste.get(0).getType_param().getString();
         // Création des données
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
@@ -41,6 +44,12 @@ public class BarresEmpilees extends JPanel{
                 "Valeurs", // Titre de l'axe des ordonnées
                 dataset // Données à afficher
         );
+
+        // Création du panel contenant le graphique
+        ChartPanel chartPanel = new ChartPanel(chart);
+        chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
+
+        this.add(chartPanel, BorderLayout.CENTER);
 
     }
 }

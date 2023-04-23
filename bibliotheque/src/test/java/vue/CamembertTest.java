@@ -1,6 +1,8 @@
 package vue;
 
+import controleur.firstscreen.ObserverFirstScreen;
 import dao.Database;
+import modele.Cache;
 import modele.parametre.Parametre;
 import modele.parametre.ParametreType;
 import modele.utils.SortBy;
@@ -35,13 +37,27 @@ public class CamembertTest {
      * Test d'affichage visuellement que la fenêtre se lance correctement avec graphique par défaut
      */
     public static void main(String[] args) throws IOException, InterruptedException {
-        //List<Parametre> liste = Database.getParamByTypeDeDoc(ParametreType.AUTEUR, TypeDeDocGrouping.FILMS, SortBy.EXEMPLAIRES);
-        JFrame frame = new JFrame();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Fermer la fenêtre en cliquant sur la croix
-        frame.setSize(550, 350); // Taille de la fenêtre
-        frame.setLocationRelativeTo(null);
-        frame.getContentPane().add(new Camembert(Objects.requireNonNull(Database.getParamByTypeDeDoc(ParametreType.AUTEUR, TypeDeDocGrouping.FILMS, SortBy.EXEMPLAIRES)),SortBy.EMPRUNTS));
-        Thread.sleep(10000);
-        frame.setVisible(true);
+        Thread thread = new Thread() {
+            List<Parametre> liste;
+            public void run() {
+                try {
+                    liste = Database.getParamByTypeDeDoc(ParametreType.AUTEUR, TypeDeDocGrouping.FILMS, SortBy.EXEMPLAIRES);
+                }
+                catch (IOException e) {
+                    System.out.println(e.getMessage());
+                }
+
+                JFrame frame = new JFrame();
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Fermer la fenêtre en cliquant sur la croix
+                frame.setSize(550, 350); // Taille de la fenêtre
+                frame.setLocationRelativeTo(null);
+
+                frame.getContentPane().add(new Camembert(Objects.requireNonNull(liste.subList(0,10)), SortBy.EXEMPLAIRES));
+                frame.setVisible(true);
+
+            }
+        };
+        thread.start();
+
     }
 }

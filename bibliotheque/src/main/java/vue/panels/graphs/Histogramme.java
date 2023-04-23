@@ -35,16 +35,17 @@ public class Histogramme extends JPanel {
 
     }
     public Histogramme(List<Parametre> liste, SortBy sortBy) {
+        this.setLayout(new BorderLayout());
         // Création des données
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         for (Parametre param : liste){
             switch(sortBy){
                 case EXEMPLAIRES:
-                    dataset.setValue(param.getTotalExemplaires(), "Nombre d'exemplaire",param.getNom());
+                    dataset.setValue(param.getTotalExemplaires(), "Nombre d'exemplaires",param.getNom());
                     break;
 
                 case EMPRUNTS:
-                    dataset.setValue(param.getTotalPrets(), "Nombre d'emprunt",param.getNom());
+                    dataset.setValue(param.getTotalPrets(), "Nombre d'emprunts",param.getNom());
                     break;
             }
         }
@@ -55,6 +56,12 @@ public class Histogramme extends JPanel {
                 "Valeurs", // Titre de l'axe des ordonnées
                 dataset // Données à afficher
         );
+
+        // Création du panel contenant le graphique
+        ChartPanel chartPanel = new ChartPanel(chart);
+        chartPanel.setPreferredSize(new Dimension(500, 270));
+
+        this.add(chartPanel, BorderLayout.CENTER);
 
     }
 
