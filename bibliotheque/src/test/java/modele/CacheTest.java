@@ -2,6 +2,7 @@ package modele;
 
 import modele.parametre.Parametre;
 import modele.parametre.ParametreType;
+import modele.utils.SortBy;
 import modele.utils.TypeDeDocGrouping;
 import org.junit.jupiter.api.Test;
 
@@ -29,14 +30,15 @@ public class CacheTest {
 
     /*private final Map<ParametreType, Map<TypeDeDocGrouping, List<Parametre>>> listesExemplairesTest = new HashMap<>();
     private final Map<ParametreType, Map<TypeDeDocGrouping, List<Parametre>>> listesEmpruntsTest = new HashMap<>();
+*/
 
-    /*
     @Test
     public void testGetLanguages() {
-        Database db = new Database();
-        assertDoesNotThrow(() -> db.getParamByTypeDeDoc(ParametreType.LANGUE, NO_TYPE));
+        Cache cache = new Cache();
+        assertDoesNotThrow(() -> cache.get(ParametreType.LANGUE, TypeDeDocGrouping.NO_TYPE, SortBy.EMPRUNTS,5));
     }
 
+    /*
     @Test
     public void testGetLanguagesNombre() throws IOException {
         Database db = new Database();
