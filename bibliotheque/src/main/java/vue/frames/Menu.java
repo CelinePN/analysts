@@ -51,8 +51,10 @@ public class Menu extends JFrame {
         btnValider.setForeground(Color.WHITE);
 
         btnValider.addActionListener(e -> {
+            //controleur.gererValidation()
             if (btnDemande.isSelected()) {
                 System.out.println("Demande est sélectionné");
+                //MainWindow
             } else if (btnOffre.isSelected()) {
                 System.out.println("Offre est sélectionné");
             } else if (btnComparaison.isSelected()) {
@@ -79,7 +81,7 @@ public class Menu extends JFrame {
 
         // Ajout de l'image label au panel2
         ClassLoader classLoader = getClass().getClassLoader();
-        ImageIcon imageIcon = new ImageIcon(Objects.requireNonNull(classLoader.getResource("bibliotheque-2.jpg")));
+        ImageIcon imageIcon = new ImageIcon(Objects.requireNonNull(classLoader.getResource("bibliothequeParis.jpg")));
         JLabel jLabel = new JLabel(imageIcon);
         panel2 = new JPanel(new BorderLayout());
         panel2.setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
@@ -98,7 +100,7 @@ public class Menu extends JFrame {
         int verticalInsets = insets.top + insets.bottom;
         int windowWidth = imageIcon.getIconWidth() + horizontalInsets;
         int windowHeight = imageIcon.getIconHeight() + labelTitre.getPreferredSize().height + panel1.getPreferredSize().height + verticalInsets;
-        setPreferredSize(new Dimension(windowWidth+700, windowHeight+150));
+        setPreferredSize(new Dimension(windowWidth+700, windowHeight+250));
         setLocationRelativeTo(null);
 
         pack();
