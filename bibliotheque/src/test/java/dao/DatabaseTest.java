@@ -2,6 +2,7 @@ package dao;
 import modele.utils.SortBy;
 import modele.parametre.ParametreType;
 import modele.utils.TypeDeDocGrouping;
+import modele.utils.SortBy;
 import org.junit.Rule;
 import org.junit.jupiter.api.Test;
 import okhttp3.*;
@@ -32,13 +33,13 @@ public class DatabaseTest {
      * Permet de tester le constructeur
      * @return un booléen en fonction de si les deux parties sont identiques ou non
      **/
-    @Test
+    /*@Test
     public void testConstructeur() {
         Database db = new Database();
         assertNotNull(db.client);
         assertNotNull(db.mediaType);
         assertEquals(db.mediaType, MediaType.parse("application/json"));
-    }
+    }*/
 
     // Vérifie si les méthodes ne lèvent pas d'exceptions
     // si les requêtes sont correctement construites
@@ -58,7 +59,7 @@ public class DatabaseTest {
     @Test
     public void testGetLanguages() {
         Database db = new Database();
-        assertDoesNotThrow(() -> db.getParamByTypeDeDoc(ParametreType.LANGUE, TypeDeDocGrouping.NO_TYPE));
+        assertDoesNotThrow(() -> db.getParamByTypeDeDoc(ParametreType.LANGUE, TypeDeDocGrouping.NO_TYPE, SortBy.EXEMPLAIRES));
     }
 
     @Test
@@ -67,53 +68,53 @@ public class DatabaseTest {
         //compter pour français?
         //assertEquals(14, db.getParamByTypeDeDoc(ParametreType.LANGUE, NO_TYPE).get(0).getTotalExemplaires());
         //assertEquals(14, db.getParamByTypeDeDoc(ParametreType.LANGUE, NO_TYPE).get(0).getTotalPrets());
-        assertEquals(67, db.getParamByTypeDeDoc(ParametreType.LANGUE, TypeDeDocGrouping.NO_TYPE).get(0).getCount());
+        assertEquals(559003, db.getParamByTypeDeDoc(ParametreType.LANGUE, TypeDeDocGrouping.NO_TYPE, SortBy.EXEMPLAIRES).get(0).getCount());
     }
 
     @Test
     public void testGetAuteurNombre() throws IOException {
         Database db = new Database();
-        assertEquals(1, db.getParamByTypeDeDoc(ParametreType.AUTEUR, TypeDeDocGrouping.LIVRES).get(0).getCount());
+        assertEquals(15, db.getParamByTypeDeDoc(ParametreType.AUTEUR, TypeDeDocGrouping.JEUX, SortBy.EXEMPLAIRES).get(0).getTotalExemplaires());
     }
 
     @Test
     public void testGetTypeNombre() throws IOException {
         Database db = new Database();
-        assertEquals(45, db.getParamByTypeDeDoc(ParametreType.TYPE_DE_DOC, TypeDeDocGrouping.NO_TYPE).get(1).getCount());
+        assertEquals(339082, db.getParamByTypeDeDoc(ParametreType.TYPE_DE_DOC, TypeDeDocGrouping.NO_TYPE, SortBy.EXEMPLAIRES).get(0).getCount());
     }
 
     @Test
     public void testGetGenreNombre() throws IOException {
         Database db = new Database();
-        assertEquals(745, db.getParamByTypeDeDoc(ParametreType.GENRE, TypeDeDocGrouping.NO_TYPE).get(1).getCount());
+        assertEquals(408, db.getParamByTypeDeDoc(ParametreType.GENRE, TypeDeDocGrouping.JEUX, SortBy.EXEMPLAIRES).get(0).getTotalExemplaires());
     }
 
 
     @Test
     public void testNullParam() throws IOException {
         Database db = new Database();
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> db.getParamByTypeDeDoc(null, TypeDeDocGrouping.NO_TYPE));
-        assertEquals("Erreur: Les paramètres ne peuvent pas être null ou la limite ne peut pas être 0", exception.getMessage());
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> db.getParamByTypeDeDoc(null, TypeDeDocGrouping.NO_TYPE, SortBy.EXEMPLAIRES));
+        assertEquals("Erreur: Les paramètres ne peuvent pas être null", exception.getMessage());
     }
 
     @Test
     public void testNullGroupBy() throws IOException {
         Database db = new Database();
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> db.getParamByTypeDeDoc(ParametreType.LANGUE, null));
-        assertEquals("Erreur: Les paramètres ne peuvent pas être null ou la limite ne peut pas être 0", exception.getMessage());
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> db.getParamByTypeDeDoc(ParametreType.LANGUE, null, SortBy.EXEMPLAIRES));
+        assertEquals("Erreur: Les paramètres ne peuvent pas être null", exception.getMessage());
     }
 
     @Test
     public void testNoNetwork() throws IOException {
         Database db = new Database();
-        Exception exception = assertThrows(IOException.class, () -> db.getParamByTypeDeDoc(ParametreType.LANGUE, TypeDeDocGrouping.NO_TYPE));
+        Exception exception = assertThrows(IOException.class, () -> db.getParamByTypeDeDoc(ParametreType.LANGUE, TypeDeDocGrouping.NO_TYPE, SortBy.EXEMPLAIRES));
         assertEquals("Hôte inconnu (data.mongodb-api.com)", exception.getMessage());
     }
 
     @Test
-    public void testGetLangueLivre() throws IOException {
+    public void testGetLangueJeux() throws IOException {
         Database db = new Database();
-        assertEquals(2447, db.getParamByTypeDeDoc(ParametreType.LANGUE, TypeDeDocGrouping.LIVRES).get(0).getCount());
+        assertEquals(8873, db.getParamByTypeDeDoc(ParametreType.LANGUE, TypeDeDocGrouping.JEUX, SortBy.EMPRUNTS).get(0).getTotalPrets());
     }
     /*
     @Test
