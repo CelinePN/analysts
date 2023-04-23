@@ -21,7 +21,6 @@ public class MainWindow extends JFrame {
         //mettre la photo dans menu
 
         ClassLoader classLoader2 = getClass().getClassLoader();
-
         ImageIcon icon = new ImageIcon(classLoader2.getResource("livreB.jpg"));
         setIconImage(icon.getImage());
 

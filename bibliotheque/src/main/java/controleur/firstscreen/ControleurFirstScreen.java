@@ -65,12 +65,13 @@ public class ControleurFirstScreen {
                             completedTasks++;
                             for(ObserverFirstScreen observer : observers){
                                 observer.updateProgressBar((int) (((float) completedTasks / totalTasks) * 100));
-                            }                        } catch (IOException e) {
+                            }
+                        }
+                        catch (IOException e) {
                             System.out.println(e.getMessage());
                             for(ObserverFirstScreen observer : observers){
                                 observer.loadingFailed();
                             }
-
                             return;
                         }
 

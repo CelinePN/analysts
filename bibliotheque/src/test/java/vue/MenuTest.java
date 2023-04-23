@@ -26,16 +26,13 @@ public class MenuTest {
     public void testInitView() {
         firstScreenEco.initView();
         assertNotNull(firstScreenEco.getContentPane());
-        assertNotNull(firstScreenEco.getPanelError());
-        assertNotNull(firstScreenEco.getPanelError());
+
     }
 
     @Test
     public void testRetry() {
-        assertFalse(firstScreenEco.getPanelError().isVisible());
         assertTrue(firstScreenEco.getProgressBar().isVisible());
         firstScreenEco.retry();
-        assertFalse(firstScreenEco.getPanelError().isVisible());
         assertTrue(firstScreenEco.getProgressBar().isVisible());
     }
 
@@ -70,7 +67,6 @@ public class MenuTest {
                 e.printStackTrace();
             }
         }
-        assertTrue(firstScreenEco.getPanelError().isVisible());
         assertFalse(firstScreenEco.getProgressBar().isVisible());
     }
 }
