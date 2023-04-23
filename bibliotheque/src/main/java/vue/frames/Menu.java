@@ -52,9 +52,9 @@ public class Menu extends JFrame {
 
         btnValider.addActionListener(e -> {
             if (btnDemande.isSelected()) {
-                System.out.println("Demande est sélectionné");
-            } else if (btnOffre.isSelected()) {
                 System.out.println("Offre est sélectionné");
+            } else if (btnOffre.isSelected()) {
+                System.out.println("Demande est sélectionné");
             } else if (btnComparaison.isSelected()) {
                 System.out.println("Comparaison Offre/Demande est sélectionné");
             } else {
@@ -104,7 +104,7 @@ public class Menu extends JFrame {
         pack();
         setVisible(true);
         //Bloquer taille de la fenetre
-        setResizable(false);
+        //setResizable(false);
 
     }
 
