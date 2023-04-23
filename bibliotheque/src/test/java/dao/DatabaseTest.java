@@ -56,6 +56,10 @@ public class DatabaseTest {
         assertNotNull(request.body());
     }*/
 
+    /**
+     * Les cinq prochains tests permettent de vérifier les types de paramètres ainsi que les groupes dans les cas des exemplaires
+     * @return un booléen en fonction de si les deux parties sont identiques ou non
+     **/
     @Test
     public void testGetLanguages() {
         Database db = new Database();
@@ -89,6 +93,10 @@ public class DatabaseTest {
         assertEquals(408, db.getParamByTypeDeDoc(ParametreType.GENRE, TypeDeDocGrouping.JEUX, SortBy.EXEMPLAIRES).get(0).getTotalExemplaires());
     }
 
+    /**
+     * Les trois prochains tests permettent de tester les cas où un paramètre est null
+     * @return un booléen en fonction de si les deux parties sont identiques ou non
+     **/
 
     @Test
     public void testNullParam() throws IOException {
@@ -110,6 +118,12 @@ public class DatabaseTest {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> db.getParamByTypeDeDoc(ParametreType.LANGUE, TypeDeDocGrouping.NO_TYPE, null));
         assertEquals("Erreur: Les paramètres ne peuvent pas être null", exception.getMessage());
     }
+
+    /**
+     * Permet de tester l'absence de réseau'
+     * @return un booléen en fonction de si les deux parties sont identiques ou non
+     **/
+
     @Test
     public void testNoNetwork() throws IOException {
         Database db = new Database();
@@ -117,6 +131,10 @@ public class DatabaseTest {
         assertEquals("Hôte inconnu (data.mongodb-api.com)", exception.getMessage());
     }
 
+    /**
+     * Permet de tester les emprunts
+     * @return un booléen en fonction de si les deux parties sont identiques ou non
+     **/
     @Test
     public void testGetLangueJeux() throws IOException {
         Database db = new Database();

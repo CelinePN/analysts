@@ -1,5 +1,4 @@
 package modele;
-import dao.Database;
 
 import modele.parametre.Parametre;
 import modele.parametre.ParametreType;
@@ -21,9 +20,9 @@ import static org.junit.jupiter.api.Assertions.*;
  *     Cette classe permet de tester la classe Cache et les données récupérées
  * </p>
  *
- * @Author: Marine
- * @Version: 2.0
- * @since: 01/04/2023
+ * @Author: Céline
+ * @Version: 1.0
+ * @since: 15/04/2023
  */
 
 public class CacheTest {
