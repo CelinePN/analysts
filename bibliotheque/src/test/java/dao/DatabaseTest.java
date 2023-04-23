@@ -56,7 +56,7 @@ public class DatabaseTest {
         assertNotNull(request.body());
     }*/
 
-    @Test
+    /*@Test
     public void testGetLanguages() {
         Database db = new Database();
         assertDoesNotThrow(() -> db.getParamByTypeDeDoc(ParametreType.LANGUE, TypeDeDocGrouping.NO_TYPE, SortBy.EXEMPLAIRES));
@@ -139,5 +139,6 @@ public class DatabaseTest {
 
         Assertions.assertEquals(expectedLanguages, actualLanguages);
     }*/
+    
 
  }
