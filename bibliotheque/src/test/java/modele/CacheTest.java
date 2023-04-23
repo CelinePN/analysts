@@ -31,6 +31,7 @@ public class CacheTest {
     /*private final Map<ParametreType, Map<TypeDeDocGrouping, List<Parametre>>> listesExemplairesTest = new HashMap<>();
     private final Map<ParametreType, Map<TypeDeDocGrouping, List<Parametre>>> listesEmpruntsTest = new HashMap<>();
 
+    /*
     @Test
     public void testGetLanguages() {
         Database db = new Database();

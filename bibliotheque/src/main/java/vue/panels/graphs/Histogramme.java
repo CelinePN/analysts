@@ -15,7 +15,7 @@ import org.jfree.data.category.DefaultCategoryDataset;
 
 //import static modele.TypeDeDocEnum.FILMS;
 
-public class Histogramme extends JFrame {
+public class Histogramme extends JPanel {
 
     /**
      *
@@ -28,7 +28,40 @@ public class Histogramme extends JFrame {
      * @param
      **/
 
-    public Histogramme(List<Parametre> liste, SortBy sortBy) {
+    /**
+     *
+     * Un constructeur par défaut Histogramme qui prend aucun param à afficher au lancement
+     * @return
+     */
+
+    public Histogramme() {
+        // Création des données
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+
+        // Création du graphique en barres
+        JFreeChart chart = ChartFactory.createBarChart(
+                "Graphique par défaut", // Titre du graphique
+                "Catégories", // Titre de l'axe des abscisses
+                "Valeurs", // Titre de l'axe des ordonnées
+                dataset // Données à afficher
+        );
+
+        // Création du panel contenant le graphique
+        ChartPanel chartPanel = new ChartPanel(chart);
+        chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
+
+
+        //-----------------DESIGNGRID LAYOUT-------------
+
+        // Création du panel principal contenant le graphique, la liste déroulante et les boutons
+        //JPanel mainPanel = new JPanel(new BorderLayout());
+        this.add(chartPanel, BorderLayout.CENTER);
+
+        // Ajout du panel principal à la fenêtre
+        //setContentPane(mainPanel);
+    }
+
+   /* public Histogramme(List<Parametre> liste, SortBy sortBy) {
         // Création des données
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         for (Parametre param : liste){
@@ -59,6 +92,11 @@ public class Histogramme extends JFrame {
         ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
 
+        /**
+         * Mettre tous les boutons dans MainWindow, Histogramme ne fait qu'un graphique
+         */
+    /*
+
         // Création des boutons
         JButton buttonLeft = new JButton("Retour Menu");
         JButton buttonRight = new JButton("Fermer");
@@ -88,6 +126,6 @@ public class Histogramme extends JFrame {
 
         // Ajout du panel principal à la fenêtre
         setContentPane(mainPanel);
-    }
+    }*/
 
 }
