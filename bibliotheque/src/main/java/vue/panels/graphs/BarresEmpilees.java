@@ -13,6 +13,7 @@ import java.util.List;
 public class BarresEmpilees extends JPanel{
 
     public BarresEmpilees(){
+
         // Création des données
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
@@ -26,21 +27,25 @@ public class BarresEmpilees extends JPanel{
 
     }
 
-    public BarresEmpilees(List<Parametre> liste){
+    public BarresEmpilees(List<Parametre> listeExemplaires, List<Parametre> listeEmprunts){
+        String typeParam = listeExemplaires.get(0).getType_param().getString();
+
         this.setLayout(new BorderLayout());
-        String type = liste.get(0).getType_param().getString();
+        String type = listeExemplaires.get(0).getType_param().getString();
         // Création des données
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        for (Parametre param : liste){
+        for (Parametre param : listeExemplaires){
             dataset.setValue(param.getTotalExemplaires(), "Offre", param.getNom()); //Offre
-            dataset.setValue(param.getTotalPrets(), "Demande", param.getNom()); //Demande
+        }
+        for (Parametre param : listeEmprunts){
+            dataset.setValue((float) param.getTotalPrets(), "Demande", param.getNom()); //Demande
         }
 
 
         // Création du graphique en barres empilées
         JFreeChart chart = ChartFactory.createStackedBarChart(
                 "Comparaison offre et demande de "+type, // Titre du graphique
-                "Catégories", // Titre de l'axe des abscisses
+                typeParam, // Titre de l'axe des abscisses
                 "Valeurs", // Titre de l'axe des ordonnées
                 dataset // Données à afficher
         );

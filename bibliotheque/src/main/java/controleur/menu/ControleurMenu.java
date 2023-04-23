@@ -1,18 +1,18 @@
 package controleur.menu;
 
-import modele.utils.SortBy;
+import modele.utils.Mode;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ControleurMenu {
 
-    private SortBy currentMode;
+    private Mode currentMode;
 
     private final List<ObserverMenu> observers ;
 
 
-    public ControleurMenu(SortBy mode) {
+    public ControleurMenu(Mode mode) {
         this.currentMode = mode;
         this.observers = new ArrayList<>();
     }
@@ -22,11 +22,11 @@ public class ControleurMenu {
     }
 
 
-    public SortBy getCurrentMode() {
+    public Mode getCurrentMode() {
         return currentMode;
     }
 
-    public void setCurrentMode(SortBy currentMode) {
+    public void setCurrentMode(Mode currentMode) {
         this.currentMode = currentMode;
     }
 

@@ -11,6 +11,8 @@ package vue.frames;
  */
 
 import javax.swing.*;
+
+import modele.utils.Mode;
 import net.java.dev.designgridlayout.DesignGridLayout;
 
 import java.awt.*;
@@ -51,17 +53,25 @@ public class Menu extends JFrame {
         btnValider.setForeground(Color.WHITE);
 
         btnValider.addActionListener(e -> {
-            //controleur.gererValidation()
+            //controleur.gererValidation(3boutons)
+            Mode mode=null;
             if (btnDemande.isSelected()) {
-                System.out.println("Demande est sélectionné");
-                //MainWindow
+                mode=Mode.EMPRUNTS;
             } else if (btnOffre.isSelected()) {
-                System.out.println("Offre est sélectionné");
+                mode=Mode.EXEMPLAIRES;
             } else if (btnComparaison.isSelected()) {
-                System.out.println("Comparaison Offre/Demande est sélectionné");
+                mode=Mode.BOTH;
             } else {
                 JOptionPane.showMessageDialog(this, "Veuillez sélectionner une option");
             }
+            if(mode!=null){
+                MainWindow mainWindow = new MainWindow(mode);
+                mainWindow.pack();
+                mainWindow.setVisible(true);
+                setVisible(false);
+                dispose();
+            }
+
         });
 
         // Ajout des boutons radio et du bouton "Valider" au panel1
@@ -84,8 +94,11 @@ public class Menu extends JFrame {
         ImageIcon imageIcon = new ImageIcon(Objects.requireNonNull(classLoader.getResource("bibliothequeParis.jpg")));
         JLabel jLabel = new JLabel(imageIcon);
         panel2 = new JPanel(new BorderLayout());
+        panel2.setVisible(false);
         panel2.setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
         panel2.add(jLabel, BorderLayout.CENTER);
+
+
 
         // Ajout des panels au frame avec DesignGridLayout
         JPanel contentPanel = new JPanel();

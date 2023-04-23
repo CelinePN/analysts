@@ -1,7 +1,5 @@
 package modele.utils;
 
-import java.util.List;
-
 /**
  *  <h1> SortBy </h1>
  *
@@ -14,7 +12,7 @@ import java.util.List;
  * @Version: 1.0
  * @since: 30/03/2023
  */
-public enum SortBy {
+public enum Mode {
     EXEMPLAIRES("total_exemplaires"),
     EMPRUNTS("total_prets"),
     BOTH("");
@@ -27,7 +25,7 @@ public enum SortBy {
     private String sortingType;
 
 
-    SortBy(String a) {
+    Mode(String a) {
         this.sortingType=a;
     }
 
