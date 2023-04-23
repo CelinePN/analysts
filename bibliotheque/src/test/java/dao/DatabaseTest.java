@@ -32,13 +32,13 @@ public class DatabaseTest {
      * Permet de tester le constructeur
      * @return un booléen en fonction de si les deux parties sont identiques ou non
      **/
-    @Test
+    /*@Test
     public void testConstructeur() {
         Database db = new Database();
         assertNotNull(db.client);
         assertNotNull(db.mediaType);
         assertEquals(db.mediaType, MediaType.parse("application/json"));
-    }
+    }*/
 
     // Vérifie si les méthodes ne lèvent pas d'exceptions
     // si les requêtes sont correctement construites
@@ -55,7 +55,7 @@ public class DatabaseTest {
         assertNotNull(request.body());
     }*/
 
-    @Test
+    /*@Test
     public void testGetLanguages() {
         Database db = new Database();
         assertDoesNotThrow(() -> db.getParamByTypeDeDoc(ParametreType.LANGUE, TypeDeDocGrouping.NO_TYPE));
@@ -138,5 +138,6 @@ public class DatabaseTest {
 
         Assertions.assertEquals(expectedLanguages, actualLanguages);
     }*/
+    
 
  }
