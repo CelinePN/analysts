@@ -1,3 +1,11 @@
+/**
+ * Menu extends JFrame
+ * Dans le menu, un layout
+ * Sur le layout 2 JPanel
+ * 1 JPanel: add tous les boutons
+ * 1 JPanel: 1 photo
+ * et 1 bouton valider
+ */
 /*package vue.frames;
 import javax.swing.*;
 import java.awt.*;

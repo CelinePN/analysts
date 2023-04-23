@@ -12,6 +12,8 @@ import java.awt.*;
 import java.util.List;
 
 public class HistogrammeBis extends JPanel {
+
+    //ajouter un histogramme par défaut (voir classe histogramme)
     public HistogrammeBis(List<Parametre> liste, SortBy sortBy) {
         // Création des données
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();

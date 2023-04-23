@@ -6,7 +6,6 @@ import modele.utils.SortBy;
 import modele.utils.TypeDeDocGrouping;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class ButtonsPanel extends JPanel {
     public ButtonsPanel() {

@@ -1,17 +1,4 @@
 package dao;
-import modele.utils.SortBy;
-import modele.parametre.ParametreType;
-import modele.utils.TypeDeDocGrouping;
-import org.junit.Rule;
-import org.junit.jupiter.api.Test;
-import okhttp3.*;
-import org.junit.rules.ExpectedException;
-
-import java.io.IOException;
-
-
-import static modele.utils.TypeDeDocGrouping.NO_TYPE;
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  *  <h1> Test database </h1>
@@ -138,6 +125,6 @@ public class DatabaseTest {
 
         Assertions.assertEquals(expectedLanguages, actualLanguages);
     }*/
-    
+
 
  }
