@@ -4,6 +4,9 @@ import controleur.mainWindow.ControleurMainWindow;
 import modele.utils.SortBy;
 import vue.panels.ButtonsPanel;
 import vue.panels.graphs.Histogramme;
+import net.java.dev.designgridlayout.DesignGridLayout;
+import javax.swing.*;
+import java.awt.*;
 
 import javax.swing.*;
 import java.awt.*;
