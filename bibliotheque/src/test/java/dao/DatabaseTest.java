@@ -21,9 +21,9 @@ import static org.junit.jupiter.api.Assertions.*;
  *     Cette classe permet de tester la classe database et les données récupérées
  * </p>
  *
- * @Author: Céline et Alice
- * @Version: 2.0
- * @since: 01/04/2023
+ * @Author: Céline
+ * @Version: 3.0
+ * @since: 23/04/2023
  */
 
 public class DatabaseTest {
@@ -104,6 +104,12 @@ public class DatabaseTest {
         assertEquals("Erreur: Les paramètres ne peuvent pas être null", exception.getMessage());
     }
 
+    @Test
+    public void testNullSortBy() throws IOException {
+        Database db = new Database();
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> db.getParamByTypeDeDoc(ParametreType.LANGUE, TypeDeDocGrouping.NO_TYPE, null));
+        assertEquals("Erreur: Les paramètres ne peuvent pas être null", exception.getMessage());
+    }
     @Test
     public void testNoNetwork() throws IOException {
         Database db = new Database();
