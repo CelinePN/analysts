@@ -1,6 +1,7 @@
 package vue.panels.graphs;
 
 import modele.parametre.Parametre;
+import modele.utils.SortBy;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -11,7 +12,7 @@ import java.awt.*;
 import java.util.List;
 
 public class CamembertBis extends JPanel {
-    public CamembertBis(List<Parametre> liste) {
+    public CamembertBis(List<Parametre> liste, SortBy sortBy) {
 
         // Création des données
         DefaultPieDataset dataset = new DefaultPieDataset();

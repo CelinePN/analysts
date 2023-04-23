@@ -2,6 +2,7 @@ package vue.frames;
 
 import controleur.firstscreen.ControleurFirstScreen;
 import controleur.firstscreen.ObserverFirstScreen;
+import net.java.dev.designgridlayout.DesignGridLayout;
 
 import javax.swing.*;
 import java.awt.*;
@@ -62,33 +63,31 @@ public class FirstScreen extends JFrame implements ObserverFirstScreen {
      */
     public void initView(){
         //init panelMain
-        JPanel panelMain = new JPanel();
-        panelMain.setLayout(new BoxLayout(panelMain, BoxLayout.PAGE_AXIS));
-
-        //init panelMain components
-        JLabel labelTitle = new JLabel("Veuillez patienter un instant, nous chargeons les données pour vous");
+        JPanel panelMain = new JPanel(new BorderLayout(10, 10));
+        panelMain.setBackground(Color.WHITE);
+        DesignGridLayout layout = new DesignGridLayout(panelMain);
+        JLabel loadingLabel = new JLabel("Veuillez patienter, nous chargeons les données pour vous...");
+        loadingLabel.setFont(new Font("Georgia", Font.PLAIN, 16)); // changement de la police
+        loadingLabel.setForeground(Color.BLUE); // changement de la couleur du texte
+        layout.row().center().add(loadingLabel);
+        layout.row().center().add(new JLabel(new ImageIcon(getClass().getClassLoader().getResource("53836.gif")))).withOwnRowWidth();
         this.progressBar = new JProgressBar();
-        panelMain.add(labelTitle);
-        panelMain.add(progressBar);
-
-        //GIF fonctionnement bizarre
-        ClassLoader classLoader = getClass().getClassLoader();
-        ImageIcon imageIcon = new ImageIcon(Objects.requireNonNull(classLoader.getResource("sablier-2.gif")));
-        JLabel jLabel = new JLabel(imageIcon);
-        JPanel jPanel = new JPanel();
-        jPanel.add(jLabel);
+        this.progressBar.setPreferredSize(new Dimension(200, 20));
+        this.progressBar.setStringPainted(true); // afficher la chaîne de caractères sous la barre de progression
+        layout.row().center().add(progressBar).withOwnRowWidth();
 
         //ICON
         ClassLoader classLoader2 = getClass().getClassLoader();
         ImageIcon icon = new ImageIcon(Objects.requireNonNull(classLoader2.getResource("livreB.jpg")));
         setIconImage(icon.getImage());
 
+
         //init panelError
         JPanel panelError = new JPanel();
-        panelError.setLayout(new BoxLayout(panelError, BoxLayout.PAGE_AXIS));
-
-        //init panelError components
-        JLabel labelError = new JLabel("Une erreur est survenue, veuillez réessayer");
+        panelError.setBackground(Color.WHITE); //ajout d'une couleur de fond
+        panelError.setBorder(BorderFactory.createLineBorder(Color.GRAY)); //ajout d'une bordure
+        DesignGridLayout layoutError = new DesignGridLayout(panelError);
+        layoutError.row().center().add(new JLabel("Une erreur est survenue, veuillez réessayer")); //modification de la police et de la couleur du texte
         JButton buttonRetry = new JButton("Réessayer");
         buttonRetry.addActionListener(new ActionListener() {
             @Override
@@ -96,14 +95,13 @@ public class FirstScreen extends JFrame implements ObserverFirstScreen {
                 controleurFirstScreen.retry();
             }
         });
-        panelError.add(labelError);
-        panelError.add(buttonRetry);
+        layoutError.row().center().add(buttonRetry);
 
         this.add(panelMain, "main");
         this.add(panelError, "error");
-        this.add(jPanel, "gif");
-
     }
+
+
 
     /**
      * fonction permettant de relancer le chargement des données du début si une erreur est survenue
