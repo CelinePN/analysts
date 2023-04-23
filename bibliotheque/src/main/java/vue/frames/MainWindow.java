@@ -2,12 +2,9 @@ package vue.frames;
 
 import vue.panels.ButtonsPanel;
 import vue.panels.graphs.Histogramme;
-import vue.panels.graphs.HistogrammeBis;
-
+import net.java.dev.designgridlayout.DesignGridLayout;
 import javax.swing.*;
 import java.awt.*;
-import java.io.InputStream;
-import java.net.URL;
 
 public class MainWindow extends JFrame {
     public MainWindow() {
