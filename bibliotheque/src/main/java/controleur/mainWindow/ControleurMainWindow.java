@@ -1,6 +1,9 @@
 package controleur.mainWindow;
 
+import controleur.menu.ObserverMenu;
+import modele.parametre.ParametreType;
 import modele.utils.Mode;
+import modele.utils.TypeDeDocGrouping;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,8 +11,11 @@ import java.util.List;
 public class ControleurMainWindow {
 
     private Mode currentMode;
-
+    private ParametreType parametreType;
+    private TypeDeDocGrouping typeDeDocGrouping;
     private final List<ObserverMainWindow> observers ;
+
+    private int limite;
 
 
     public ControleurMainWindow(Mode mode) {
@@ -21,7 +27,27 @@ public class ControleurMainWindow {
         this.observers.add(observer);
     }
 
+    public TypeDeDocGrouping getTypeDeDocGrouping() {
+        return typeDeDocGrouping;
+    }
 
+    public int getLimite() {
+        return limite;
+    }
+
+    public void setLimite(int limite) {
+        this.limite = limite;
+    }
+    public void setTypeDeDocGrouping(TypeDeDocGrouping typeDeDocGrouping) {
+        this.typeDeDocGrouping = typeDeDocGrouping;
+    }
+    public ParametreType getParametreType() {
+        return parametreType;
+    }
+
+    public void setParametreType(ParametreType parametreType) {
+        this.parametreType = parametreType;
+    }
 
 
 
@@ -35,4 +61,17 @@ public class ControleurMainWindow {
         this.currentMode = currentMode;
     }
 
+    public void valider() {
+        if (this.getCurrentMode()!=null) {
+            for (ObserverMainWindow observer : observers) {
+                //observer.fenetrefermer(this.getCurrentMode());
+            }
+        }
+
+        else{
+            for(ObserverMainWindow observer : observers){
+                observer.choisir();
+            }
+        }
+    }
 }
