@@ -13,7 +13,7 @@ import java.util.Map;
 public class Cache {
 
     /**
-     * @Author: Marine
+     * @Author: Marine, Céline
      * @since: 10/04/2023
      * @Version: 1.0
      * Le cache permet de stocker nos données côté applicatif pour les charger une fois au démarrage
@@ -60,28 +60,27 @@ public class Cache {
         if(key1 == null || key2 == null || sortBy == null){
             throw new IllegalArgumentException("Erreur: Les paramètres ne peuvent pas être null");
         }
-        try {
-            Map<TypeDeDocGrouping, List<Parametre>> innerMap = null;
-            switch (sortBy) {
-                case EXEMPLAIRES: {
-                    innerMap = cacheMapExemplaires.get(key1);
-                    break;
-                }
-                case EMPRUNTS: {
-                    innerMap = cacheMapEmprunts.get(key1);
-                    break;
-                }
+
+        Map<TypeDeDocGrouping, List<Parametre>> innerMap = null;
+        switch (sortBy) {
+            case EXEMPLAIRES: {
+                innerMap = cacheMapExemplaires.get(key1);
+                break;
             }
-            if (innerMap != null) {
-                List<Parametre> list = innerMap.get(key2);
-                return list.subList(0, limit);
+            case EMPRUNTS: {
+                innerMap = cacheMapEmprunts.get(key1);
+                break;
             }
-            return new ArrayList<>();
         }
-        catch(IllegalArgumentException illegalArgumentException){
+        if (innerMap != null) {
+            List<Parametre> list = innerMap.get(key2);
+            return list.subList(0, limit);
+        }
+        return new ArrayList<>();
+
+        /*catch(IllegalArgumentException illegalArgumentException){
             System.out.println(illegalArgumentException.getMessage());
-            return null;
-        }
+        }*/
     }
 
     /**

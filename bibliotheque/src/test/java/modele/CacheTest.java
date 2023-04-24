@@ -1,5 +1,6 @@
 package modele;
 
+import dao.Database;
 import modele.parametre.Parametre;
 import modele.parametre.ParametreType;
 import modele.utils.Mode;
@@ -148,31 +149,36 @@ public class CacheTest {
     public void testGetTypeNull() throws IOException {
         Cache.clearCache();
         Parametre p = new Parametre();
-        p.setType_param(ParametreType.AUTEUR);
-        p.setNom("Petersson");
-        p.setTotalExemplaires(17);
-        p.setTotalPrets(2);
-        List<Parametre> lEx = new ArrayList<>();
-        List<Parametre> lEm = new ArrayList<>();
-        lEx.add(p);
-        lEm.add(p);
-        Cache.put(ParametreType.AUTEUR, TypeDeDocGrouping.LIVRES, lEx, lEm);
-        assertEquals(new ArrayList<>(), Cache.get(null, TypeDeDocGrouping.LIVRES, Mode.EMPRUNTS, 1));
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> Cache.get(null, TypeDeDocGrouping.LIVRES, Mode.EMPRUNTS, 1));
+        assertEquals("Erreur: Les paramètres ne peuvent pas être null", exception.getMessage());
     }
 
     @Test
     public void testGetDocNull() throws IOException {
         Cache.clearCache();
         Parametre p = new Parametre();
-        p.setType_param(ParametreType.AUTEUR);
-        p.setNom("Petersson");
-        p.setTotalExemplaires(17);
-        p.setTotalPrets(2);
         List<Parametre> lEx = new ArrayList<>();
         List<Parametre> lEm = new ArrayList<>();
         lEx.add(p);
         lEm.add(p);
         Cache.put(ParametreType.AUTEUR, TypeDeDocGrouping.LIVRES, lEx, lEm);
-        assertEquals(new ArrayList<>(), Cache.get(ParametreType.AUTEUR, null, Mode.EMPRUNTS, 1));
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> Cache.get(ParametreType.AUTEUR, null, Mode.EMPRUNTS, 1));
+        assertEquals("Erreur: Les paramètres ne peuvent pas être null", exception.getMessage());
+    }
+    @Test
+    public void testGetModeNull() throws IOException {
+        Cache.clearCache();
+        Parametre p = new Parametre();
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> Cache.get(ParametreType.AUTEUR, TypeDeDocGrouping.LIVRES, null, 1));
+        assertEquals("Erreur: Les paramètres ne peuvent pas être null", exception.getMessage());
+    }
+
+    @Test
+    public void testGetLimitNull() throws IOException {
+        Cache.clearCache();
+        Parametre p = new Parametre();
+        /*Exception exception = assertThrows(IllegalArgumentException.class, () -> Cache.get(ParametreType.AUTEUR, TypeDeDocGrouping.LIVRES, Mode.EMPRUNTS, 0));
+        assertEquals("Erreur: Les paramètres ne peuvent pas être null", exception.getMessage());*/
+        assertEquals(new ArrayList<>(), Cache.get(ParametreType.LANGUE, TypeDeDocGrouping.LIVRES, Mode.EMPRUNTS, 0));
     }
  }
