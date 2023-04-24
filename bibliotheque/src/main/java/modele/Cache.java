@@ -57,6 +57,10 @@ public class Cache {
      * Récupère une liste dans le cache selon ses paramètres
      */
     public static List<Parametre> get(ParametreType key1, TypeDeDocGrouping key2, Mode sortBy, int limit) {
+        if(key1 == null || key2 == null || ){
+            throw new IllegalArgumentException("Erreur: Les paramètres ne peuvent pas être null");
+        }
+
         Map<TypeDeDocGrouping, List<Parametre>> innerMap = null;
         switch(sortBy){
             case EXEMPLAIRES: {

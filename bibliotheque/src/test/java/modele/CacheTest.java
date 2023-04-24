@@ -1,11 +1,14 @@
 package modele;
 
+import modele.parametre.Parametre;
 import modele.parametre.ParametreType;
 import modele.utils.Mode;
 import modele.utils.TypeDeDocGrouping;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -23,10 +26,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class CacheTest {
 
-    /*private final Map<ParametreType, Map<TypeDeDocGrouping, List<Parametre>>> listesExemplairesTest = new HashMap<>();
-    private final Map<ParametreType, Map<TypeDeDocGrouping, List<Parametre>>> listesEmpruntsTest = new HashMap<>();
-*/
-
     @Test
     public void testGetLanguages() {
         assertDoesNotThrow(() -> Cache.get(ParametreType.LANGUE, TypeDeDocGrouping.NO_TYPE, Mode.EMPRUNTS,5));
@@ -43,66 +42,137 @@ public class CacheTest {
     }
 */
     @Test
-    public void testGetAuteurNombre() throws IOException {
-   //     assertEquals(10, Cache.put(ParametreType.AUTEUR, TypeDeDocGrouping.LIVRES, , 3));
-    }
-/*
-    @Test
-    public void testGetTypeNombre() throws IOException {
-        Database db = new Database();
-        assertEquals(45, db.getParamByTypeDeDoc(ParametreType.TYPE_DE_DOC, TypeDeDocGrouping.NO_TYPE).get(1).getCount());
-    }
-
-    @Test
-    public void testGetGenreNombre() throws IOException {
-        Database db = new Database();
-        assertEquals(745, db.getParamByTypeDeDoc(ParametreType.GENRE, TypeDeDocGrouping.NO_TYPE).get(1).getCount());
-    }
-
-
-    @Test
-    public void testNullParam() throws IOException {
-        Database db = new Database();
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> db.getParamByTypeDeDoc(null, TypeDeDocGrouping.NO_TYPE));
-        assertEquals("Erreur: Les paramètres ne peuvent pas être null ou la limite ne peut pas être 0", exception.getMessage());
+    public void testClearCache() throws IOException {
+        Parametre p = new Parametre();
+        p.setType_param(ParametreType.AUTEUR);
+        p.setNom("Petersson");
+        p.setTotalExemplaires(17);
+        p.setTotalPrets(2);
+        List<Parametre> lEx = new ArrayList<>();
+        List<Parametre> lEm = new ArrayList<>();
+        lEx.add(p);
+        lEm.add(p);
+        Cache.clearCache();
+        assertEquals(new ArrayList<>(), Cache.get(ParametreType.AUTEUR, TypeDeDocGrouping.LIVRES, Mode.EXEMPLAIRES, 1));
     }
 
     @Test
-    public void testNullGroupBy() throws IOException {
-        Database db = new Database();
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> db.getParamByTypeDeDoc(ParametreType.LANGUE, null));
-        assertEquals("Erreur: Les paramètres ne peuvent pas être null ou la limite ne peut pas être 0", exception.getMessage());
+    public void testPutCacheNbExemplaires() throws IOException {
+        Cache.clearCache();
+        Parametre p = new Parametre();
+        p.setType_param(ParametreType.AUTEUR);
+        p.setNom("Petersson");
+        p.setTotalExemplaires(17);
+        p.setTotalPrets(2);
+        List<Parametre> lEx = new ArrayList<>();
+        List<Parametre> lEm = new ArrayList<>();
+        lEx.add(p);
+        lEm.add(p);
+        Cache.put(ParametreType.AUTEUR, TypeDeDocGrouping.LIVRES, lEx, lEm);
+        assertEquals(17, Cache.get(ParametreType.AUTEUR, TypeDeDocGrouping.LIVRES, Mode.EXEMPLAIRES, 1).get(0).getTotalExemplaires());
     }
 
     @Test
-    public void testNoNetwork() throws IOException {
-        Database db = new Database();
-        Exception exception = assertThrows(IOException.class, () -> db.getParamByTypeDeDoc(ParametreType.LANGUE, TypeDeDocGrouping.NO_TYPE));
-        assertEquals("Hôte inconnu (data.mongodb-api.com)", exception.getMessage());
+    public void testPutCacheAuteur() throws IOException {
+        Cache.clearCache();
+        Parametre p = new Parametre();
+        p.setType_param(ParametreType.AUTEUR);
+        p.setNom("Petersson");
+        p.setTotalExemplaires(17);
+        p.setTotalPrets(2);
+        List<Parametre> lEx = new ArrayList<>();
+        List<Parametre> lEm = new ArrayList<>();
+        lEx.add(p);
+        lEm.add(p);
+        Cache.put(ParametreType.AUTEUR, TypeDeDocGrouping.LIVRES, lEx, lEm);
+        assertEquals("Petersson", Cache.get(ParametreType.AUTEUR, TypeDeDocGrouping.LIVRES, Mode.EXEMPLAIRES, 1).get(0).getNom());
     }
 
-    /*
     @Test
-    public void testGetLanguagesManuelle() throws IOException {
-        List<Parametre> expectedLanguages = new ArrayList<>();
-        Database db = new Database();
+    public void testPutCacheType() throws IOException {
+        Cache.clearCache();
+        Parametre p = new Parametre();
+        p.setType_param(ParametreType.AUTEUR);
+        p.setNom("Petersson");
+        p.setTotalExemplaires(17);
+        p.setTotalPrets(2);
+        List<Parametre> lEx = new ArrayList<>();
+        List<Parametre> lEm = new ArrayList<>();
+        lEx.add(p);
+        lEm.add(p);
+        Cache.put(ParametreType.AUTEUR, TypeDeDocGrouping.LIVRES, lEx, lEm);
+        assertEquals(ParametreType.AUTEUR, Cache.get(ParametreType.AUTEUR, TypeDeDocGrouping.LIVRES, Mode.EXEMPLAIRES, 1).get(0).getType_param());
+    }
 
-        expectedLanguages.add(new Parametre());
-        expectedLanguages.add(new Parametre("Anglais", "en"));
-        expectedLanguages.add(new Parametre("Arabe", "ar"));
-        expectedLanguages.add(new Parametre("Chinois", "zh"));
-        expectedLanguages.add(new Parametre("Espagnol", "es"));
-        expectedLanguages.add(new Parametre("Français", "fr"));
-        expectedLanguages.add(new Parametre("Italien", "it"));
-        expectedLanguages.add(new Parametre("Japonais", "ja"));
-        expectedLanguages.add(new Parametre("Néerlandais", "nl"));
-        expectedLanguages.add(new Parametre("Polonais", "pl"));
-        expectedLanguages.add(new Parametre("Portugais", "pt"));
-        expectedLanguages.add(new Parametre("Russe", "ru"));
+    @Test
+    public void testPutCacheEmprunts() throws IOException {
+        Cache.clearCache();
+        Parametre p = new Parametre();
+        p.setType_param(ParametreType.AUTEUR);
+        p.setNom("Petersson");
+        p.setTotalExemplaires(17);
+        p.setTotalPrets(2);
+        List<Parametre> lEx = new ArrayList<>();
+        List<Parametre> lEm = new ArrayList<>();
+        lEx.add(p);
+        lEm.add(p);
+        Cache.put(ParametreType.AUTEUR, TypeDeDocGrouping.LIVRES, lEx, lEm);
+        assertEquals(2, Cache.get(ParametreType.AUTEUR, TypeDeDocGrouping.LIVRES, Mode.EMPRUNTS, 1).get(0).getTotalPrets());
+    }
 
-        List<Parametre> actualLanguages = db.getLanguages();
+    @Test
+    public void testPutVide() throws IOException {
+        Cache.clearCache();
+        Parametre p = new Parametre();
+        List<Parametre> lEx = new ArrayList<>();
+        List<Parametre> lEm = new ArrayList<>();
+        lEx.add(p);
+        lEm.add(p);
+        Cache.put(ParametreType.AUTEUR, TypeDeDocGrouping.LIVRES, lEx, lEm);
+        assertEquals(0, Cache.get(ParametreType.AUTEUR, TypeDeDocGrouping.LIVRES, Mode.EMPRUNTS, 1).get(0).getTotalPrets());
+    }
 
-        Assertions.assertEquals(expectedLanguages, actualLanguages);
-    }*/
+    @Test
+    public void testGetTypeDiff() throws IOException {
+        Cache.clearCache();
+        Parametre p = new Parametre();
+        List<Parametre> lEx = new ArrayList<>();
+        List<Parametre> lEm = new ArrayList<>();
+        lEx.add(p);
+        lEm.add(p);
+        Cache.put(ParametreType.AUTEUR, TypeDeDocGrouping.LIVRES, lEx, lEm);
+        assertEquals(new ArrayList<>(), Cache.get(ParametreType.LANGUE, TypeDeDocGrouping.LIVRES, Mode.EMPRUNTS, 1));
+    }
 
+    @Test
+    public void testGetTypeNull() throws IOException {
+        Cache.clearCache();
+        Parametre p = new Parametre();
+        p.setType_param(ParametreType.AUTEUR);
+        p.setNom("Petersson");
+        p.setTotalExemplaires(17);
+        p.setTotalPrets(2);
+        List<Parametre> lEx = new ArrayList<>();
+        List<Parametre> lEm = new ArrayList<>();
+        lEx.add(p);
+        lEm.add(p);
+        Cache.put(ParametreType.AUTEUR, TypeDeDocGrouping.LIVRES, lEx, lEm);
+        assertEquals(new ArrayList<>(), Cache.get(null, TypeDeDocGrouping.LIVRES, Mode.EMPRUNTS, 1));
+    }
+
+    @Test
+    public void testGetDocNull() throws IOException {
+        Cache.clearCache();
+        Parametre p = new Parametre();
+        p.setType_param(ParametreType.AUTEUR);
+        p.setNom("Petersson");
+        p.setTotalExemplaires(17);
+        p.setTotalPrets(2);
+        List<Parametre> lEx = new ArrayList<>();
+        List<Parametre> lEm = new ArrayList<>();
+        lEx.add(p);
+        lEm.add(p);
+        Cache.put(ParametreType.AUTEUR, TypeDeDocGrouping.LIVRES, lEx, lEm);
+        assertEquals(new ArrayList<>(), Cache.get(ParametreType.AUTEUR, null, Mode.EMPRUNTS, 1));
+    }
  }
