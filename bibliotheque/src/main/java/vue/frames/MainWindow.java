@@ -2,12 +2,11 @@ package vue.frames;
 
 import controleur.mainWindow.ControleurMainWindow;
 import modele.parametre.ParametreType;
-import modele.utils.SortBy;
+import modele.utils.Mode;
 import modele.utils.TypeDeDocGrouping;
 import vue.panels.graphs.Histogramme;
 import javax.swing.*;
 import net.java.dev.designgridlayout.DesignGridLayout;
-import modele.utils.Mode;
 import vue.panels.ButtonsPanel;
 import vue.panels.graphs.Histogramme;
 
@@ -74,13 +73,21 @@ public class MainWindow extends JFrame {
         Histogramme jPanel = new Histogramme();
         panelRight.add(jPanel);
 
-        // Ajout des panels au frame avec DesignGridLayout
+        // Définir la taille préférée du panel gauche
+        panelLeft.setPreferredSize(new Dimension(200, 300));
+
+        // Définir la taille préférée du panel droit
+        panelRight.setPreferredSize(new Dimension(500, 300));
+
+        // Ajouter les panels au layout avec la méthode size()
         JPanel contentPanel = new JPanel();
         DesignGridLayout layout = new DesignGridLayout(contentPanel);
         layout.row().center().add(labelTop); // Nouvelle ligne pour le label en haut
         layout.row().grid().add(labelType).add(labelParametre).add(labelLimite);
         layout.row().grid().add(comboBox).add(comboBox2).add(comboBox3); // Boutons déroulants en haut sur la même ligne
-        layout.row().grid().add(new JScrollPane(panelLeft)).add(new JScrollPane(panelRight)); // Panels à gauche et à droite sur la même ligne
+        layout.row().grid(3).add(new JScrollPane(panelLeft)).grid(7).add(new JScrollPane(panelRight)); // Panels à gauche et à droite sur la même ligne avec taille spécifiée
+
+
 
         add(contentPanel, BorderLayout.CENTER);
 

@@ -5,11 +5,18 @@ import modele.utils.Mode;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.CategoryAxis;
+import org.jfree.chart.axis.CategoryLabelPositions;
+import org.jfree.chart.labels.CategoryItemLabelGenerator;
+import org.jfree.chart.labels.XYItemLabelGenerator;
+import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.data.category.DefaultCategoryDataset;
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
+import org.jfree.chart.labels.StandardCategoryItemLabelGenerator;
+import org.jfree.chart.renderer.category.CategoryItemRenderer;
+
 
 public class Histogramme extends JPanel {
 
@@ -26,7 +33,7 @@ public class Histogramme extends JPanel {
                 "Valeurs", // Titre de l'axe des ordonnées
                 dataset // Données à afficher
         );
-
+        chart.getLegend().setVisible(true);
         // Création du panel contenant le graphique
         ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
@@ -58,6 +65,19 @@ public class Histogramme extends JPanel {
                 dataset // Données à afficher
         );
 
+        // Personnalisation du graphique
+        BarRenderer renderer = (BarRenderer) chart.getCategoryPlot().getRenderer();
+        renderer.setSeriesPaint(0, Color.BLUE); // Changer la couleur des barres
+        renderer.setSeriesItemLabelGenerator(0,new StandardCategoryItemLabelGenerator()); // Ajouter des labels pour les barres
+        renderer.setSeriesItemLabelsVisible(0,true);
+        renderer.setSeriesItemLabelFont(0,new Font("SansSerif", Font.BOLD, 12));
+        renderer.setSeriesItemLabelPaint(0,Color.BLACK);
+
+        CategoryAxis categoryAxis = chart.getCategoryPlot().getDomainAxis();
+        categoryAxis.setTickLabelFont(new Font("SansSerif", Font.PLAIN, 12));
+        categoryAxis.setTickLabelsVisible(true);
+        categoryAxis.setCategoryLabelPositions(CategoryLabelPositions.UP_90); // Changer l'orientation de l'axe des abscisses
+
         // Création du panel contenant le graphique
         ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new Dimension(500, 270));
@@ -65,6 +85,7 @@ public class Histogramme extends JPanel {
         this.add(chartPanel, BorderLayout.CENTER);
 
     }
+
 
 
 }

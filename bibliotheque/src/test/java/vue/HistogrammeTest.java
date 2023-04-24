@@ -30,7 +30,7 @@ public class HistogrammeTest {
             List<Parametre> liste;
             public void run() {
                 try {
-                    liste = Database.getParamByTypeDeDoc(ParametreType.LANGUE, TypeDeDocGrouping.LIVRES, Mode.EMPRUNTS);
+                    liste = Database.getParamByTypeDeDoc(ParametreType.GENRE, TypeDeDocGrouping.LIVRES, Mode.EMPRUNTS);
                 }
                 catch (IOException e) {
                     System.out.println(e.getMessage());
