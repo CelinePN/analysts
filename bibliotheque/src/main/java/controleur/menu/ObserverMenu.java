@@ -1,8 +1,11 @@
 package controleur.menu;
 
+import modele.utils.Mode;
+
 public interface ObserverMenu {
-    public void updateProgressBar(int progression);
-    public void loadingFailed();
-    public void loadingSuccess();
-    public void retry();
+
+    public void selectioner();
+
+    public void choisir();
+    public void fenetrefermer(Mode mode);
 }

@@ -12,23 +12,39 @@ package vue.frames;
 
 import javax.swing.*;
 
+import controleur.firstscreen.ObserverFirstScreen;
+import controleur.menu.ControleurMenu;
+import controleur.menu.ObserverMenu;
+
 import modele.utils.Mode;
 import net.java.dev.designgridlayout.DesignGridLayout;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
-public class Menu extends JFrame {
+public class Menu extends JFrame implements ObserverMenu {
     private JPanel panel1, panel2;
-    private JRadioButton btnDemande, btnOffre, btnComparaison;
+    public  JRadioButton btnDemande;
+    public  JRadioButton btnOffre;
+    public  JRadioButton btnComparaison;
     private ButtonGroup buttonGroup;
     private JButton btnValider;
+    private final ControleurMenu controleurMenu;
+    private  Mode mode;
+    private List<ObserverMenu> observers = new ArrayList<>();
+
 
 
     public Menu() {
         super("Menu");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
+        this.controleurMenu = new ControleurMenu();
+        this.controleurMenu.registerObserver(this);
 
         // Titre au centre en haut
         JLabel labelTitre = new JLabel("Bienvenue dans le menu des bibliothèques de Paris");
@@ -52,27 +68,38 @@ public class Menu extends JFrame {
         btnValider.setBackground(Color.BLUE);
         btnValider.setForeground(Color.WHITE);
 
-        btnValider.addActionListener(e -> {
-            //controleur.gererValidation(3boutons)
-            Mode mode=null;
-            if (btnDemande.isSelected()) {
-                mode=Mode.EMPRUNTS;
-            } else if (btnOffre.isSelected()) {
-                mode=Mode.EXEMPLAIRES;
-            } else if (btnComparaison.isSelected()) {
-                mode=Mode.BOTH;
-            } else {
-                JOptionPane.showMessageDialog(this, "Veuillez sélectionner une option");
-            }
-            if(mode!=null){
-                MainWindow mainWindow = new MainWindow(mode);
-                mainWindow.pack();
-                mainWindow.setVisible(true);
-                setVisible(false);
-                dispose();
-            }
+        btnValider.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
 
+                controleurMenu.selectioner();
+            }
         });
+
+        btnDemande.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                controleurMenu.setCurrentMode(Mode.EMPRUNTS);
+            }
+        });
+
+        btnOffre.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                controleurMenu.setCurrentMode(Mode.EXEMPLAIRES);
+            }
+        });
+
+        btnComparaison.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                controleurMenu.setCurrentMode(Mode.BOTH);
+            }
+        });
+
 
         // Ajout des boutons radio et du bouton "Valider" au panel1
         JLabel labelExplication = new JLabel("Que voulez-vous regarder?");
@@ -99,7 +126,6 @@ public class Menu extends JFrame {
         panel2.add(jLabel, BorderLayout.CENTER);
 
 
-
         // Ajout des panels au frame avec DesignGridLayout
         JPanel contentPanel = new JPanel();
         DesignGridLayout layout = new DesignGridLayout(contentPanel);
@@ -113,7 +139,7 @@ public class Menu extends JFrame {
         int verticalInsets = insets.top + insets.bottom;
         int windowWidth = imageIcon.getIconWidth() + horizontalInsets;
         int windowHeight = imageIcon.getIconHeight() + labelTitre.getPreferredSize().height + panel1.getPreferredSize().height + verticalInsets;
-        setPreferredSize(new Dimension(windowWidth+700, windowHeight+250));
+        setPreferredSize(new Dimension(windowWidth + 700, windowHeight + 250));
         setLocationRelativeTo(null);
 
         pack();
@@ -124,7 +150,34 @@ public class Menu extends JFrame {
     }
 
 
+    public ControleurMenu getControleurMenu() {
+        return controleurMenu;
+    }
+
     public static void main(String[] args) {
         new Menu();
     }
+
+
+
+    @Override
+    public void selectioner() {
+
+    }
+
+    @Override
+    public void choisir() {
+            JOptionPane.showMessageDialog(null, "Choisir une catégorie");
+
+        }
+
+    @Override
+    public void fenetrefermer(Mode mode) {
+        MainWindow mainWindow = new MainWindow(mode);
+        mainWindow.setVisible(true);
+        this.setVisible(false);
+        this.dispose();
+    }
+
+
 }

@@ -5,4 +5,5 @@ public interface ObserverFirstScreen {
     public void loadingFailed();
     public void loadingSuccess();
     public void retry();
+
 }
