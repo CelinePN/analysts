@@ -11,22 +11,40 @@ package vue.frames;
  */
 
 import javax.swing.*;
+
+import controleur.firstscreen.ObserverFirstScreen;
+import controleur.menu.ControleurMenu;
+import controleur.menu.ObserverMenu;
+import modele.utils.SortBy;
 import net.java.dev.designgridlayout.DesignGridLayout;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
-public class Menu extends JFrame {
+public class Menu extends JFrame implements ObserverMenu {
     private JPanel panel1, panel2;
-    private JRadioButton btnDemande, btnOffre, btnComparaison;
+    public static JRadioButton btnDemande;
+    public static JRadioButton btnOffre;
+    public static JRadioButton btnComparaison;
     private ButtonGroup buttonGroup;
     private JButton btnValider;
+    private final ControleurMenu controleurMenu;
+    private  SortBy mode;
+    private List<ObserverMenu> observers = new ArrayList<>();
+
+
 
 
     public Menu() {
         super("Menu");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
+        this.controleurMenu=new ControleurMenu(mode);
+        this.controleurMenu.registerObserver(this);
 
         // Titre au centre en haut
         JLabel labelTitre = new JLabel("Bienvenue dans le menu des bibliothèques de Paris");
@@ -50,7 +68,15 @@ public class Menu extends JFrame {
         btnValider.setBackground(Color.BLUE);
         btnValider.setForeground(Color.WHITE);
 
-        btnValider.addActionListener(e -> {
+        btnValider.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                controleurMenu.selectioner();
+            }
+        });
+
+       /* btnValider.addActionListener(e -> {
             //controleur.gererValidation()
             if (btnDemande.isSelected()) {
                 System.out.println("Demande est sélectionné");
@@ -62,7 +88,7 @@ public class Menu extends JFrame {
             } else {
                 JOptionPane.showMessageDialog(this, "Veuillez sélectionner une option");
             }
-        });
+        });*/
 
         // Ajout des boutons radio et du bouton "Valider" au panel1
         JLabel labelExplication = new JLabel("Que voulez-vous regarder?");
@@ -109,9 +135,38 @@ public class Menu extends JFrame {
         //setResizable(false);
 
     }
+    public static void choisir() {
+        JOptionPane.showMessageDialog(null, "Choisir une catégorie");
 
+    }
+
+    public ControleurMenu getControleurMenu() {
+        return controleurMenu;
+    }
 
     public static void main(String[] args) {
         new Menu();
     }
+
+
+    @Override
+    public void updateProgressBar(int progression) {
+
+    }
+
+    @Override
+    public void loadingFailed() {
+
+    }
+
+    @Override
+    public void loadingSuccess() {
+
+    }
+
+    @Override
+    public void selectioner() {
+
+    }
+
 }

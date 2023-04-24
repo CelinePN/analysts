@@ -1,7 +1,10 @@
 package controleur.menu;
 
 import modele.utils.SortBy;
+import vue.frames.MainWindow;
+import vue.frames.Menu;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,4 +33,21 @@ public class ControleurMenu {
         this.currentMode = currentMode;
     }
 
+    public void selectioner() {
+        if (Menu.btnDemande.isSelected()){
+            MainWindow mainWindow = new MainWindow(SortBy.EMPRUNTS);
+            mainWindow.setVisible(true);
+        }
+        else if (Menu.btnOffre.isSelected()){
+            MainWindow mainWindow = new MainWindow(SortBy.EXEMPLAIRES);
+            mainWindow.setVisible(true);
+        }
+        else if (Menu.btnComparaison.isSelected()){
+            MainWindow mainWindow = new MainWindow(SortBy.BOTH);
+            mainWindow.setVisible(true);
+        }
+        else{
+            Menu.choisir();
+        }
+    }
 }

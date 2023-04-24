@@ -14,7 +14,6 @@ import java.util.List;
 public class ControleurMainWindow {
 
     private SortBy currentMode;
-
     private final List<ObserverMainWindow> observers ;
 
 
