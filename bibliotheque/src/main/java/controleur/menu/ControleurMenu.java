@@ -1,6 +1,7 @@
 package controleur.menu;
 
 
+import controleur.firstscreen.ObserverFirstScreen;
 import vue.frames.MainWindow;
 import vue.frames.Menu;
 import modele.utils.Mode;
@@ -16,8 +17,8 @@ public class ControleurMenu {
     private final List<ObserverMenu> observers ;
 
 
-    public ControleurMenu(Mode mode) {
-        this.currentMode = mode;
+    public ControleurMenu() {
+        this.currentMode = null;
         this.observers = new ArrayList<>();
     }
 
@@ -35,20 +36,16 @@ public class ControleurMenu {
     }
 
     public void selectioner() {
-        if (Menu.btnDemande.isSelected()){
-            MainWindow mainWindow = new MainWindow(SortBy.EMPRUNTS);
-            mainWindow.setVisible(true);
+        if (this.getCurrentMode()!=null) {
+            for (ObserverMenu observer : observers) {
+                observer.fenetrefermer(this.getCurrentMode());
+            }
         }
-        else if (Menu.btnOffre.isSelected()){
-            MainWindow mainWindow = new MainWindow(SortBy.EXEMPLAIRES);
-            mainWindow.setVisible(true);
-        }
-        else if (Menu.btnComparaison.isSelected()){
-            MainWindow mainWindow = new MainWindow(SortBy.BOTH);
-            mainWindow.setVisible(true);
-        }
+
         else{
-            Menu.choisir();
+             for(ObserverMenu observer : observers){
+                 observer.choisir();
+             }
         }
     }
 }
