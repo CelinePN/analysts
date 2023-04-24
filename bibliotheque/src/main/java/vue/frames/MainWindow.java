@@ -16,7 +16,6 @@ public class MainWindow extends JFrame {
     private JRadioButton btnCamembert, btnHistogramme, btnBarresEmpilees;
     private ButtonGroup buttonGroup;
     private JButton btnValider;
-
     private JLabel labelTop;
     private final ControleurMainWindow controleurMainWindow;
 
