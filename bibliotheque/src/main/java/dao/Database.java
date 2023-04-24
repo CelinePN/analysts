@@ -45,7 +45,7 @@ public class Database {
      * */
     public static List<Parametre> getParamByTypeDeDoc(ParametreType typeParam, TypeDeDocGrouping typeDeDocEnum, Mode sortBy) throws IOException {
 
-        if(typeParam == null || typeDeDocEnum == null){
+        if(typeParam == null || typeDeDocEnum == null || sortBy == null){
             throw new IllegalArgumentException("Erreur: Les paramètres ne peuvent pas être null");
         }
         String jsonData="";

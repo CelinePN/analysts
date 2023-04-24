@@ -57,26 +57,31 @@ public class Cache {
      * Récupère une liste dans le cache selon ses paramètres
      */
     public static List<Parametre> get(ParametreType key1, TypeDeDocGrouping key2, Mode sortBy, int limit) {
-        if(key1 == null || key2 == null || ){
+        if(key1 == null || key2 == null || sortBy == null){
             throw new IllegalArgumentException("Erreur: Les paramètres ne peuvent pas être null");
         }
-
-        Map<TypeDeDocGrouping, List<Parametre>> innerMap = null;
-        switch(sortBy){
-            case EXEMPLAIRES: {
-                innerMap = cacheMapExemplaires.get(key1);
-                break;
+        try {
+            Map<TypeDeDocGrouping, List<Parametre>> innerMap = null;
+            switch (sortBy) {
+                case EXEMPLAIRES: {
+                    innerMap = cacheMapExemplaires.get(key1);
+                    break;
+                }
+                case EMPRUNTS: {
+                    innerMap = cacheMapEmprunts.get(key1);
+                    break;
+                }
             }
-            case EMPRUNTS: {
-                innerMap = cacheMapEmprunts.get(key1);
-                break;
+            if (innerMap != null) {
+                List<Parametre> list = innerMap.get(key2);
+                return list.subList(0, limit);
             }
+            return new ArrayList<>();
         }
-        if (innerMap != null) {
-            List<Parametre> list = innerMap.get(key2);
-            return list.subList(0, limit);
+        catch(IllegalArgumentException illegalArgumentException){
+            System.out.println(illegalArgumentException.getMessage());
+            return null;
         }
-        return new ArrayList<>();
     }
 
     /**
