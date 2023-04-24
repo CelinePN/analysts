@@ -16,7 +16,7 @@ public class ButtonsPanel extends JPanel {
     public ButtonsPanel(ControleurMainWindow controleurMainWindow) {
         this.controleur= controleurMainWindow;
 
-        // panel utilisé pour la frame menu et la frame mainWindow
+        // panel utilisé pou la frame menu et la frame mainWindow
         //tous les params possibles
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 

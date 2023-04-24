@@ -26,6 +26,12 @@ import java.util.Objects;
 
 public class HistogrammeTest {
     public static void main(String[] args) {
+        test1();
+        test2();
+        test3();
+    }
+
+    public static void test1(){
         Thread thread = new Thread() {
             List<Parametre> liste;
             public void run() {
@@ -41,7 +47,55 @@ public class HistogrammeTest {
                 frame.setSize(550, 350); // Taille de la fenêtre
                 frame.setLocationRelativeTo(null);
 
+                frame.getContentPane().add(new Histogramme(Objects.requireNonNull(liste.subList(0,5)), Mode.EMPRUNTS));
+                frame.setVisible(true);
+
+            }
+        };
+        thread.start();
+    }
+
+    public static void test2(){
+        Thread thread = new Thread() {
+            List<Parametre> liste;
+            public void run() {
+                try {
+                    liste = Database.getParamByTypeDeDoc(ParametreType.AUTEUR, TypeDeDocGrouping.JEUX, Mode.EXEMPLAIRES);
+                }
+                catch (IOException e) {
+                    System.out.println(e.getMessage());
+                }
+
+                JFrame frame = new JFrame();
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Fermer la fenêtre en cliquant sur la croix
+                frame.setSize(550, 350); // Taille de la fenêtre
+                frame.setLocationRelativeTo(null);
+
                 frame.getContentPane().add(new Histogramme(Objects.requireNonNull(liste.subList(0,10)), Mode.EMPRUNTS));
+                frame.setVisible(true);
+
+            }
+        };
+        thread.start();
+    }
+
+    public static void test3(){
+        Thread thread = new Thread() {
+            List<Parametre> liste;
+            public void run() {
+                try {
+                    liste = Database.getParamByTypeDeDoc(ParametreType.GENRE, TypeDeDocGrouping.BD, Mode.EMPRUNTS);
+                }
+                catch (IOException e) {
+                    System.out.println(e.getMessage());
+                }
+
+                JFrame frame = new JFrame();
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Fermer la fenêtre en cliquant sur la croix
+                frame.setSize(550, 350); // Taille de la fenêtre
+                frame.setLocationRelativeTo(null);
+
+                frame.getContentPane().add(new Histogramme(Objects.requireNonNull(liste.subList(0,20)), Mode.EMPRUNTS));
                 frame.setVisible(true);
 
             }

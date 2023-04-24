@@ -1,7 +1,10 @@
 package vue.frames;
 
 import controleur.mainWindow.ControleurMainWindow;
+import controleur.mainWindow.ObserverMainWindow;
+
 import modele.parametre.ParametreType;
+
 import modele.utils.Mode;
 import modele.utils.TypeDeDocGrouping;
 import vue.panels.graphs.Histogramme;
@@ -10,9 +13,15 @@ import net.java.dev.designgridlayout.DesignGridLayout;
 import vue.panels.ButtonsPanel;
 import vue.panels.graphs.Histogramme;
 
-import java.awt.*;
 
-public class MainWindow extends JFrame {
+
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+
+public class MainWindow extends JFrame implements ObserverMainWindow {
     private JPanel panelLeft, panelRight;
     private JComboBox<String> comboBoxParametre, comboBoxPartType, comboBoxLimite;
     private JRadioButton btnCamembert, btnHistogramme, btnBarresEmpilees;
@@ -20,12 +29,15 @@ public class MainWindow extends JFrame {
     private JButton btnValider;
     private JLabel labelTop;
     private final ControleurMainWindow controleurMainWindow;
+    private  Mode mode;
+    private List<ObserverMainWindow> observers = new ArrayList<>();
 
     public MainWindow(Mode mode) {
         super("Les bibliothèques de PARIS"); // Titre de la fenêtre
         this.controleurMainWindow= new ControleurMainWindow(mode);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
+        this.controleurMainWindow.registerObserver(this);
 
         // Label en haut
         labelTop = new JLabel("Les documents des bibliothèque de Paris");
@@ -41,6 +53,10 @@ public class MainWindow extends JFrame {
         buttonGroup.add(btnBarresEmpilees);
         btnValider = new JButton("Valider");
 
+
+
+
+
         // Label en haut
         JLabel labelParametre = new JLabel("Type de document");
         JLabel labelType = new JLabel("Catégorie");
@@ -54,6 +70,70 @@ public class MainWindow extends JFrame {
         String[] limit = {"1", "5", "10", "20"};
         JComboBox<String> comboBox3 = new JComboBox<>(limit);
         comboBox3.setSelectedIndex(0);
+
+
+        comboBoxLimite.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int selectedOption = (int) comboBoxLimite.getSelectedItem();
+
+                controleurMainWindow.setLimite(selectedOption);
+            }
+        });
+
+
+        btnCamembert.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                controleurMainWindow.setCurrentMode(Mode.EMPRUNTS);
+            }
+        });
+
+        btnBarresEmpilees.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                controleurMainWindow.setCurrentMode(Mode.EMPRUNTS);
+            }
+        });
+
+        btnHistogramme.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                controleurMainWindow.setCurrentMode(Mode.EMPRUNTS);
+            }
+        });
+
+        comboBoxParametre.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ParametreType selectedOption = (ParametreType) comboBoxParametre.getSelectedItem();
+                controleurMainWindow.setParametreType(selectedOption);
+            }
+        });
+
+
+        comboBoxPartType.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                TypeDeDocGrouping selectedOption = (TypeDeDocGrouping) comboBoxPartType.getSelectedItem();
+
+                controleurMainWindow.setTypeDeDocGrouping(selectedOption);
+            }
+        });
+
+
+
+        btnValider.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                controleurMainWindow.valider();
+            }
+        });
+
 
         // Label à gauche
         JLabel labelTypeGraph = new JLabel("Type de graphique");
@@ -83,7 +163,7 @@ public class MainWindow extends JFrame {
         JPanel contentPanel = new JPanel();
         DesignGridLayout layout = new DesignGridLayout(contentPanel);
         layout.row().center().add(labelTop); // Nouvelle ligne pour le label en haut
-        layout.row().grid().add(labelType).add(labelParametre).add(labelLimite);
+        layout.row().grid().add(labelParametre).add(labelType).add(labelLimite);
         layout.row().grid().add(comboBox).add(comboBox2).add(comboBox3); // Boutons déroulants en haut sur la même ligne
         layout.row().grid(3).add(new JScrollPane(panelLeft)).grid(7).add(new JScrollPane(panelRight)); // Panels à gauche et à droite sur la même ligne avec taille spécifiée
 
@@ -96,4 +176,17 @@ public class MainWindow extends JFrame {
     }
 
 
+    public ControleurMainWindow getControleurMainWindow() {
+        return controleurMainWindow;
+    }
+
+    public static void main(String[] args) {
+       // new MainWindow(Mode mode);
+    }
+
+    @Override
+    public void choisir() {
+        JOptionPane.showMessageDialog(null, "Choisir les différents paramètres");
+
+    }
 }

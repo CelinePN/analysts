@@ -13,7 +13,7 @@ import java.util.Map;
 public class Cache {
 
     /**
-     * @Author: Marine
+     * @Author: Marine, Céline
      * @since: 10/04/2023
      * @Version: 1.0
      * Le cache permet de stocker nos données côté applicatif pour les charger une fois au démarrage
@@ -57,8 +57,12 @@ public class Cache {
      * Récupère une liste dans le cache selon ses paramètres
      */
     public static List<Parametre> get(ParametreType key1, TypeDeDocGrouping key2, Mode sortBy, int limit) {
+        if(key1 == null || key2 == null || sortBy == null){
+            throw new IllegalArgumentException("Erreur: Les paramètres ne peuvent pas être null");
+        }
+
         Map<TypeDeDocGrouping, List<Parametre>> innerMap = null;
-        switch(sortBy){
+        switch (sortBy) {
             case EXEMPLAIRES: {
                 innerMap = cacheMapExemplaires.get(key1);
                 break;
@@ -73,6 +77,10 @@ public class Cache {
             return list.subList(0, limit);
         }
         return new ArrayList<>();
+
+        /*catch(IllegalArgumentException illegalArgumentException){
+            System.out.println(illegalArgumentException.getMessage());
+        }*/
     }
 
     /**
