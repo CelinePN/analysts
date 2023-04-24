@@ -2,7 +2,7 @@ package modele;
 
 import modele.parametre.Parametre;
 import modele.parametre.ParametreType;
-import modele.utils.SortBy;
+import modele.utils.Mode;
 import modele.utils.TypeDeDocGrouping;
 
 import java.util.ArrayList;
@@ -56,7 +56,7 @@ public class Cache {
      * @param sortBy: selon si on veut récupérer le cache de l'offre (exemplaires) ou de la demande (emprunts)
      * Récupère une liste dans le cache selon ses paramètres
      */
-    public static List<Parametre> get(ParametreType key1, TypeDeDocGrouping key2, SortBy sortBy, int limit) {
+    public static List<Parametre> get(ParametreType key1, TypeDeDocGrouping key2, Mode sortBy, int limit) {
         Map<TypeDeDocGrouping, List<Parametre>> innerMap = null;
         switch(sortBy){
             case EXEMPLAIRES: {

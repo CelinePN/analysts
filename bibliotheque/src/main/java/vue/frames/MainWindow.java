@@ -1,8 +1,7 @@
 package vue.frames;
 
-import controleur.firstscreen.ControleurFirstScreen;
 import controleur.mainWindow.ControleurMainWindow;
-import modele.utils.SortBy;
+import modele.utils.Mode;
 import vue.panels.ButtonsPanel;
 import vue.panels.graphs.Histogramme;
 
@@ -13,7 +12,7 @@ import java.awt.*;
 public class MainWindow extends JFrame {
     private final ControleurMainWindow controleurMainWindow;
 
-    public MainWindow(SortBy mode) {
+    public MainWindow(Mode mode) {
         super("Les bibliothèques de PARIS"); // Titre de la fenêtre
         this.controleurMainWindow= new ControleurMainWindow(mode);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Fermer la fenêtre en cliquant sur la croix

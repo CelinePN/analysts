@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import modele.parametre.Parametre;
 import modele.parametre.ParametreType;
 import modele.parametre.ParametreWrapper;
-import modele.utils.SortBy;
+import modele.utils.Mode;
 import modele.utils.TypeDeDocGrouping;
 import okhttp3.*;
 
@@ -43,7 +43,7 @@ public class Database {
      * @param typeParam : le paramètre choisi (ex: LANGUE)
      * @param typeDeDocEnum : le type de document sur lequel on veut se centrer uniquement (ex: LIVRE)
      * */
-    public static List<Parametre> getParamByTypeDeDoc(ParametreType typeParam, TypeDeDocGrouping typeDeDocEnum, SortBy sortBy) throws IOException {
+    public static List<Parametre> getParamByTypeDeDoc(ParametreType typeParam, TypeDeDocGrouping typeDeDocEnum, Mode sortBy) throws IOException {
 
         if(typeParam == null || typeDeDocEnum == null){
             throw new IllegalArgumentException("Erreur: Les paramètres ne peuvent pas être null");

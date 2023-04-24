@@ -5,7 +5,7 @@ import dao.Database;
 import modele.Cache;
 import modele.parametre.Parametre;
 import modele.parametre.ParametreType;
-import modele.utils.SortBy;
+import modele.utils.Mode;
 import modele.utils.TypeDeDocGrouping;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
@@ -47,8 +47,8 @@ public class FirstScreenControleurTest {
         for(ParametreType param: ParametreType.values()){
             for(TypeDeDocGrouping typeDeDoc: TypeDeDocGrouping.values()){
                 try {
-                    List<Parametre> liste1 = Database.getParamByTypeDeDoc(param,typeDeDoc,SortBy.EXEMPLAIRES).subList(0,10);
-                    List<Parametre> liste2 = Database.getParamByTypeDeDoc(param,typeDeDoc,SortBy.EMPRUNTS).subList(0,10);
+                    List<Parametre> liste1 = Database.getParamByTypeDeDoc(param,typeDeDoc, Mode.EXEMPLAIRES).subList(0,10);
+                    List<Parametre> liste2 = Database.getParamByTypeDeDoc(param,typeDeDoc, Mode.EMPRUNTS).subList(0,10);
                     Cache.put(param, typeDeDoc,liste1,liste2);
 
                 } catch (IOException e) {

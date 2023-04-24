@@ -1,17 +1,12 @@
 package modele;
 
-import modele.parametre.Parametre;
 import modele.parametre.ParametreType;
-import modele.utils.SortBy;
+import modele.utils.Mode;
 import modele.utils.TypeDeDocGrouping;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
-import static modele.utils.TypeDeDocGrouping.NO_TYPE;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -34,7 +29,7 @@ public class CacheTest {
 
     @Test
     public void testGetLanguages() {
-        assertDoesNotThrow(() -> Cache.get(ParametreType.LANGUE, TypeDeDocGrouping.NO_TYPE, SortBy.EMPRUNTS,5));
+        assertDoesNotThrow(() -> Cache.get(ParametreType.LANGUE, TypeDeDocGrouping.NO_TYPE, Mode.EMPRUNTS,5));
     }
 
     /*

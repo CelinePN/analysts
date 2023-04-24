@@ -4,7 +4,7 @@ import dao.Database;
 import modele.Cache;
 import modele.parametre.Parametre;
 import modele.parametre.ParametreType;
-import modele.utils.SortBy;
+import modele.utils.Mode;
 import modele.utils.TypeDeDocGrouping;
 
 import java.io.IOException;
@@ -55,13 +55,13 @@ public class ControleurFirstScreen {
                     for (TypeDeDocGrouping typeDeDocGrouping : TypeDeDocGrouping.values()) {
 
                         try {
-                            listeExemplaires = Database.getParamByTypeDeDoc(parametreType, typeDeDocGrouping, SortBy.EXEMPLAIRES);
+                            listeExemplaires = Database.getParamByTypeDeDoc(parametreType, typeDeDocGrouping, Mode.EXEMPLAIRES);
                             completedTasks++;
                             for(ObserverFirstScreen observer : observers){
                                 observer.updateProgressBar((int) (((float) completedTasks / totalTasks) * 100));
                             }
 
-                            listeEmprunts = Database.getParamByTypeDeDoc(parametreType, typeDeDocGrouping, SortBy.EMPRUNTS);
+                            listeEmprunts = Database.getParamByTypeDeDoc(parametreType, typeDeDocGrouping, Mode.EMPRUNTS);
                             completedTasks++;
                             for(ObserverFirstScreen observer : observers){
                                 observer.updateProgressBar((int) (((float) completedTasks / totalTasks) * 100));
