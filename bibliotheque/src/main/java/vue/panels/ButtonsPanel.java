@@ -77,4 +77,12 @@ public class ButtonsPanel extends JPanel {
 
        // this.add(this, BorderLayout.EAST);
     }
+
+    public void BoutonGraphique() {
+
+    }
+
+    public void BoutonCaracteristique() {
+
+    }
 }
