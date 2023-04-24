@@ -167,9 +167,9 @@ public class Menu extends JFrame implements ObserverMenu {
 
     @Override
     public void choisir() {
-            JOptionPane.showMessageDialog(null, "Choisir une catégorie");
+        JOptionPane.showMessageDialog(null, "Choisir une catégorie");
 
-        }
+    }
 
     @Override
     public void fenetrefermer(Mode mode) {

@@ -2,14 +2,12 @@ package vue.frames;
 
 import controleur.mainWindow.ControleurMainWindow;
 import modele.parametre.ParametreType;
-import modele.utils.SortBy;
 import modele.utils.TypeDeDocGrouping;
 import vue.panels.graphs.Histogramme;
 import javax.swing.*;
 import net.java.dev.designgridlayout.DesignGridLayout;
 import modele.utils.Mode;
-import vue.panels.ButtonsPanel;
-import vue.panels.graphs.Histogramme;
+
 
 import java.awt.*;
 
@@ -78,7 +76,7 @@ public class MainWindow extends JFrame {
         JPanel contentPanel = new JPanel();
         DesignGridLayout layout = new DesignGridLayout(contentPanel);
         layout.row().center().add(labelTop); // Nouvelle ligne pour le label en haut
-        layout.row().grid().add(labelType).add(labelParametre).add(labelLimite);
+        layout.row().grid().add(labelParametre).add(labelType).add(labelLimite);
         layout.row().grid().add(comboBox).add(comboBox2).add(comboBox3); // Boutons déroulants en haut sur la même ligne
         layout.row().grid().add(new JScrollPane(panelLeft)).add(new JScrollPane(panelRight)); // Panels à gauche et à droite sur la même ligne
 

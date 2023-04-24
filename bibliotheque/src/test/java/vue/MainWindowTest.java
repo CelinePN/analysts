@@ -17,8 +17,6 @@ import vue.frames.MainWindow;
  * @since: 01/04/2023
  */
 
-//tester de lancer MainWindow
-
 public class MainWindowTest {
     private MainWindow mainWindow;
 
