@@ -1,6 +1,6 @@
 package dao;
 
-import modele.utils.SortBy;
+import modele.utils.Mode;
 import modele.parametre.ParametreType;
 import modele.utils.TypeDeDocGrouping;
 
@@ -59,7 +59,7 @@ public class DatabaseTest {
      **/
     @Test
     public void testGetLanguages() {
-        assertDoesNotThrow(() -> Database.getParamByTypeDeDoc(ParametreType.LANGUE, TypeDeDocGrouping.NO_TYPE, SortBy.EXEMPLAIRES));
+        assertDoesNotThrow(() -> Database.getParamByTypeDeDoc(ParametreType.LANGUE, TypeDeDocGrouping.NO_TYPE, Mode.EXEMPLAIRES));
     }
 
     @Test
@@ -69,22 +69,22 @@ public class DatabaseTest {
         //assertEquals(14, Database.getParamByTypeDeDoc(ParametreType.LANGUE, NO_TYPE).get(0).getTotalPrets());
         //assertEquals(14, db.getParamByTypeDeDoc(ParametreType.LANGUE, NO_TYPE).get(0).getTotalExemplaires());
         //assertEquals(14, db.getParamByTypeDeDoc(ParametreType.LANGUE, NO_TYPE).get(0).getTotalPrets());
-        assertEquals(559003, Database.getParamByTypeDeDoc(ParametreType.LANGUE, TypeDeDocGrouping.NO_TYPE, SortBy.EXEMPLAIRES).get(0).getCount());
+        assertEquals(559003, Database.getParamByTypeDeDoc(ParametreType.LANGUE, TypeDeDocGrouping.NO_TYPE, Mode.EXEMPLAIRES).get(0).getCount());
     }
 
     @Test
     public void testGetAuteurNombre() throws IOException {
-        assertEquals(15, Database.getParamByTypeDeDoc(ParametreType.AUTEUR, TypeDeDocGrouping.JEUX, SortBy.EXEMPLAIRES).get(0).getTotalExemplaires());
+        assertEquals(15, Database.getParamByTypeDeDoc(ParametreType.AUTEUR, TypeDeDocGrouping.JEUX, Mode.EXEMPLAIRES).get(0).getTotalExemplaires());
     }
 
     @Test
     public void testGetTypeNombre() throws IOException {
-        assertEquals(339082, Database.getParamByTypeDeDoc(ParametreType.TYPE_DE_DOC, TypeDeDocGrouping.NO_TYPE, SortBy.EXEMPLAIRES).get(0).getCount());
+        assertEquals(339082, Database.getParamByTypeDeDoc(ParametreType.TYPE_DE_DOC, TypeDeDocGrouping.NO_TYPE, Mode.EXEMPLAIRES).get(0).getCount());
     }
 
     @Test
     public void testGetGenreNombre() throws IOException {
-        assertEquals(408, Database.getParamByTypeDeDoc(ParametreType.GENRE, TypeDeDocGrouping.JEUX, SortBy.EXEMPLAIRES).get(0).getTotalExemplaires());
+        assertEquals(408, Database.getParamByTypeDeDoc(ParametreType.GENRE, TypeDeDocGrouping.JEUX, Mode.EXEMPLAIRES).get(0).getTotalExemplaires());
     }
 
     /**
@@ -94,13 +94,13 @@ public class DatabaseTest {
 
     @Test
     public void testNullParam() throws IOException {
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> Database.getParamByTypeDeDoc(null, TypeDeDocGrouping.NO_TYPE, SortBy.EXEMPLAIRES));
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> Database.getParamByTypeDeDoc(null, TypeDeDocGrouping.NO_TYPE, Mode.EXEMPLAIRES));
         assertEquals("Erreur: Les paramètres ne peuvent pas être null", exception.getMessage());
     }
 
     @Test
     public void testNullGroupBy() throws IOException {
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> Database.getParamByTypeDeDoc(ParametreType.LANGUE, null, SortBy.EXEMPLAIRES));
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> Database.getParamByTypeDeDoc(ParametreType.LANGUE, null, Mode.EXEMPLAIRES));
         assertEquals("Erreur: Les paramètres ne peuvent pas être null", exception.getMessage());
     }
 
@@ -117,7 +117,7 @@ public class DatabaseTest {
 
     @Test
     public void testNoNetwork() throws IOException {
-        Exception exception = assertThrows(IOException.class, () -> Database.getParamByTypeDeDoc(ParametreType.LANGUE, TypeDeDocGrouping.NO_TYPE, SortBy.EXEMPLAIRES));
+        Exception exception = assertThrows(IOException.class, () -> Database.getParamByTypeDeDoc(ParametreType.LANGUE, TypeDeDocGrouping.NO_TYPE, Mode.EXEMPLAIRES));
         assertEquals("Hôte inconnu (data.mongoDatabase-api.com)", exception.getMessage());
     }
 
@@ -127,7 +127,7 @@ public class DatabaseTest {
      **/
     @Test
     public void testGetLangueJeux() throws IOException {
-        assertEquals(8873, Database.getParamByTypeDeDoc(ParametreType.LANGUE, TypeDeDocGrouping.JEUX, SortBy.EMPRUNTS).get(0).getTotalPrets());
+        assertEquals(8873, Database.getParamByTypeDeDoc(ParametreType.LANGUE, TypeDeDocGrouping.JEUX, Mode.EMPRUNTS).get(0).getTotalPrets());
     }
 
  }

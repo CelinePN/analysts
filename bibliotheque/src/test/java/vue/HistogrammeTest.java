@@ -3,12 +3,8 @@ package vue;
 import dao.Database;
 import modele.parametre.Parametre;
 import modele.parametre.ParametreType;
-import modele.utils.SortBy;
+import modele.utils.Mode;
 import modele.utils.TypeDeDocGrouping;
-import org.junit.Before;
-import org.junit.jupiter.api.Test;
-import vue.frames.MainWindow;
-import vue.panels.graphs.Camembert;
 import vue.panels.graphs.Histogramme;
 
 import javax.swing.*;
@@ -34,7 +30,7 @@ public class HistogrammeTest {
             List<Parametre> liste;
             public void run() {
                 try {
-                    liste = Database.getParamByTypeDeDoc(ParametreType.LANGUE, TypeDeDocGrouping.LIVRES, SortBy.EMPRUNTS);
+                    liste = Database.getParamByTypeDeDoc(ParametreType.LANGUE, TypeDeDocGrouping.LIVRES, Mode.EMPRUNTS);
                 }
                 catch (IOException e) {
                     System.out.println(e.getMessage());
@@ -45,7 +41,7 @@ public class HistogrammeTest {
                 frame.setSize(550, 350); // Taille de la fenêtre
                 frame.setLocationRelativeTo(null);
 
-                frame.getContentPane().add(new Histogramme(Objects.requireNonNull(liste.subList(0,20)), SortBy.EMPRUNTS));
+                frame.getContentPane().add(new Histogramme(Objects.requireNonNull(liste.subList(0,10)), Mode.EMPRUNTS));
                 frame.setVisible(true);
 
             }

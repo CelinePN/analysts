@@ -3,10 +3,9 @@ package vue;
 import dao.Database;
 import modele.parametre.Parametre;
 import modele.parametre.ParametreType;
-import modele.utils.SortBy;
+import modele.utils.Mode;
 import modele.utils.TypeDeDocGrouping;
 import vue.panels.graphs.BarresEmpilees;
-import vue.panels.graphs.Histogramme;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -33,11 +32,13 @@ public class BarresEmpileesTest {
      */
     public static void main(String[] args) {
             Thread thread = new Thread() {
-                List<Parametre> liste;
+                List<Parametre> listeExemplaires;
+                List<Parametre> listeEmprunts;
 
                 public void run() {
                     try {
-                        liste = Database.getParamByTypeDeDoc(ParametreType.AUTEUR, TypeDeDocGrouping.BD, SortBy.EXEMPLAIRES);
+                        listeExemplaires = Database.getParamByTypeDeDoc(ParametreType.AUTEUR, TypeDeDocGrouping.BD, Mode.EXEMPLAIRES);
+                        listeEmprunts = Database.getParamByTypeDeDoc(ParametreType.AUTEUR, TypeDeDocGrouping.BD, Mode.EMPRUNTS);
                     } catch (IOException e) {
                         System.out.println(e.getMessage());
                     }
@@ -47,7 +48,7 @@ public class BarresEmpileesTest {
                     frame.setSize(550, 350); // Taille de la fenêtre
                     frame.setLocationRelativeTo(null);
 
-                    frame.getContentPane().add(new BarresEmpilees(Objects.requireNonNull(liste.subList(0, 10))));
+                    frame.getContentPane().add(new BarresEmpilees(Objects.requireNonNull(listeExemplaires.subList(0, 10)), Objects.requireNonNull(listeEmprunts.subList(0, 10))));
                     frame.setVisible(true);
 
                 }

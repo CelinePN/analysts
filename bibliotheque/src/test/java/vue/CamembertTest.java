@@ -1,15 +1,10 @@
 package vue;
 
-import controleur.firstscreen.ObserverFirstScreen;
 import dao.Database;
-import modele.Cache;
 import modele.parametre.Parametre;
 import modele.parametre.ParametreType;
-import modele.utils.SortBy;
+import modele.utils.Mode;
 import modele.utils.TypeDeDocGrouping;
-import org.junit.Before;
-import org.junit.jupiter.api.Test;
-import vue.frames.MainWindow;
 import vue.panels.graphs.Camembert;
 
 import javax.swing.*;
@@ -41,7 +36,7 @@ public class CamembertTest {
             List<Parametre> liste;
             public void run() {
                 try {
-                    liste = Database.getParamByTypeDeDoc(ParametreType.AUTEUR, TypeDeDocGrouping.FILMS, SortBy.EXEMPLAIRES);
+                    liste = Database.getParamByTypeDeDoc(ParametreType.AUTEUR, TypeDeDocGrouping.FILMS, Mode.EXEMPLAIRES);
                 }
                 catch (IOException e) {
                     System.out.println(e.getMessage());
@@ -52,7 +47,7 @@ public class CamembertTest {
                 frame.setSize(550, 350); // Taille de la fenêtre
                 frame.setLocationRelativeTo(null);
 
-                frame.getContentPane().add(new Camembert(Objects.requireNonNull(liste.subList(0,10)), SortBy.EXEMPLAIRES));
+                frame.getContentPane().add(new Camembert(Objects.requireNonNull(liste.subList(0,10)), Mode.EXEMPLAIRES));
                 frame.setVisible(true);
 
             }

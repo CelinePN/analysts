@@ -1,15 +1,13 @@
 package vue.panels;
 
 
-import controleur.firstscreen.ControleurFirstScreen;
 import controleur.mainWindow.ControleurMainWindow;
 import modele.parametre.ParametreType;
-import modele.utils.SortBy;
 import modele.utils.TypeDeDocGrouping;
 
 import javax.swing.*;
 
-import static modele.utils.SortBy.BOTH;
+import static modele.utils.Mode.BOTH;
 
 public class ButtonsPanel extends JPanel {
 

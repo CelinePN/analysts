@@ -1,7 +1,7 @@
 package vue.panels.graphs;
 
 import modele.parametre.Parametre;
-import modele.utils.SortBy;
+import modele.utils.Mode;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -34,7 +34,8 @@ public class Histogramme extends JPanel {
         this.add(chartPanel, BorderLayout.CENTER);
 
     }
-    public Histogramme(List<Parametre> liste, SortBy sortBy) {
+    public Histogramme(List<Parametre> liste, Mode sortBy) {
+        String typeParam = liste.get(0).getType_param().getString();
         this.setLayout(new BorderLayout());
         // Création des données
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
@@ -52,8 +53,8 @@ public class Histogramme extends JPanel {
         // Création du graphique en barres
         JFreeChart chart = ChartFactory.createBarChart(
                 "Mon graphique en barres", // Titre du graphique
-                "Catégories", // Titre de l'axe des abscisses
-                "Valeurs", // Titre de l'axe des ordonnées
+                typeParam, // Titre de l'axe des abscisses
+                sortBy.getSortingString(), // Titre de l'axe des ordonnées
                 dataset // Données à afficher
         );
 

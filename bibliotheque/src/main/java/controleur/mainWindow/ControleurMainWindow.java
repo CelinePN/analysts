@@ -1,24 +1,18 @@
 package controleur.mainWindow;
 
-import dao.Database;
-import modele.Cache;
-import modele.parametre.Parametre;
-import modele.parametre.ParametreType;
-import modele.utils.SortBy;
-import modele.utils.TypeDeDocGrouping;
+import modele.utils.Mode;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ControleurMainWindow {
 
-    private SortBy currentMode;
+    private Mode currentMode;
 
     private final List<ObserverMainWindow> observers ;
 
 
-    public ControleurMainWindow(SortBy mode) {
+    public ControleurMainWindow(Mode mode) {
         this.currentMode = mode;
         this.observers = new ArrayList<>();
     }
@@ -33,11 +27,11 @@ public class ControleurMainWindow {
 
 
 
-    public SortBy getCurrentMode() {
+    public Mode getCurrentMode() {
         return currentMode;
     }
 
-    public void setCurrentMode(SortBy currentMode) {
+    public void setCurrentMode(Mode currentMode) {
         this.currentMode = currentMode;
     }
 

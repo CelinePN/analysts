@@ -1,13 +1,9 @@
 package vue;
 
-import modele.utils.SortBy;
+import modele.utils.Mode;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
-import vue.frames.FirstScreen;
 import vue.frames.MainWindow;
-import vue.panels.ButtonsPanel;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  *  <h1> Test FirstScreen </h1>
@@ -30,7 +26,7 @@ public class MainWindowTest {
      * Test d'affichage visuellement que la fenêtre se lance correctement avec graphique par défaut
      */
     public static void main(String[] args) {
-        new MainWindow(SortBy.EXEMPLAIRES);
+        new MainWindow(Mode.EXEMPLAIRES);
     }
 
     /**
@@ -39,7 +35,7 @@ public class MainWindowTest {
      */
     @Before
     public void initTest(){
-        this.mainWindow = new MainWindow(SortBy.EXEMPLAIRES);
+        this.mainWindow = new MainWindow(Mode.EXEMPLAIRES);
     }
     @Test
     public void testInitView() throws InterruptedException {

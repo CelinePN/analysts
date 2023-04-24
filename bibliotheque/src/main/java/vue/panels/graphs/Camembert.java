@@ -1,7 +1,7 @@
 package vue.panels.graphs;
 
 import modele.parametre.Parametre;
-import modele.utils.SortBy;
+import modele.utils.Mode;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.general.DefaultPieDataset;
@@ -24,7 +24,8 @@ public class Camembert extends JPanel {
      * @since   2023-03-30
      *
      **/
-    public Camembert(List<Parametre> liste, SortBy sortBy) {
+    public Camembert(List<Parametre> liste, Mode sortBy) {
+
 
         this.setLayout(new BorderLayout());
 
