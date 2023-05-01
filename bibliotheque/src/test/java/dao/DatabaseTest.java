@@ -24,35 +24,6 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 
 public class DatabaseTest {
-
-    // Variables initialisées correctement
-    /**
-     * Permet de tester le constructeur
-     * @return un booléen en fonction de si les deux parties sont identiques ou non
-     **/
-    /*@Test
-    public void testConstructeur() {
-        Database Database = new Database();
-        assertNotNull(Database.client);
-        assertNotNull(Database.mediaType);
-        assertEquals(Database.mediaType, MediaType.parse("application/json"));
-    }*/
-
-    // Vérifie si les méthodes ne lèvent pas d'exceptions
-    // si les requêtes sont correctement construites
-    /*@Test
-    public void testGetRequest() {
-        Database Database = new Database();
-        RequestBody request = Database.getRequestBody("test", "test", "total_exemplaires", "10");
-        assertNotNull(request);
-        assertEquals("https://data.mongoDatabase-api.com/app/data-moehb/endpoint/data/v1/action/aggregate", request.url().toString());
-        assertEquals("POST", request.method());
-        assertEquals("application/json", request.header("Content-Type"));
-        assertEquals("*", request.header("Access-Control-Request-Headers"));
-        assertEquals("xALvC4U1PdzK3K5y48tsvdpQar51gpnLLmKiNPQU4t2wOt11TqbyQ1mAabx8wAi6", request.header("api-key"));
-        assertNotNull(request.body());
-    }*/
-
     /**
      * Les cinq prochains tests permettent de vérifier les types de paramètres ainsi que les groupes dans les cas des exemplaires
      * @return un booléen en fonction de si les deux parties sont identiques ou non
@@ -85,6 +56,15 @@ public class DatabaseTest {
     @Test
     public void testGetGenreNombre() throws IOException {
         assertEquals(408, Database.getParamByTypeDeDoc(ParametreType.GENRE, TypeDeDocGrouping.JEUX, Mode.EXEMPLAIRES).get(0).getTotalExemplaires());
+    }
+
+    /**
+     * Permet de tester les emprunts
+     * @return un booléen en fonction de si les deux parties sont identiques ou non
+     **/
+    @Test
+    public void testGetLangueJeux() throws IOException {
+        assertEquals(8873, Database.getParamByTypeDeDoc(ParametreType.LANGUE, TypeDeDocGrouping.JEUX, Mode.EMPRUNTS).get(0).getTotalPrets());
     }
 
     /**
@@ -122,12 +102,29 @@ public class DatabaseTest {
     }
 
     /**
-     * Permet de tester les emprunts
+     * Permet de tester le constructeur
      * @return un booléen en fonction de si les deux parties sont identiques ou non
      **/
-    @Test
-    public void testGetLangueJeux() throws IOException {
-        assertEquals(8873, Database.getParamByTypeDeDoc(ParametreType.LANGUE, TypeDeDocGrouping.JEUX, Mode.EMPRUNTS).get(0).getTotalPrets());
-    }
+    /*@Test
+    public void testConstructeur() {
+        Database Database = new Database();
+        assertNotNull(Database.client);
+        assertNotNull(Database.mediaType);
+        assertEquals(Database.mediaType, MediaType.parse("application/json"));
+    }*/
 
+    // Vérifie si les méthodes ne lèvent pas d'exceptions
+    // si les requêtes sont correctement construites
+    /*@Test
+    public void testGetRequest() {
+        Database Database = new Database();
+        RequestBody request = Database.getRequestBody("test", "test", "total_exemplaires", "10");
+        assertNotNull(request);
+        assertEquals("https://data.mongoDatabase-api.com/app/data-moehb/endpoint/data/v1/action/aggregate", request.url().toString());
+        assertEquals("POST", request.method());
+        assertEquals("application/json", request.header("Content-Type"));
+        assertEquals("*", request.header("Access-Control-Request-Headers"));
+        assertEquals("xALvC4U1PdzK3K5y48tsvdpQar51gpnLLmKiNPQU4t2wOt11TqbyQ1mAabx8wAi6", request.header("api-key"));
+        assertNotNull(request.body());
+    }*/
  }
