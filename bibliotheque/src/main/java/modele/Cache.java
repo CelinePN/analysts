@@ -75,7 +75,12 @@ public class Cache {
         }
         if (innerMap != null) {
             List<Parametre> list = innerMap.get(key2);
-            return list.subList(0, limit);
+            if(limit>list.size()){
+                return list;
+            }
+            else{
+                return list.subList(0, limit);
+            }
         }
         return new ArrayList<>();
 

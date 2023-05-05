@@ -12,7 +12,6 @@ package vue.frames;
 
 import javax.swing.*;
 
-import controleur.firstscreen.ObserverFirstScreen;
 import controleur.menu.ControleurMenu;
 import controleur.menu.ObserverMenu;
 
@@ -34,8 +33,6 @@ public class Menu extends JFrame implements ObserverMenu {
     private ButtonGroup buttonGroup;
     private JButton btnValider;
     private final ControleurMenu controleurMenu;
-    private  Mode mode;
-    private List<ObserverMenu> observers = new ArrayList<>();
 
 
 
@@ -43,6 +40,7 @@ public class Menu extends JFrame implements ObserverMenu {
         super("Menu");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
+
         this.controleurMenu = new ControleurMenu();
         this.controleurMenu.registerObserver(this);
 

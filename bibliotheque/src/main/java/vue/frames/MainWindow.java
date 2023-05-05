@@ -21,26 +21,27 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+
+import static modele.utils.Mode.BOTH;
 
 public class MainWindow extends JFrame implements ObserverMainWindow {
     private JPanel panelLeft, panelRight;
-  //  private JComboBox<String> comboBoxParametre = new JComboBox<String>();
-   // private JComboBox<String> comboBoxPartType = new JComboBox<String>();
- //   private JComboBox<String> comboBoxLimite = new JComboBox<String>();
-
-
     private JRadioButton btnCamembert, btnHistogramme, btnBarresEmpilees;
     private ButtonGroup buttonGroup;
     private JButton btnValider;
+    private JButton btnRetour;
     private JLabel labelTop;
     private final ControleurMainWindow controleurMainWindow;
-    private Mode mode;
 
-    private List<Parametre> type;
-    private List<ObserverMainWindow> observers = new ArrayList<>();
 
     public MainWindow(Mode mode) {
         super("Les bibliothèques de PARIS"); // Titre de la fenêtre
+        //ICON
+        ClassLoader classLoader2 = getClass().getClassLoader();
+        ImageIcon icon = new ImageIcon(Objects.requireNonNull(classLoader2.getResource("livreB.jpg")));
+        setIconImage(icon.getImage());
+
         this.controleurMainWindow = new ControleurMainWindow(mode);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
@@ -51,14 +52,23 @@ public class MainWindow extends JFrame implements ObserverMainWindow {
         labelTop.setHorizontalAlignment(JLabel.CENTER);
 
         // Boutons à gauche
-        btnCamembert = new JRadioButton("Camembert");
-        btnHistogramme = new JRadioButton("Histogramme");
-        btnBarresEmpilees = new JRadioButton("Barres Empilées");
+
         buttonGroup = new ButtonGroup();
-        buttonGroup.add(btnCamembert);
-        buttonGroup.add(btnHistogramme);
-        buttonGroup.add(btnBarresEmpilees);
+        if(controleurMainWindow.getCurrentMode()==BOTH){
+            btnBarresEmpilees = new JRadioButton("Barres Empilées");
+            buttonGroup.add(btnBarresEmpilees);
+
+        }
+        else{
+            btnCamembert = new JRadioButton("Camembert");
+            btnHistogramme = new JRadioButton("Histogramme");
+            buttonGroup.add(btnCamembert);
+            buttonGroup.add(btnHistogramme);
+        }
+
+
         btnValider = new JButton("Valider");
+        btnRetour = new JButton("Retour Menu");
 
 
         // Label en haut
@@ -136,6 +146,14 @@ public class MainWindow extends JFrame implements ObserverMainWindow {
                 controleurMainWindow.valider();
             }
         });
+        btnRetour.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                retourMenu();
+            }
+        });
+
+
 
 
         // Label à gauche
@@ -177,50 +195,22 @@ public class MainWindow extends JFrame implements ObserverMainWindow {
         setVisible(true);
     }
 
+    private void retourMenu(){
+        Menu menu = new Menu();
+        menu.setVisible(true);
+        this.setVisible(false);
+        this.dispose();
+    }
+
 
     public ControleurMainWindow getControleurMainWindow() {
         return controleurMainWindow;
     }
 
-    public static void main(String[] args) {
-        new MainWindow(Mode.EMPRUNTS);
-    }
 
     @Override
     public void choisir() {
         JOptionPane.showMessageDialog(null, "Choisir les différents paramètres");
-
-    }
-
-
-
-    @Override
-    public void fenetrefermer(Mode mode) {
-        MainWindow mainWindow = new MainWindow(mode);
-        mainWindow.setVisible(true);
-        this.setVisible(false);
-        this.dispose();
-    }
-
-    @Override
-    public void mode(Mode currentMode) {
-        MainWindow mainWindow = new MainWindow(currentMode);
-
-
-    }
-
-    @Override
-    public void typeParametre(ParametreType parametreType) {
-
-    }
-
-    @Override
-    public void limite(int limite) {
-
-
-    }
-    @Override
-    public void typeDeDocGrouping(TypeDeDocGrouping typeDeDocGrouping) {
 
     }
 
