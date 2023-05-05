@@ -3,16 +3,16 @@ package vue.frames;
 import controleur.mainWindow.ControleurMainWindow;
 import controleur.mainWindow.ObserverMainWindow;
 
+import modele.parametre.Parametre;
 import modele.parametre.ParametreType;
 
 import modele.utils.Mode;
 import modele.utils.TypeDeDocGrouping;
+import vue.panels.graphs.BarresEmpilees;
+import vue.panels.graphs.Camembert;
 import vue.panels.graphs.Histogramme;
 import javax.swing.*;
 import net.java.dev.designgridlayout.DesignGridLayout;
-import vue.panels.ButtonsPanel;
-import vue.panels.graphs.Histogramme;
-
 
 
 import java.awt.*;
@@ -23,18 +23,24 @@ import java.util.List;
 
 public class MainWindow extends JFrame implements ObserverMainWindow {
     private JPanel panelLeft, panelRight;
-    private JComboBox<String> comboBoxParametre, comboBoxPartType, comboBoxLimite;
+    private JComboBox<String> comboBoxParametre = new JComboBox<String>();
+    private JComboBox<String> comboBoxPartType = new JComboBox<String>();
+    private JComboBox<String> comboBoxLimite = new JComboBox<String>();
+
+
     private JRadioButton btnCamembert, btnHistogramme, btnBarresEmpilees;
     private ButtonGroup buttonGroup;
     private JButton btnValider;
     private JLabel labelTop;
     private final ControleurMainWindow controleurMainWindow;
-    private  Mode mode;
+    private Mode mode;
+
+    private List<Parametre> type;
     private List<ObserverMainWindow> observers = new ArrayList<>();
 
     public MainWindow(Mode mode) {
         super("Les bibliothèques de PARIS"); // Titre de la fenêtre
-        this.controleurMainWindow= new ControleurMainWindow(mode);
+        this.controleurMainWindow = new ControleurMainWindow(mode);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
         this.controleurMainWindow.registerObserver(this);
@@ -52,9 +58,6 @@ public class MainWindow extends JFrame implements ObserverMainWindow {
         buttonGroup.add(btnHistogramme);
         buttonGroup.add(btnBarresEmpilees);
         btnValider = new JButton("Valider");
-
-
-
 
 
         // Label en haut
@@ -81,28 +84,27 @@ public class MainWindow extends JFrame implements ObserverMainWindow {
             }
         });
 
-
         btnCamembert.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-                controleurMainWindow.setCurrentMode(Mode.EMPRUNTS);
+                new Camembert(type, mode);
+                // controleurMainWindow.setCurrentMode(Camembert);
             }
         });
 
         btnBarresEmpilees.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-                controleurMainWindow.setCurrentMode(Mode.EMPRUNTS);
+                new BarresEmpilees(type, type);
+                // controleurMainWindow.setCurrentMode(Mode.EMPRUNTS);
             }
         });
 
         btnHistogramme.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-                controleurMainWindow.setCurrentMode(Mode.EMPRUNTS);
+                new Histogramme(type, mode);
+                //    controleurMainWindow.setCurrentMode(Mode.EMPRUNTS);
             }
         });
 
@@ -123,7 +125,6 @@ public class MainWindow extends JFrame implements ObserverMainWindow {
                 controleurMainWindow.setTypeDeDocGrouping(selectedOption);
             }
         });
-
 
 
         btnValider.addActionListener(new ActionListener() {
@@ -168,7 +169,6 @@ public class MainWindow extends JFrame implements ObserverMainWindow {
         layout.row().grid(3).add(new JScrollPane(panelLeft)).grid(7).add(new JScrollPane(panelRight)); // Panels à gauche et à droite sur la même ligne avec taille spécifiée
 
 
-
         add(contentPanel, BorderLayout.CENTER);
 
         pack();
@@ -181,7 +181,7 @@ public class MainWindow extends JFrame implements ObserverMainWindow {
     }
 
     public static void main(String[] args) {
-       // new MainWindow(Mode mode);
+        // new MainWindow(Mode mode);
     }
 
     @Override
@@ -189,4 +189,42 @@ public class MainWindow extends JFrame implements ObserverMainWindow {
         JOptionPane.showMessageDialog(null, "Choisir les différents paramètres");
 
     }
+
+    @Override
+    public void fenetrefermer(Mode mode) {
+        MainWindow mainWindow = new MainWindow(mode);
+        mainWindow.setVisible(true);
+        this.setVisible(false);
+        this.dispose();
+    }
+
+    @Override
+    public void mode(Mode currentMode) {
+        MainWindow mainWindow = new MainWindow(currentMode);
+
+
+    }
+
+    @Override
+    public void typeParametre(ParametreType parametreType) {
+
+    }
+
+    @Override
+    public void limite(int limite) {
+        switch (limite) {
+            case 1:
+
+                break;
+
+            default:
+
+        }
+    }
+//si c 'est un histogramme recupérer la limite
+    @Override
+    public void typeDeDocGrouping(TypeDeDocGrouping typeDeDocGrouping) {
+
+    }
+
 }

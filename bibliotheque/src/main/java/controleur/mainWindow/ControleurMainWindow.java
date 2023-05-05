@@ -49,10 +49,6 @@ public class ControleurMainWindow {
         this.parametreType = parametreType;
     }
 
-
-
-
-
     public Mode getCurrentMode() {
         return currentMode;
     }
@@ -64,7 +60,14 @@ public class ControleurMainWindow {
     public void valider() {
         if (this.getCurrentMode()!=null) {
             for (ObserverMainWindow observer : observers) {
-                //observer.fenetrefermer(this.getCurrentMode());
+               // observer.fenetrefermer(this.getCurrentMode());
+
+                observer.mode(this.getCurrentMode());
+                observer.typeParametre(this.getParametreType());
+                observer.limite(this.getLimite());
+                observer.typeDeDocGrouping(this.getTypeDeDocGrouping());
+                // if
+
             }
         }
 
@@ -74,4 +77,6 @@ public class ControleurMainWindow {
             }
         }
     }
+
+
 }
