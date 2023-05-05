@@ -71,6 +71,7 @@ public class Cache {
                 innerMap = cacheMapEmprunts.get(key1);
                 break;
             }
+
         }
         if (innerMap != null) {
             List<Parametre> list = innerMap.get(key2);

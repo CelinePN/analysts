@@ -8,6 +8,7 @@ import modele.parametre.ParametreType;
 
 import modele.utils.Mode;
 import modele.utils.TypeDeDocGrouping;
+import modele.utils.TypeGraph;
 import vue.panels.graphs.BarresEmpilees;
 import vue.panels.graphs.Camembert;
 import vue.panels.graphs.Histogramme;
@@ -87,24 +88,23 @@ public class MainWindow extends JFrame implements ObserverMainWindow {
         btnCamembert.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new Camembert(type, mode);
-                // controleurMainWindow.setCurrentMode(Camembert);
+                controleurMainWindow.setTypeGraph(TypeGraph.CAMEMBERTS);
+
             }
         });
 
         btnBarresEmpilees.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new BarresEmpilees(type, type);
-                // controleurMainWindow.setCurrentMode(Mode.EMPRUNTS);
+                controleurMainWindow.setTypeGraph(TypeGraph.BARRES_EMPILEES);
+
             }
         });
 
         btnHistogramme.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new Histogramme(type, mode);
-                //    controleurMainWindow.setCurrentMode(Mode.EMPRUNTS);
+                controleurMainWindow.setTypeGraph(TypeGraph.HISTOGRAMMES);
             }
         });
 
@@ -181,7 +181,7 @@ public class MainWindow extends JFrame implements ObserverMainWindow {
     }
 
     public static void main(String[] args) {
-        // new MainWindow(Mode mode);
+        new MainWindow(Mode.EMPRUNTS);
     }
 
     @Override
@@ -212,18 +212,40 @@ public class MainWindow extends JFrame implements ObserverMainWindow {
 
     @Override
     public void limite(int limite) {
-        switch (limite) {
-            case 1:
 
-                break;
 
-            default:
-
-        }
     }
-//si c 'est un histogramme recupérer la limite
     @Override
     public void typeDeDocGrouping(TypeDeDocGrouping typeDeDocGrouping) {
+
+    }
+
+    @Override
+    public void updateGraphPanel(List<Parametre> liste, TypeGraph typeGraph, Mode currentmode) {
+        panelRight.removeAll();
+
+        switch (typeGraph) {
+            case HISTOGRAMMES:
+                Histogramme jPanel = new Histogramme(liste, currentmode);
+                panelRight.add(jPanel);
+                break;
+
+            case CAMEMBERTS:
+                Camembert jPanel2 = new Camembert(liste, currentmode);
+                panelRight.add(jPanel2);
+                break;
+
+
+        }
+        this.repaint();
+
+    }
+
+    @Override
+    public void updateGraphBarre(List<Parametre> listeexemplaire, List<Parametre> listeemprunt) {
+        panelRight.removeAll();
+        BarresEmpilees jPanel3 = new BarresEmpilees(listeexemplaire,listeemprunt);
+        panelRight.add(jPanel3);
 
     }
 
