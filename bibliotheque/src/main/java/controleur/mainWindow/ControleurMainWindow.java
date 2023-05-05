@@ -82,20 +82,23 @@ public class ControleurMainWindow {
                     for (ObserverMainWindow observer : observers) {
                         observer.updateGraphBarre(listeexemplaire, listeemprunt);
                     }
-                } else {
-                    List<Parametre> liste = Cache.get(this.getParametreType(), this.getTypeDeDocGrouping(), this.getCurrentMode(), this.getLimite());
-                    if (!liste.isEmpty()) {
-                        for (ObserverMainWindow observer : observers) {
-                            observer.updateGraphPanel(liste, this.getTypeGraph(), this.getCurrentMode());
-                        }
-                    }
                 }
             } else {
-                for (ObserverMainWindow observer : observers) {
-                    observer.choisir();
+                List<Parametre> liste = Cache.get(this.getParametreType(), this.getTypeDeDocGrouping(), this.getCurrentMode(), this.getLimite());
+                if (!liste.isEmpty()) {
+                    for (ObserverMainWindow observer : observers) {
+                        observer.updateGraphPanel(liste, this.getTypeGraph(), this.getCurrentMode());
+                    }
                 }
             }
+
         }
+        else {
+            for (ObserverMainWindow observer : observers) {
+                observer.choisir();
+            }
+        }
+
     }
 }
 

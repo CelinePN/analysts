@@ -24,9 +24,9 @@ import java.util.List;
 
 public class MainWindow extends JFrame implements ObserverMainWindow {
     private JPanel panelLeft, panelRight;
-    private JComboBox<String> comboBoxParametre = new JComboBox<String>();
-    private JComboBox<String> comboBoxPartType = new JComboBox<String>();
-    private JComboBox<String> comboBoxLimite = new JComboBox<String>();
+  //  private JComboBox<String> comboBoxParametre = new JComboBox<String>();
+   // private JComboBox<String> comboBoxPartType = new JComboBox<String>();
+ //   private JComboBox<String> comboBoxLimite = new JComboBox<String>();
 
 
     private JRadioButton btnCamembert, btnHistogramme, btnBarresEmpilees;
@@ -67,23 +67,25 @@ public class MainWindow extends JFrame implements ObserverMainWindow {
         JLabel labelLimite = new JLabel("Nombre max.");
 
         // Boutons déroulants en haut
-        JComboBox<TypeDeDocGrouping> comboBox = new JComboBox<>(TypeDeDocGrouping.values());
-        comboBox.setSelectedIndex(0);
-        JComboBox<ParametreType> comboBox2 = new JComboBox<>(ParametreType.values());
-        comboBox2.setSelectedIndex(0);
+        JComboBox<TypeDeDocGrouping> comboBoxPartType = new JComboBox<>(TypeDeDocGrouping.values());
+        comboBoxPartType.setSelectedIndex(0);
+        JComboBox<ParametreType> comboBoxParametre = new JComboBox<>(ParametreType.values());
+        comboBoxParametre.setSelectedIndex(0);
         String[] limit = {"1", "5", "10", "20"};
-        JComboBox<String> comboBox3 = new JComboBox<>(limit);
-        comboBox3.setSelectedIndex(0);
+        JComboBox<String> comboBoxLimite = new JComboBox<>(limit);
+        comboBoxLimite.setSelectedIndex(0);
 
 
         comboBoxLimite.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int selectedOption = (int) comboBoxLimite.getSelectedItem();
+                int selectedOption = Integer.parseInt( (String)comboBoxLimite.getSelectedItem());
 
                 controleurMainWindow.setLimite(selectedOption);
             }
         });
+
+
 
         btnCamembert.addActionListener(new ActionListener() {
             @Override
@@ -165,7 +167,7 @@ public class MainWindow extends JFrame implements ObserverMainWindow {
         DesignGridLayout layout = new DesignGridLayout(contentPanel);
         layout.row().center().add(labelTop); // Nouvelle ligne pour le label en haut
         layout.row().grid().add(labelParametre).add(labelType).add(labelLimite);
-        layout.row().grid().add(comboBox).add(comboBox2).add(comboBox3); // Boutons déroulants en haut sur la même ligne
+        layout.row().grid().add(comboBoxPartType).add(comboBoxParametre).add(comboBoxLimite); // Boutons déroulants en haut sur la même ligne
         layout.row().grid(3).add(new JScrollPane(panelLeft)).grid(7).add(new JScrollPane(panelRight)); // Panels à gauche et à droite sur la même ligne avec taille spécifiée
 
 
@@ -189,6 +191,8 @@ public class MainWindow extends JFrame implements ObserverMainWindow {
         JOptionPane.showMessageDialog(null, "Choisir les différents paramètres");
 
     }
+
+
 
     @Override
     public void fenetrefermer(Mode mode) {
@@ -237,7 +241,8 @@ public class MainWindow extends JFrame implements ObserverMainWindow {
 
 
         }
-        this.repaint();
+        panelRight.revalidate();
+        //panelRight.repaint();
 
     }
 
