@@ -155,11 +155,7 @@ public class Menu extends JFrame implements ObserverMenu {
     public static void main(String[] args) {
         new Menu();
     }
-
-    @Override
-    public void selectioner() {
-
-    }
+    
 
     @Override
     public void choisir() {

@@ -73,6 +73,7 @@ public class ControleurMainWindow {
         this.currentMode = currentMode;
     }
 
+    //enlever la ligne de vérif null et set toutes les valeurs avec la valeur par défaut des boutons dans la vue
     public void valider() {
         if (this.getParametreType() != null && this.getLimite() != 0 && this.getTypeDeDocGrouping() != null && this.getTypeGraph() != null) {
             if (this.getCurrentMode() == Mode.BOTH) {

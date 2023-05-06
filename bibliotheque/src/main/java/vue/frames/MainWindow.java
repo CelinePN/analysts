@@ -34,7 +34,7 @@ public class MainWindow extends JFrame implements ObserverMainWindow {
     private JLabel labelTop;
     private final ControleurMainWindow controleurMainWindow;
 
-
+    //essayer de séparer le constructeurs en fonctions expliquées
     public MainWindow(Mode mode) {
         super("Les bibliothèques de PARIS"); // Titre de la fenêtre
         //ICON
@@ -85,6 +85,35 @@ public class MainWindow extends JFrame implements ObserverMainWindow {
         JComboBox<String> comboBoxLimite = new JComboBox<>(limit);
         comboBoxLimite.setSelectedIndex(0);
 
+        //faire un set des variables du controleur avec les selectedindex par défauts
+
+
+        if(controleurMainWindow.getCurrentMode()==BOTH) {
+
+            btnBarresEmpilees.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    controleurMainWindow.setTypeGraph(TypeGraph.BARRES_EMPILEES);
+
+                }
+            });
+        }
+        else{
+            btnCamembert.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    controleurMainWindow.setTypeGraph(TypeGraph.CAMEMBERTS);
+
+                }
+            });
+
+            btnHistogramme.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    controleurMainWindow.setTypeGraph(TypeGraph.HISTOGRAMMES);
+                }
+            });
+        }
 
         comboBoxLimite.addActionListener(new ActionListener() {
             @Override
@@ -92,31 +121,6 @@ public class MainWindow extends JFrame implements ObserverMainWindow {
                 int selectedOption = Integer.parseInt( (String)comboBoxLimite.getSelectedItem());
 
                 controleurMainWindow.setLimite(selectedOption);
-            }
-        });
-
-
-
-        btnCamembert.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                controleurMainWindow.setTypeGraph(TypeGraph.CAMEMBERTS);
-
-            }
-        });
-
-        btnBarresEmpilees.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                controleurMainWindow.setTypeGraph(TypeGraph.BARRES_EMPILEES);
-
-            }
-        });
-
-        btnHistogramme.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                controleurMainWindow.setTypeGraph(TypeGraph.HISTOGRAMMES);
             }
         });
 
@@ -153,9 +157,6 @@ public class MainWindow extends JFrame implements ObserverMainWindow {
             }
         });
 
-
-
-
         // Label à gauche
         JLabel labelTypeGraph = new JLabel("Type de graphique");
 
@@ -163,10 +164,16 @@ public class MainWindow extends JFrame implements ObserverMainWindow {
         panelLeft = new JPanel(new GridLayout(5, 1));
         panelLeft.setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
         panelLeft.add(labelTypeGraph);
-        panelLeft.add(btnCamembert);
-        panelLeft.add(btnHistogramme);
-        panelLeft.add(btnBarresEmpilees);
+        if(controleurMainWindow.getCurrentMode()==BOTH) {
+            panelLeft.add(btnBarresEmpilees);
+        }
+        else{
+            panelLeft.add(btnCamembert);
+            panelLeft.add(btnHistogramme);
+        }
+
         panelLeft.add(btnValider);
+        panelLeft.add(btnRetour);
 
         // Panel à droite
         panelRight = new JPanel();
@@ -211,7 +218,6 @@ public class MainWindow extends JFrame implements ObserverMainWindow {
     @Override
     public void choisir() {
         JOptionPane.showMessageDialog(null, "Choisir les différents paramètres");
-
     }
 
     @Override
@@ -228,19 +234,18 @@ public class MainWindow extends JFrame implements ObserverMainWindow {
                 Camembert jPanel2 = new Camembert(liste, currentmode);
                 panelRight.add(jPanel2);
                 break;
-
-
         }
         panelRight.revalidate();
-        //panelRight.repaint();
 
     }
 
+    //pb barres empilées marhce pas
     @Override
     public void updateGraphBarre(List<Parametre> listeexemplaire, List<Parametre> listeemprunt) {
         panelRight.removeAll();
         BarresEmpilees jPanel3 = new BarresEmpilees(listeexemplaire,listeemprunt);
         panelRight.add(jPanel3);
+        panelRight.revalidate();
 
     }
 
