@@ -239,7 +239,6 @@ public class MainWindow extends JFrame implements ObserverMainWindow {
 
     }
 
-    //pb barres empilées marhce pas
     @Override
     public void updateGraphBarre(List<Parametre> listeexemplaire, List<Parametre> listeemprunt) {
         panelRight.removeAll();
