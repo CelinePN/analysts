@@ -36,32 +36,37 @@ public class Histogramme extends JPanel {
         chart.getLegend().setVisible(true);
         // Création du panel contenant le graphique
         ChartPanel chartPanel = new ChartPanel(chart);
-        chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
+        chartPanel.setPreferredSize(new Dimension(500, 270));
 
+        this.setLayout(new BorderLayout());
         this.add(chartPanel, BorderLayout.CENTER);
 
     }
-    public Histogramme(List<Parametre> liste, Mode sortBy) {
+    public Histogramme(List<Parametre> liste, Mode mode) {
         String typeParam = liste.get(0).getType_param().getString();
         this.setLayout(new BorderLayout());
         // Création des données
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        String val="";
         for (Parametre param : liste){
-            switch(sortBy){
+            switch(mode){
                 case EXEMPLAIRES:
+                    val="OFFRE";
                     dataset.setValue(param.getTotalExemplaires(), "Nombre d'exemplaires",param.getNom());
                     break;
 
                 case EMPRUNTS:
+                    val="DEMANDE";
                     dataset.setValue(param.getTotalPrets(), "Nombre d'emprunts",param.getNom());
                     break;
             }
         }
+
         // Création du graphique en barres
         JFreeChart chart = ChartFactory.createBarChart(
-                "Mon graphique en barres", // Titre du graphique
+                "Graphique "+val+" pour "+typeParam, // Titre du graphique
                 typeParam, // Titre de l'axe des abscisses
-                sortBy.getSortingString(), // Titre de l'axe des ordonnées
+                mode.getSortingString(), // Titre de l'axe des ordonnées
                 dataset // Données à afficher
         );
 
