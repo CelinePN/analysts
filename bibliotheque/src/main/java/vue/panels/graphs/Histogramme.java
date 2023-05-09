@@ -36,8 +36,9 @@ public class Histogramme extends JPanel {
         chart.getLegend().setVisible(true);
         // Création du panel contenant le graphique
         ChartPanel chartPanel = new ChartPanel(chart);
-        chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
+        chartPanel.setPreferredSize(new Dimension(500, 270));
 
+        this.setLayout(new BorderLayout());
         this.add(chartPanel, BorderLayout.CENTER);
 
     }

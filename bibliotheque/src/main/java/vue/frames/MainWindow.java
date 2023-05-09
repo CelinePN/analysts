@@ -87,7 +87,9 @@ public class MainWindow extends JFrame implements ObserverMainWindow {
         controleurMainWindow.setTypeDeDocGrouping((TypeDeDocGrouping) comboBoxPartType.getSelectedItem());
         controleurMainWindow.setParametreType((ParametreType) comboBoxParametre.getSelectedItem());
         controleurMainWindow.setLimite(1);
-        //faire un set des variables du controleur avec les selectedindex par défauts
+        controleurMainWindow.setTypeGraph(TypeGraph.CAMEMBERTS);
+        btnCamembert.setSelected(true);
+
 
 
         if(controleurMainWindow.getCurrentMode()==BOTH) {
@@ -177,11 +179,12 @@ public class MainWindow extends JFrame implements ObserverMainWindow {
         panelLeft.add(btnValider);
         panelLeft.add(btnRetour);
 
+
         // Panel à droite
-        panelRight = new JPanel();
+        panelRight = new JPanel(new BorderLayout());
         panelRight.setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
         Histogramme jPanel = new Histogramme();
-        panelRight.add(jPanel);
+        panelRight.add(jPanel, BorderLayout.CENTER);
 
         // Définir la taille préférée du panel gauche
         //panelLeft.setPreferredSize(new Dimension(200, 300));
@@ -199,7 +202,7 @@ public class MainWindow extends JFrame implements ObserverMainWindow {
 
 
         add(contentPanel, BorderLayout.CENTER);
-
+        controleurMainWindow.valider();
         pack();
         setLocationRelativeTo(null); // Centrer la fenêtre sur l'écran
         setPreferredSize(new Dimension(1200, 250));
