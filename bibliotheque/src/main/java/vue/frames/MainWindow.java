@@ -87,7 +87,9 @@ public class MainWindow extends JFrame implements ObserverMainWindow {
         controleurMainWindow.setTypeDeDocGrouping((TypeDeDocGrouping) comboBoxPartType.getSelectedItem());
         controleurMainWindow.setParametreType((ParametreType) comboBoxParametre.getSelectedItem());
         controleurMainWindow.setLimite(1);
-        //faire un set des variables du controleur avec les selectedindex par défauts
+        controleurMainWindow.setTypeGraph(TypeGraph.CAMEMBERTS);
+        btnCamembert.setSelected(true);
+
 
 
         if(controleurMainWindow.getCurrentMode()==BOTH) {
@@ -199,7 +201,7 @@ public class MainWindow extends JFrame implements ObserverMainWindow {
 
 
         add(contentPanel, BorderLayout.CENTER);
-
+        controleurMainWindow.valider();
         pack();
         setLocationRelativeTo(null); // Centrer la fenêtre sur l'écran
         setPreferredSize(new Dimension(1200, 250));
