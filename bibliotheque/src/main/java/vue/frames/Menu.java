@@ -137,10 +137,10 @@ public class Menu extends JFrame implements ObserverMenu {
         int verticalInsets = insets.top + insets.bottom;
         int windowWidth = imageIcon.getIconWidth() + horizontalInsets;
         int windowHeight = imageIcon.getIconHeight() + labelTitre.getPreferredSize().height + panel1.getPreferredSize().height + verticalInsets;
-        setPreferredSize(new Dimension(windowWidth + 700, windowHeight + 250));
-        setLocationRelativeTo(null);
+        setPreferredSize(new Dimension(windowWidth + 1200, windowHeight + 250));
 
         pack();
+        setLocationRelativeTo(null); // Centrer la fenêtre sur l'écran
         setVisible(true);
         //Bloquer taille de la fenetre
         //setResizable(false);

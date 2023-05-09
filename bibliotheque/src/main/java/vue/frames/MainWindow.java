@@ -182,10 +182,10 @@ public class MainWindow extends JFrame implements ObserverMainWindow {
         panelRight.add(jPanel);
 
         // Définir la taille préférée du panel gauche
-        panelLeft.setPreferredSize(new Dimension(200, 300));
+        //panelLeft.setPreferredSize(new Dimension(200, 300));
 
         // Définir la taille préférée du panel droit
-        panelRight.setPreferredSize(new Dimension(500, 300));
+        //panelRight.setPreferredSize(new Dimension(500, 300));
 
         // Ajouter les panels au layout avec la méthode size()
         JPanel contentPanel = new JPanel();
@@ -199,6 +199,8 @@ public class MainWindow extends JFrame implements ObserverMainWindow {
         add(contentPanel, BorderLayout.CENTER);
 
         pack();
+        setLocationRelativeTo(null); // Centrer la fenêtre sur l'écran
+        setPreferredSize(new Dimension(1200, 250));
         setVisible(true);
     }
 
