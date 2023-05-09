@@ -46,13 +46,14 @@ public class FirstScreen extends JFrame implements ObserverFirstScreen {
         this.controleurFirstScreen.registerObserver(this);
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Fermer la fenêtre en cliquant sur la croix
-        this.setLocationRelativeTo(null); // Centrer la fenêtre sur l'écran
         this.setSize(500, 400);
         this.cardLayout = new CardLayout();
         this.setLayout(cardLayout);
         this.initView();
         cardLayout.show(getContentPane(), "main");
-
+        this.setResizable(false);
+        this.pack();
+        this.setLocationRelativeTo(null); // Centrer la fenêtre sur l'écran
         setVisible(true); // Rendre la fenêtre visible
 
         this.controleurFirstScreen.loadData();
