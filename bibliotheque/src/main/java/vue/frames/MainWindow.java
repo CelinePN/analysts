@@ -177,11 +177,12 @@ public class MainWindow extends JFrame implements ObserverMainWindow {
         panelLeft.add(btnValider);
         panelLeft.add(btnRetour);
 
+
         // Panel à droite
-        panelRight = new JPanel();
+        panelRight = new JPanel(new BorderLayout());
         panelRight.setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
         Histogramme jPanel = new Histogramme();
-        panelRight.add(jPanel);
+        panelRight.add(jPanel, BorderLayout.CENTER);
 
         // Définir la taille préférée du panel gauche
         //panelLeft.setPreferredSize(new Dimension(200, 300));
