@@ -53,8 +53,8 @@ public class Menu extends JFrame implements ObserverMenu {
         add(labelTitre, BorderLayout.NORTH);
 
         // Initialisation des boutons radio
-        btnDemande = new JRadioButton("Offre");
-        btnOffre = new JRadioButton("Demande");
+        btnDemande = new JRadioButton("Demande");
+        btnOffre = new JRadioButton("Offre");
         btnComparaison = new JRadioButton("Comparaison Offre/Demande");
         buttonGroup = new ButtonGroup();
         buttonGroup.add(btnDemande);
@@ -138,8 +138,6 @@ public class Menu extends JFrame implements ObserverMenu {
         int windowWidth = imageIcon.getIconWidth() + horizontalInsets;
         int windowHeight = imageIcon.getIconHeight() + labelTitre.getPreferredSize().height + panel1.getPreferredSize().height + verticalInsets;
         setPreferredSize(new Dimension(windowWidth + 700, windowHeight + 250));
-        setLocationRelativeTo(null);
-
         pack();
         setVisible(true);
         //Bloquer taille de la fenetre
@@ -147,20 +145,14 @@ public class Menu extends JFrame implements ObserverMenu {
 
     }
 
-
-    public ControleurMenu getControleurMenu() {
-        return controleurMenu;
-    }
-
     public static void main(String[] args) {
         new Menu();
     }
-    
+
 
     @Override
     public void choisir() {
         JOptionPane.showMessageDialog(null, "Choisir une catégorie");
-
     }
 
     @Override

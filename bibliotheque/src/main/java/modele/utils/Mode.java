@@ -22,7 +22,7 @@ public enum Mode {
         return sortingType;
     }
 
-    private String sortingType;
+    private final String sortingType;
 
 
     Mode(String a) {
