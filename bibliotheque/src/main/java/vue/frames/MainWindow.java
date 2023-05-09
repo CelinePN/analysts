@@ -84,7 +84,9 @@ public class MainWindow extends JFrame implements ObserverMainWindow {
         String[] limit = {"1", "5", "10", "20"};
         JComboBox<String> comboBoxLimite = new JComboBox<>(limit);
         comboBoxLimite.setSelectedIndex(0);
-
+        controleurMainWindow.setTypeDeDocGrouping((TypeDeDocGrouping) comboBoxPartType.getSelectedItem());
+        controleurMainWindow.setParametreType((ParametreType) comboBoxParametre.getSelectedItem());
+        controleurMainWindow.setLimite(1);
         //faire un set des variables du controleur avec les selectedindex par défauts
 
 
