@@ -57,10 +57,13 @@ public class MainWindow extends JFrame implements ObserverMainWindow {
         if(controleurMainWindow.getCurrentMode()==BOTH){
             btnBarresEmpilees = new JRadioButton("Barres Empilées");
             buttonGroup.add(btnBarresEmpilees);
+            btnBarresEmpilees.setSelected(true);
+
 
         }
         else{
             btnCamembert = new JRadioButton("Camembert");
+            btnCamembert.setSelected(true);
             btnHistogramme = new JRadioButton("Histogramme");
             buttonGroup.add(btnCamembert);
             buttonGroup.add(btnHistogramme);
@@ -88,9 +91,6 @@ public class MainWindow extends JFrame implements ObserverMainWindow {
         controleurMainWindow.setParametreType((ParametreType) comboBoxParametre.getSelectedItem());
         controleurMainWindow.setLimite(1);
         controleurMainWindow.setTypeGraph(TypeGraph.CAMEMBERTS);
-        btnCamembert.setSelected(true);
-
-
 
         if(controleurMainWindow.getCurrentMode()==BOTH) {
 
@@ -168,6 +168,7 @@ public class MainWindow extends JFrame implements ObserverMainWindow {
         panelLeft = new JPanel(new GridLayout(5, 1));
         panelLeft.setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
         panelLeft.add(labelTypeGraph);
+
         if(controleurMainWindow.getCurrentMode()==BOTH) {
             panelLeft.add(btnBarresEmpilees);
         }
@@ -183,14 +184,6 @@ public class MainWindow extends JFrame implements ObserverMainWindow {
         // Panel à droite
         panelRight = new JPanel(new BorderLayout());
         panelRight.setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
-        Histogramme jPanel = new Histogramme();
-        panelRight.add(jPanel, BorderLayout.CENTER);
-
-        // Définir la taille préférée du panel gauche
-        //panelLeft.setPreferredSize(new Dimension(200, 300));
-
-        // Définir la taille préférée du panel droit
-        //panelRight.setPreferredSize(new Dimension(500, 300));
 
         // Ajouter les panels au layout avec la méthode size()
         JPanel contentPanel = new JPanel();
@@ -199,7 +192,6 @@ public class MainWindow extends JFrame implements ObserverMainWindow {
         layout.row().grid().add(labelParametre).add(labelType).add(labelLimite);
         layout.row().grid().add(comboBoxPartType).add(comboBoxParametre).add(comboBoxLimite); // Boutons déroulants en haut sur la même ligne
         layout.row().grid(3).add(new JScrollPane(panelLeft)).grid(7).add(new JScrollPane(panelRight)); // Panels à gauche et à droite sur la même ligne avec taille spécifiée
-
 
         add(contentPanel, BorderLayout.CENTER);
         controleurMainWindow.valider();
@@ -229,17 +221,19 @@ public class MainWindow extends JFrame implements ObserverMainWindow {
 
     @Override
     public void updateGraphPanel(List<Parametre> liste, TypeGraph typeGraph, Mode currentmode) {
-        panelRight.removeAll();
+        if(panelRight.getComponentCount()!=0){
+            panelRight.removeAll();
+        }
 
         switch (typeGraph) {
             case HISTOGRAMMES:
                 Histogramme jPanel = new Histogramme(liste, currentmode);
-                panelRight.add(jPanel);
+                panelRight.add(jPanel, BorderLayout.CENTER);
                 break;
 
             case CAMEMBERTS:
                 Camembert jPanel2 = new Camembert(liste, currentmode);
-                panelRight.add(jPanel2);
+                panelRight.add(jPanel2, BorderLayout.CENTER);
                 break;
         }
         panelRight.revalidate();
@@ -248,9 +242,11 @@ public class MainWindow extends JFrame implements ObserverMainWindow {
 
     @Override
     public void updateGraphBarre(List<Parametre> listeexemplaire, List<Parametre> listeemprunt) {
-        panelRight.removeAll();
+        if(panelRight.getComponentCount()!=0){
+            panelRight.removeAll();
+        }
         BarresEmpilees jPanel3 = new BarresEmpilees(listeexemplaire,listeemprunt);
-        panelRight.add(jPanel3);
+        panelRight.add(jPanel3, BorderLayout.CENTER);
         panelRight.revalidate();
 
     }
