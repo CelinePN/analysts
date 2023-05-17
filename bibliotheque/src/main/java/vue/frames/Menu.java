@@ -116,7 +116,7 @@ public class Menu extends JFrame implements ObserverMenu {
 
         // Ajout de l'image label au panel2
         ClassLoader classLoader = getClass().getClassLoader();
-        ImageIcon imageIcon = new ImageIcon(Objects.requireNonNull(classLoader.getResource("bibliothequeParis.jpg")));
+        ImageIcon imageIcon = new ImageIcon(Objects.requireNonNull(classLoader.getResource("FirstSCreen.png")));
         JLabel jLabel = new JLabel(imageIcon);
         panel2 = new JPanel(new BorderLayout());
         panel2.setVisible(false);
