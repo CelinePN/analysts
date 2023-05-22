@@ -1,7 +1,7 @@
 package modele.utils;
 
 /**
- *  <h1> SortBy </h1>
+ *  <h1> TypeGraph </h1>
  *
  * <p>
  *     Enumération comportant les différentes manières dont on peut trier les données appelées.
@@ -16,6 +16,5 @@ public enum TypeGraph {
     HISTOGRAMMES,
     CAMEMBERTS,
     BARRES_EMPILEES;
-
 
 }

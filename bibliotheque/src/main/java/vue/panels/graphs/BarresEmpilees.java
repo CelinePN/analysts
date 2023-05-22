@@ -10,9 +10,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
-public class BarresEmpilees extends JPanel{
+public class BarresEmpilees extends JPanel {
 
-    public BarresEmpilees(){
+    public BarresEmpilees() {
 
         // Création des données
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
@@ -27,24 +27,23 @@ public class BarresEmpilees extends JPanel{
 
     }
 
-    public BarresEmpilees(List<Parametre> listeExemplaires, List<Parametre> listeEmprunts){
+    public BarresEmpilees(List<Parametre> listeExemplaires, List<Parametre> listeEmprunts) {
         String typeParam = listeExemplaires.get(0).getType_param().getString();
 
         this.setLayout(new BorderLayout());
         String type = listeExemplaires.get(0).getType_param().getString();
         // Création des données
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        for (Parametre param : listeExemplaires){
-            dataset.setValue(param.getTotalExemplaires(), "Offre", param.getNom()); //Offre
+        for (Parametre param : listeExemplaires) {
+            dataset.setValue(param.getTotalExemplaires(), "Offre", param.getNom()); // Offre
         }
-        for (Parametre param : listeEmprunts){
-            dataset.setValue((float) param.getTotalPrets(), "Demande", param.getNom()); //Demande
+        for (Parametre param : listeEmprunts) {
+            dataset.setValue((float) param.getTotalPrets(), "Demande", param.getNom()); // Demande
         }
-
 
         // Création du graphique en barres empilées
         JFreeChart chart = ChartFactory.createStackedBarChart(
-                "Comparaison offre et demande de "+type, // Titre du graphique
+                "Comparaison offre et demande de " + type, // Titre du graphique
                 typeParam, // Titre de l'axe des abscisses
                 "Valeurs", // Titre de l'axe des ordonnées
                 dataset // Données à afficher
@@ -54,7 +53,17 @@ public class BarresEmpilees extends JPanel{
         ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
 
-        this.add(chartPanel, BorderLayout.CENTER);
+        // Création du JLabel avec le texte
+        JLabel label = new JLabel("*Attention les premiers de l'offre ne sont pas forcément ceux de la demande");
+        label.setHorizontalAlignment(SwingConstants.LEFT);
 
+        // Création du panel principal contenant le graphique et le JLabel
+        JPanel mainPanel = new JPanel(new BorderLayout());
+        mainPanel.add(chartPanel, BorderLayout.CENTER);
+        mainPanel.add(label, BorderLayout.SOUTH);
+
+        this.add(mainPanel, BorderLayout.CENTER);
     }
+
 }
+
