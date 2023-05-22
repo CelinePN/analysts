@@ -119,7 +119,7 @@ public class Menu extends JFrame implements ObserverMenu {
         ImageIcon imageIcon = new ImageIcon(Objects.requireNonNull(classLoader.getResource("FirstSCreen.png")));
         JLabel jLabel = new JLabel(imageIcon);
         panel2 = new JPanel(new BorderLayout());
-        panel2.setVisible(false);
+        panel2.setVisible(true);
         panel2.setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
         panel2.add(jLabel, BorderLayout.CENTER);
 
