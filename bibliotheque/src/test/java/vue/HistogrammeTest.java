@@ -71,7 +71,7 @@ public class HistogrammeTest {
                 frame.setSize(550, 350); // Taille de la fenêtre
                 frame.setLocationRelativeTo(null);
 
-                frame.getContentPane().add(new Histogramme(Objects.requireNonNull(liste.subList(0,10)), Mode.EMPRUNTS));
+                frame.getContentPane().add(new Histogramme(Objects.requireNonNull(liste.subList(0,10)), Mode.EXEMPLAIRES));
                 frame.setVisible(true);
 
             }
