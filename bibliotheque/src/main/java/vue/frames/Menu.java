@@ -21,8 +21,6 @@ import net.java.dev.designgridlayout.DesignGridLayout;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 public class Menu extends JFrame implements ObserverMenu {
@@ -33,7 +31,6 @@ public class Menu extends JFrame implements ObserverMenu {
     private ButtonGroup buttonGroup;
     private JButton btnValider;
     private final ControleurMenu controleurMenu;
-
 
 
     public Menu() {
@@ -116,7 +113,7 @@ public class Menu extends JFrame implements ObserverMenu {
 
         // Ajout de l'image label au panel2
         ClassLoader classLoader = getClass().getClassLoader();
-        ImageIcon imageIcon = new ImageIcon(Objects.requireNonNull(classLoader.getResource("FirstSCreen.png")));
+        ImageIcon imageIcon = new ImageIcon(Objects.requireNonNull(classLoader.getResource("bibliothequeParis.jpg")));
         JLabel jLabel = new JLabel(imageIcon);
         panel2 = new JPanel(new BorderLayout());
         panel2.setVisible(true);
@@ -138,9 +135,10 @@ public class Menu extends JFrame implements ObserverMenu {
         int windowWidth = imageIcon.getIconWidth() + horizontalInsets;
         int windowHeight = imageIcon.getIconHeight() + labelTitre.getPreferredSize().height + panel1.getPreferredSize().height + verticalInsets;
 
-        setPreferredSize(new Dimension(windowWidth + 1200, windowHeight + 250));
+        //setPreferredSize(new Dimension(windowWidth + 700, windowHeight + 700));
         pack();
         setLocationRelativeTo(null); // Centrer la fenêtre sur l'écran
+        //pack();
         setVisible(true);
         //Bloquer taille de la fenetre
         //setResizable(false);
