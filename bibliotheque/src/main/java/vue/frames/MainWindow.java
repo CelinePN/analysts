@@ -48,7 +48,7 @@ public class MainWindow extends JFrame implements ObserverMainWindow {
         this.controleurMainWindow.registerObserver(this);
 
         // Label en haut
-        labelTop = new JLabel("Les documents des bibliothèque de Paris");
+        labelTop = new JLabel("Les documents des bibliothèques de Paris");
         labelTop.setHorizontalAlignment(JLabel.CENTER);
 
         // Boutons à gauche

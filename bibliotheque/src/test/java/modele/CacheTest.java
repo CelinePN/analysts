@@ -32,16 +32,12 @@ public class CacheTest {
         assertDoesNotThrow(() -> Cache.get(ParametreType.LANGUE, TypeDeDocGrouping.NO_TYPE, Mode.EMPRUNTS,5));
     }
 
-    /*
     @Test
-    public void testGetLanguagesNombre() throws IOException {
-        Database db = new Database();
-        //compter pour français?
-        //assertEquals(14, db.getParamByTypeDeDoc(ParametreType.LANGUE, NO_TYPE).get(0).getTotalExemplaires());
-        //assertEquals(14, db.getParamByTypeDeDoc(ParametreType.LANGUE, NO_TYPE).get(0).getTotalPrets());
-        assertEquals(67, db.getParamByTypeDeDoc(ParametreType.LANGUE, TypeDeDocGrouping.NO_TYPE).get(0).getCount());
+    public void testGetOnEmptyCache() {
+        Cache.clearCache();
+        assertDoesNotThrow(() -> Cache.get(ParametreType.LANGUE, TypeDeDocGrouping.NO_TYPE, Mode.EMPRUNTS,5));
     }
-*/
+
     @Test
     public void testClearCache() throws IOException {
         Parametre p = new Parametre();
