@@ -75,18 +75,16 @@ public class Cache {
         }
         if (innerMap != null) {
             List<Parametre> list = innerMap.get(key2);
-            if(limit>list.size()){
-                return list;
-            }
-            else{
-                return list.subList(0, limit);
+            if(list!=null){
+                if(limit>list.size()){
+                    return list;
+                }
+                else{
+                    return list.subList(0, limit);
+                }
             }
         }
         return new ArrayList<>();
-
-        /*catch(IllegalArgumentException illegalArgumentException){
-            System.out.println(illegalArgumentException.getMessage());
-        }*/
     }
 
     /**

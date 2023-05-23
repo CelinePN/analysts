@@ -37,7 +37,6 @@ public class ControleurMainWindowTest {
     public static Map<ParametreType, Map<TypeDeDocGrouping, List<Parametre>>> cacheMapEmpruntsTest = new HashMap<>();
 
 
-    //à refaire, ça sert à rien de tester la même chose que y'a dans le code
     //plutôt tester des exemples et des cas complexes
     //tester le coverage, les exceptions...
     @Before

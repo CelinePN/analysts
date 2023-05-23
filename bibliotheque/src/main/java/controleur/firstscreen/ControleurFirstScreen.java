@@ -44,7 +44,6 @@ public class ControleurFirstScreen {
      */
 
     public void loadData() {
-        Cache.clearCache();
         thread = new Thread() {
             public void run() {
                 // Perform data loading here
@@ -55,13 +54,18 @@ public class ControleurFirstScreen {
                     for (TypeDeDocGrouping typeDeDocGrouping : TypeDeDocGrouping.values()) {
 
                         try {
-                            listeExemplaires = Database.getParamByTypeDeDoc(parametreType, typeDeDocGrouping, Mode.EXEMPLAIRES);
+                            listeExemplaires=Cache.get(parametreType, typeDeDocGrouping, Mode.EXEMPLAIRES, Integer.MAX_VALUE);
+                            if(listeExemplaires.isEmpty()){
+                                listeExemplaires = Database.getParamByTypeDeDoc(parametreType, typeDeDocGrouping, Mode.EXEMPLAIRES);
+                            }
                             completedTasks++;
                             for(ObserverFirstScreen observer : observers){
                                 observer.updateProgressBar((int) (((float) completedTasks / totalTasks) * 100));
                             }
-
-                            listeEmprunts = Database.getParamByTypeDeDoc(parametreType, typeDeDocGrouping, Mode.EMPRUNTS);
+                            listeEmprunts=Cache.get(parametreType, typeDeDocGrouping, Mode.EXEMPLAIRES, Integer.MAX_VALUE);
+                            if(listeEmprunts.isEmpty()){
+                                listeEmprunts = Database.getParamByTypeDeDoc(parametreType, typeDeDocGrouping, Mode.EMPRUNTS);
+                            }
                             completedTasks++;
                             for(ObserverFirstScreen observer : observers){
                                 observer.updateProgressBar((int) (((float) completedTasks / totalTasks) * 100));

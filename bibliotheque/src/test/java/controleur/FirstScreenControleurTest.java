@@ -58,7 +58,6 @@ public class FirstScreenControleurTest {
         }
 
         return cacheMapExemplairesTest = Cache.cacheMapExemplaires;
-        //cacheMapEmpruntsTest = Cache.cacheMapEmprunts;
     }
 
     /**
@@ -100,7 +99,5 @@ public class FirstScreenControleurTest {
             }
         }
         assertEquals(test, Cache.cacheMapExemplaires) ;
-        //assertEquals(cacheMapEmpruntsTest, Cache.cacheMapEmprunts) ;
-
     }
 }

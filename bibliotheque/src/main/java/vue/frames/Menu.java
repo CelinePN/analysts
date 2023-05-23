@@ -19,8 +19,7 @@ import modele.utils.Mode;
 import net.java.dev.designgridlayout.DesignGridLayout;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.util.Objects;
 
 public class Menu extends JFrame implements ObserverMenu {
@@ -30,6 +29,8 @@ public class Menu extends JFrame implements ObserverMenu {
     public  JRadioButton btnComparaison;
     private ButtonGroup buttonGroup;
     private JButton btnValider;
+    private JLabel jLabelImage;
+    private Image image;
     private final ControleurMenu controleurMenu;
 
 
@@ -114,11 +115,22 @@ public class Menu extends JFrame implements ObserverMenu {
         // Ajout de l'image label au panel2
         ClassLoader classLoader = getClass().getClassLoader();
         ImageIcon imageIcon = new ImageIcon(Objects.requireNonNull(classLoader.getResource("menu.png")));
-        JLabel jLabel = new JLabel(imageIcon);
+        image = imageIcon.getImage();
+
+        // Redimensionner l'image en utilisant getScaledInstance()
+        int newWidth = 350; // Nouvelle largeur souhaitée
+        int newHeight = 350; // Nouvelle hauteur souhaitée
+        Image resizedImage = image.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
+
+        // Créer un nouvel ImageIcon à partir de l'image redimensionnée
+        ImageIcon resizedIcon = new ImageIcon(resizedImage);
+        jLabelImage = new JLabel(resizedIcon);
+
+
         panel2 = new JPanel(new BorderLayout());
         panel2.setVisible(true);
         panel2.setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
-        panel2.add(jLabel, BorderLayout.CENTER);
+        panel2.add(jLabelImage);
 
 
         // Ajout des panels au frame avec DesignGridLayout
@@ -128,20 +140,19 @@ public class Menu extends JFrame implements ObserverMenu {
         layout.row().grid().add(new JScrollPane(panel1)).add(new JScrollPane(panel2));
         add(contentPanel, BorderLayout.CENTER);
 
+
         // Ajout d'une marge autour de la fenêtre pour centrer
         Insets insets = Toolkit.getDefaultToolkit().getScreenInsets(getGraphicsConfiguration());
         int horizontalInsets = insets.left + insets.right;
         int verticalInsets = insets.top + insets.bottom;
         int windowWidth = imageIcon.getIconWidth() + horizontalInsets;
         int windowHeight = imageIcon.getIconHeight() + labelTitre.getPreferredSize().height + panel1.getPreferredSize().height + verticalInsets;
-
-        //setPreferredSize(new Dimension(windowWidth + 700, windowHeight + 700));
+        //setPreferredSize(new Dimension(windowWidth, windowHeight));
         pack();
         setLocationRelativeTo(null); // Centrer la fenêtre sur l'écran
-        //pack();
         setVisible(true);
         //Bloquer taille de la fenetre
-        //setResizable(false);
+        setResizable(false);
 
     }
 

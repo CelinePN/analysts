@@ -166,7 +166,7 @@ public class MainWindow extends JFrame implements ObserverMainWindow {
 
         // Panel à gauche
         panelLeft = new JPanel(new GridLayout(5, 1));
-        panelLeft.setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
+        panelLeft.setBorder(BorderFactory.createEmptyBorder(25, 25, 25, 25));
         panelLeft.add(labelTypeGraph);
 
         if(controleurMainWindow.getCurrentMode()==BOTH) {
@@ -197,7 +197,8 @@ public class MainWindow extends JFrame implements ObserverMainWindow {
         controleurMainWindow.valider();
         pack();
         setLocationRelativeTo(null); // Centrer la fenêtre sur l'écran
-        setPreferredSize(new Dimension(1200, 250));
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        //setPreferredSize(new Dimension(1200, 250));
         setVisible(true);
     }
 

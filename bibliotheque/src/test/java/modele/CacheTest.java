@@ -28,14 +28,16 @@ import static org.junit.jupiter.api.Assertions.*;
 public class CacheTest {
 
     @Test
-    public void testGetLanguages() {
-        assertDoesNotThrow(() -> Cache.get(ParametreType.LANGUE, TypeDeDocGrouping.NO_TYPE, Mode.EMPRUNTS,5));
+    public void testGetLimitOverListSize() {
+        assertDoesNotThrow(() -> Cache.get(ParametreType.LANGUE, TypeDeDocGrouping.NO_TYPE, Mode.EMPRUNTS,Integer.MAX_VALUE));
+        assertEquals(new ArrayList<>() , Cache.get(ParametreType.LANGUE, TypeDeDocGrouping.NO_TYPE, Mode.EMPRUNTS,5));
     }
 
     @Test
     public void testGetOnEmptyCache() {
         Cache.clearCache();
         assertDoesNotThrow(() -> Cache.get(ParametreType.LANGUE, TypeDeDocGrouping.NO_TYPE, Mode.EMPRUNTS,5));
+        assertEquals(new ArrayList<>() , Cache.get(ParametreType.LANGUE, TypeDeDocGrouping.NO_TYPE, Mode.EMPRUNTS,5));
     }
 
     @Test
