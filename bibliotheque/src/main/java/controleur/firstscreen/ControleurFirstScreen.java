@@ -62,7 +62,7 @@ public class ControleurFirstScreen {
                             for(ObserverFirstScreen observer : observers){
                                 observer.updateProgressBar((int) (((float) completedTasks / totalTasks) * 100));
                             }
-                            listeEmprunts=Cache.get(parametreType, typeDeDocGrouping, Mode.EXEMPLAIRES, Integer.MAX_VALUE);
+                            listeEmprunts=Cache.get(parametreType, typeDeDocGrouping, Mode.EMPRUNTS, Integer.MAX_VALUE);
                             if(listeEmprunts.isEmpty()){
                                 listeEmprunts = Database.getParamByTypeDeDoc(parametreType, typeDeDocGrouping, Mode.EMPRUNTS);
                             }
