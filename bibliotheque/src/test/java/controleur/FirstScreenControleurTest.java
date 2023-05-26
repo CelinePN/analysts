@@ -38,7 +38,7 @@ public class FirstScreenControleurTest {
     public FirstScreenControleurTest() {
     }
 
-    //a refaire, ça sert a rien de tester la même chose que y'a dans le code
+    //a refaire, ca sert a rien de tester la même chose que y'a dans le code
     //plutôt tester des exemples et des cas  complexes
     //tester le coverage, les exceptions...
     @Before

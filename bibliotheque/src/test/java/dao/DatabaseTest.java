@@ -35,7 +35,7 @@ public class DatabaseTest {
 
     @Test
     public void testGetLanguagesNombre() throws IOException {
-        //compter pour français?
+        //compter pour francais?
         //assertEquals(14, Database.getParamByTypeDeDoc(ParametreType.LANGUE, NO_TYPE).get(0).getTotalExemplaires());
         //assertEquals(14, Database.getParamByTypeDeDoc(ParametreType.LANGUE, NO_TYPE).get(0).getTotalPrets());
         //assertEquals(14, db.getParamByTypeDeDoc(ParametreType.LANGUE, NO_TYPE).get(0).getTotalExemplaires());
