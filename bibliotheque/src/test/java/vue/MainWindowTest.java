@@ -9,7 +9,7 @@ import vue.frames.MainWindow;
  *  <h1> Test FirstScreen </h1>
  *
  * <p>
- *     Cette classe permet de tester la classe FirstScreen et les données récupérées
+ *     Cette classe permet de tester la classe FirstScreen et les donnees recuperees
  * </p>
  *
  * @Author: Marine
@@ -21,15 +21,15 @@ public class MainWindowTest {
     private MainWindow mainWindow;
 
     /**
-     * Test d'affichage visuellement que la fenêtre se lance correctement avec graphique par défaut
+     * Test d'affichage visuellement que la fenêtre se lance correctement avec graphique par defaut
      */
     public static void main(String[] args) {
         new MainWindow(Mode.EXEMPLAIRES);
     }
 
     /**
-     * Vérifie que la fenêtre se lance avec les attributs visibles aux bonnes places
-     * Vérifie que par défaut, la fenêtre lance un graphique par défaut
+     * Verifie que la fenêtre se lance avec les attributs visibles aux bonnes places
+     * Verifie que par defaut, la fenêtre lance un graphique par defaut
      */
     @Before
     public void initTest(){
@@ -44,7 +44,7 @@ public class MainWindowTest {
     }
 
     /**
-     * Vérifie que le graphique s'affiche correctement avec les bonnes données
+     * Verifie que le graphique s'affiche correctement avec les bonnes donnees
      */
     @Test
     public void testCamembert() {

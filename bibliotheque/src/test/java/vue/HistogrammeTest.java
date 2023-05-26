@@ -16,7 +16,7 @@ import java.util.Objects;
  *  <h1> Test FirstScreen </h1>
  *
  * <p>
- *     Cette classe permet de tester la classe FirstScreen et les données récupérées
+ *     Cette classe permet de tester la classe FirstScreen et les donnees recuperees
  * </p>
  *
  * @Author: Marine
