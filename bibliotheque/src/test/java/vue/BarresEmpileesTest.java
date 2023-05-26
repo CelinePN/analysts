@@ -20,9 +20,9 @@ import java.util.Objects;
  *     Cette classe permet de tester la classe BarresEmpilees
  * </p>
  *
- * @Author: Alice
- * @Version: 2.0
- * @since: 01/04/2023
+ * @author : Alice
+ * @version : 2.0
+ * @since : 01/04/2023
  */
 
 

@@ -9,9 +9,9 @@ import vue.frames.Menu;
  *     Cette classe permet de tester la classe FirstScreen et les donnees recuperees
  * </p>
  *
- * @Author: Alice
- * @Version: 2.0
- * @since: 01/04/2023
+ * @author : Alice
+ * @version : 2.0
+ * @since : 01/04/2023
  */
 
 //tester de lancer la classe
