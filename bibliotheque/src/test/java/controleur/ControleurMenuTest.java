@@ -36,8 +36,8 @@ import java.util.Map;
 public class ControleurMenuTest {
 
     /**
-     * Vérifie que le controleur menu se créer correctement
-     *@return un booléen en fonction de si les deux parties sont identiques ou non
+     * Verifie que le controleur menu se creer correctement
+     *@return un booleen en fonction de si les deux parties sont identiques ou non
      *
      */
     @Test
@@ -47,8 +47,8 @@ public class ControleurMenuTest {
     }
 
     /**
-     * Vérifie que le setter du mode change bien le mode enregistré
-     *@return un booléen en fonction de si les deux parties sont identiques ou non
+     * Verifie que le setter du mode change bien le mode enregistre
+     *@return un booleen en fonction de si les deux parties sont identiques ou non
      *
      */
     @Test

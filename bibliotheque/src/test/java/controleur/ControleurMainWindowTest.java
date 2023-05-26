@@ -20,10 +20,10 @@ import java.util.Map;
  *  <h1> Test FirstScreen Controleur </h1>
  *
  * <p>
- *     Cette classe permet de tester la classe FirstScreen et les données récupérées
+ *     Cette classe permet de tester la classe FirstScreen et les donnees recuperees
  * </p>
  *
- * @Author: Céline
+ * @Author: Celine
  * @Version: 1.0
  * @since: 14/05/2023
  */
@@ -41,7 +41,7 @@ public class ControleurMainWindowTest {
     //tester le coverage, les exceptions...
     @Before
     public void creationTestData() {
-        //on suggère que la database est le cache ont déjà été testés
+        //on suggere que la database est le cache ont deja ete testes
         for(ParametreType param: ParametreType.values()){
             for(TypeDeDocGrouping typeDeDoc: TypeDeDocGrouping.values()){
                 try {
@@ -60,7 +60,7 @@ public class ControleurMainWindowTest {
     }
 
     /**
-     * Vérifie que le cache se remplit correctement en appelant loadData() si on a du réseau
+     * Verifie que le cache se remplit correctement en appelant loadData() si on a du reseau
      *
      * @throws IOException
      */
@@ -69,7 +69,7 @@ public class ControleurMainWindowTest {
 
         controleurFirstScreen.loadData();
 
-        //attends que toutes les données soient chargées avant de tester le chargement du cache
+        //attends que toutes les donnees soient chargees avant de tester le chargement du cache
         while (!controleurFirstScreen.isDataLoaded()) {
             try {
                 Thread.sleep(100); // wait for 100 milliseconds

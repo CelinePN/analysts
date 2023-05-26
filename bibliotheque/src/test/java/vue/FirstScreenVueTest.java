@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
  *  <h1> Test FirstScreen </h1>
  *
  * <p>
- *     Cette classe permet de tester la classe FirstScreen et les données récupérées
+ *     Cette classe permet de tester la classe FirstScreen et les donnees recuperees
  * </p>
  *
  * @Author: Marine
@@ -40,7 +40,7 @@ public class FirstScreenVueTest {
     public void testProgressBar(){
         firstScreenEco.getControleurFirstScreen().loadData();
 
-        //attends que toutes les données soient chargées avant de tester le chargement du cache
+        //attends que toutes les donnees soient chargees avant de tester le chargement du cache
         while (!firstScreenEco.getControleurFirstScreen().isDataLoaded()) {
             try {
                 Thread.sleep(100); // wait for 100 milliseconds
@@ -59,7 +59,7 @@ public class FirstScreenVueTest {
     public void testErrorLoading(){
         firstScreenEco.getControleurFirstScreen().loadData();
 
-        //attends que toutes les données soient chargées avant de tester le chargement du cache
+        //attends que toutes les donnees soient chargees avant de tester le chargement du cache
         while (firstScreenEco.getControleurFirstScreen().getThread().isAlive()) {
             try {
                 Thread.sleep(100); // wait for 100 milliseconds

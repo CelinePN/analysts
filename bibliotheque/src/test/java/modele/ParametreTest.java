@@ -12,20 +12,20 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ParametreTest {
     /**
-     *  <h1> Test des paramètres </h1>
+     *  <h1> Test des parametres </h1>
      *
      * <p>
      *     Cette classe permet de tester la classe parametre
      * </p>
      *
-     * @Author: Céline
+     * @Author: Celine
      * @Version: 1.0
      * @since: 25/05/2023
      */
 
     /**
-     * Les cinq prochains tests permettent de vérifier les getters et setters de la classe parametres
-     * @return un booléen en fonction de si les deux parties sont identiques ou non
+     * Les cinq prochains tests permettent de verifier les getters et setters de la classe parametres
+     * @return un booleen en fonction de si les deux parties sont identiques ou non
      **/
     @Test
     public void testSetGetNom() {

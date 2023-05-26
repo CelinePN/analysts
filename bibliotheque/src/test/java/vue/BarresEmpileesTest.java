@@ -29,7 +29,7 @@ import java.util.Objects;
 public class BarresEmpileesTest {
 
     /**
-     * Test d'affichage visuellement que la fenêtre se lance correctement avec graphique par défaut
+     * Test d'affichage visuellement que la fenêtre se lance correctement avec graphique par defaut
      */
     public static void main(String[] args) {
         test1();
