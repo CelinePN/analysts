@@ -23,9 +23,9 @@ import java.util.Map;
  *     Cette classe permet de tester la classe FirstScreen et les donnees recuperees
  * </p>
  *
- * @Author: Marine
- * @Version: 2.0
- * @since: 01/04/2023
+ * @author : Marine
+ * @version : 2.0
+ * @since : 01/04/2023
  */
 
 
