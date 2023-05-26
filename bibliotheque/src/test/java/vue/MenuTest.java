@@ -6,7 +6,7 @@ import vue.frames.Menu;
  *  <h1> Test Menu </h1>
  *
  * <p>
- *     Cette classe permet de tester la classe FirstScreen et les données récupérées
+ *     Cette classe permet de tester la classe FirstScreen et les donnees recuperees
  * </p>
  *
  * @Author: Alice

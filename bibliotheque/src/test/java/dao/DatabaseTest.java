@@ -15,18 +15,18 @@ import static org.junit.jupiter.api.Assertions.*;
  *  <h1> Test database </h1>
  *
  * <p>
- *     Cette classe permet de tester la classe database et les données récupérées
+ *     Cette classe permet de tester la classe database et les donnees recuperees
  * </p>
  *
- * @Author: Céline
+ * @Author: Celine
  * @Version: 3.0
  * @since: 23/04/2023
  */
 
 public class DatabaseTest {
     /**
-     * Les cinq prochains tests permettent de vérifier les types de paramètres ainsi que les groupes dans les cas des exemplaires
-     * @return un booléen en fonction de si les deux parties sont identiques ou non
+     * Les cinq prochains tests permettent de verifier les types de parametres ainsi que les groupes dans les cas des exemplaires
+     * @return un booleen en fonction de si les deux parties sont identiques ou non
      **/
     @Test
     public void testGetLanguages() {
@@ -35,7 +35,7 @@ public class DatabaseTest {
 
     @Test
     public void testGetLanguagesNombre() throws IOException {
-        //compter pour français?
+        //compter pour francais?
         //assertEquals(14, Database.getParamByTypeDeDoc(ParametreType.LANGUE, NO_TYPE).get(0).getTotalExemplaires());
         //assertEquals(14, Database.getParamByTypeDeDoc(ParametreType.LANGUE, NO_TYPE).get(0).getTotalPrets());
         //assertEquals(14, db.getParamByTypeDeDoc(ParametreType.LANGUE, NO_TYPE).get(0).getTotalExemplaires());
@@ -60,7 +60,7 @@ public class DatabaseTest {
 
     /**
      * Permet de tester les emprunts
-     * @return un booléen en fonction de si les deux parties sont identiques ou non
+     * @return un booleen en fonction de si les deux parties sont identiques ou non
      **/
     @Test
     public void testGetLangueJeux() throws IOException {
@@ -68,31 +68,31 @@ public class DatabaseTest {
     }
 
     /**
-     * Les trois prochains tests permettent de tester les cas où un paramètre est null
-     * @return un booléen en fonction de si les deux parties sont identiques ou non
+     * Les trois prochains tests permettent de tester les cas où un parametre est null
+     * @return un booleen en fonction de si les deux parties sont identiques ou non
      **/
 
     @Test
     public void testNullParam() throws IOException {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> Database.getParamByTypeDeDoc(null, TypeDeDocGrouping.NO_TYPE, Mode.EXEMPLAIRES));
-        assertEquals("Erreur: Les paramètres ne peuvent pas être null", exception.getMessage());
+        assertEquals("Erreur: Les parametres ne peuvent pas être null", exception.getMessage());
     }
 
     @Test
     public void testNullGroupBy() throws IOException {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> Database.getParamByTypeDeDoc(ParametreType.LANGUE, null, Mode.EXEMPLAIRES));
-        assertEquals("Erreur: Les paramètres ne peuvent pas être null", exception.getMessage());
+        assertEquals("Erreur: Les parametres ne peuvent pas être null", exception.getMessage());
     }
 
     @Test
     public void testNullSortBy() throws IOException {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> Database.getParamByTypeDeDoc(ParametreType.LANGUE, TypeDeDocGrouping.NO_TYPE, null));
-        assertEquals("Erreur: Les paramètres ne peuvent pas être null", exception.getMessage());
+        assertEquals("Erreur: Les parametres ne peuvent pas être null", exception.getMessage());
     }
 
     /**
-     * Permet de tester l'absence de réseau'
-     * @return un booléen en fonction de si les deux parties sont identiques ou non
+     * Permet de tester l'absence de reseau'
+     * @return un booleen en fonction de si les deux parties sont identiques ou non
      **/
 
     @Test
@@ -103,7 +103,7 @@ public class DatabaseTest {
 
     /**
      * Permet de tester le constructeur
-     * @return un booléen en fonction de si les deux parties sont identiques ou non
+     * @return un booleen en fonction de si les deux parties sont identiques ou non
      **/
     /*@Test
     public void testConstructeur() {
@@ -113,7 +113,7 @@ public class DatabaseTest {
         assertEquals(Database.mediaType, MediaType.parse("application/json"));
     }*/
 
-    // Vérifie si les méthodes ne lèvent pas d'exceptions
+    // Verifie si les methodes ne levent pas d'exceptions
     // si les requêtes sont correctement construites
     /*@Test
     public void testGetRequest() {

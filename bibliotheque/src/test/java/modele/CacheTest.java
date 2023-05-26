@@ -17,10 +17,10 @@ import static org.junit.jupiter.api.Assertions.*;
  *  <h1> Test Cache </h1>
  *
  * <p>
- *     Cette classe permet de tester la classe Cache et les données récupérées
+ *     Cette classe permet de tester la classe Cache et les donnees recuperees
  * </p>
  *
- * @Author: Céline
+ * @Author: Celine
  * @Version: 1.0
  * @since: 15/04/2023
  */
@@ -148,7 +148,7 @@ public class CacheTest {
         Cache.clearCache();
         Parametre p = new Parametre();
         Exception exception = assertThrows(IllegalArgumentException.class, () -> Cache.get(null, TypeDeDocGrouping.LIVRES, Mode.EMPRUNTS, 1));
-        assertEquals("Erreur: Les paramètres ne peuvent pas être null", exception.getMessage());
+        assertEquals("Erreur: Les parametres ne peuvent pas être null", exception.getMessage());
     }
 
     @Test
@@ -161,14 +161,14 @@ public class CacheTest {
         lEm.add(p);
         Cache.put(ParametreType.AUTEUR, TypeDeDocGrouping.LIVRES, lEx, lEm);
         Exception exception = assertThrows(IllegalArgumentException.class, () -> Cache.get(ParametreType.AUTEUR, null, Mode.EMPRUNTS, 1));
-        assertEquals("Erreur: Les paramètres ne peuvent pas être null", exception.getMessage());
+        assertEquals("Erreur: Les parametres ne peuvent pas être null", exception.getMessage());
     }
     @Test
     public void testGetModeNull() throws IOException {
         Cache.clearCache();
         Parametre p = new Parametre();
         Exception exception = assertThrows(IllegalArgumentException.class, () -> Cache.get(ParametreType.AUTEUR, TypeDeDocGrouping.LIVRES, null, 1));
-        assertEquals("Erreur: Les paramètres ne peuvent pas être null", exception.getMessage());
+        assertEquals("Erreur: Les parametres ne peuvent pas être null", exception.getMessage());
     }
 
     @Test
@@ -176,7 +176,7 @@ public class CacheTest {
         Cache.clearCache();
         Parametre p = new Parametre();
         /*Exception exception = assertThrows(IllegalArgumentException.class, () -> Cache.get(ParametreType.AUTEUR, TypeDeDocGrouping.LIVRES, Mode.EMPRUNTS, 0));
-        assertEquals("Erreur: Les paramètres ne peuvent pas être null", exception.getMessage());*/
+        assertEquals("Erreur: Les parametres ne peuvent pas être null", exception.getMessage());*/
         assertEquals(new ArrayList<>(), Cache.get(ParametreType.LANGUE, TypeDeDocGrouping.LIVRES, Mode.EMPRUNTS, 0));
     }
  }
