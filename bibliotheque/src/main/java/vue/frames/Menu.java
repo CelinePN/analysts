@@ -22,6 +22,20 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.Objects;
 
+
+/**
+ *  <h1> Menu Vue </h1>
+ *
+ * <p>
+ *      Cette classe permet l'affichage de la fenêtre du menu.
+ *
+ * </p>
+ *
+ * @Author: Alice et Mathilde
+ * @Version: 1.0
+ * @since: 09/05/2023
+ */
+
 public class Menu extends JFrame implements ObserverMenu {
     private JPanel panel1, panel2;
     public  JRadioButton btnDemande;
@@ -160,12 +174,14 @@ public class Menu extends JFrame implements ObserverMenu {
         new Menu();
     }
 
-
+    // Méthode affichant un message (pop up) lorsque l'utilisateur n'a pas choisi sa catégorie
     @Override
     public void choisir() {
         JOptionPane.showMessageDialog(null, "Choisir une catégorie");
     }
 
+
+    //Méthode permettant de fermer le fenètre du menu
     @Override
     public void fenetrefermer(Mode mode) {
         MainWindow mainWindow = new MainWindow(mode);

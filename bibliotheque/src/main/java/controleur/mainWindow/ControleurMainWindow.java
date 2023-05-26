@@ -12,6 +12,20 @@ import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *  <h1> MainWindow Controleur </h1>
+ *
+ * <p>
+ *      Cette classe est reponsable de la gestion des intéractions et du
+ *      contrôle des données pour la mainwindow.
+ * </p>
+ *
+ * @Author: Mathilde et Marine
+ * @Version: 1.0
+ * @since: 09/05/2023
+ */
+
+
 public class ControleurMainWindow {
 
     private Mode currentMode;
@@ -73,7 +87,6 @@ public class ControleurMainWindow {
         this.currentMode = currentMode;
     }
 
-    //enlever la ligne de vérif null et set toutes les valeurs avec la valeur par défaut des boutons dans la vue
     public void valider() {
         if (this.getParametreType() != null && this.getLimite() != 0 && this.getTypeDeDocGrouping() != null && this.getTypeGraph() != null) {
             if (this.getCurrentMode() == Mode.BOTH) {
