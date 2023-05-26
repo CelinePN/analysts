@@ -7,13 +7,13 @@ import java.util.List;
  *  <h1> TypeDeDocGrouping </h1>
  *
  * <p>
- *     Cette énumération regroupe des types de document (trop) spécifiques dans des catégories plus larges.
- *     Permet de choisir sur l'interface un type de document sans avoir une liste trop longue à dérouler
+ *     Cette enumeration regroupe des types de document (trop) specifiques dans des categories plus larges.
+ *     Permet de choisir sur l'interface un type de document sans avoir une liste trop longue a derouler
  * </p>
  *
- * @Author: Céline
- * @Version: 1.0
- * @since: 30/03/2023
+ * @author Celine
+ * @version 1.0
+ * @since 30/03/2023
  */
 public enum TypeDeDocGrouping {
 
@@ -31,7 +31,7 @@ public enum TypeDeDocGrouping {
         return listTypes;
     }
 
-    private List<String> listTypes;
+    private final List<String> listTypes;
 
     public int getIndice() {
         return indice;
@@ -46,9 +46,9 @@ public enum TypeDeDocGrouping {
         this.indice = i;
     }
 
-    /** @return String: Cette méthode retourne une chaîne de caractères regroupant tous
-     * les types englobés dans un TypeDeDocGrouping. Cette chaîne servira au body de la
-     * requête en MongoDB. */
+    /** @return String: Cette methode retourne une chaîne de caracteres regroupant tous
+     * les types englobes dans un TypeDeDocGrouping. Cette chaine servira au body de la
+     * requete en MongoDB. */
 
     public String enumToString(){
         String string="";

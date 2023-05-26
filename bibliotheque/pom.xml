@@ -51,12 +51,6 @@
       <version>2.5.5</version>
     </dependency>
     <dependency>
-      <groupId>org.testng</groupId>
-      <artifactId>testng</artifactId>
-      <version>RELEASE</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
       <groupId>org.jfree</groupId>
       <artifactId>jfreechart</artifactId>
       <version>1.5.3</version>
@@ -66,10 +60,6 @@
       <artifactId>designgridlayout</artifactId>
       <version>1.11</version>
     </dependency>
-
-
-
-
   </dependencies>
 
 
@@ -95,8 +85,17 @@
           <version>2.22.1</version>
         </plugin>
         <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-jar-plugin</artifactId>
           <version>3.0.2</version>
+          <configuration>
+            <archive>
+              <manifest>
+                <addClasspath>true</addClasspath>
+                <mainClass>Main.java</mainClass> <!-- Spécifiez la classe principale de votre application ici -->
+              </manifest>
+            </archive>
+          </configuration>
         </plugin>
         <plugin>
           <artifactId>maven-install-plugin</artifactId>

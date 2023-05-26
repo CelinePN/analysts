@@ -5,19 +5,22 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /**
- *  <h1> ParamètreWrapper </h1>
+ *  <h1> ParametreWrapper </h1>
  *
  * <p>
- *     C'est un objet modèle qui comporte la structure de nos données telles que récupérées.
- *     C'est à dire un objet qui contient une liste de paramètres
+ *     C'est un objet modele qui comporte la structure de nos donnees telles que recuperees.
+ *     C'est à dire un objet qui contient une liste de parametres
  * </p>
  *
- * @Author: Marine
- * @Version: 1.0
- * @since: 30/03/2023
+ * @author Marine
+ * @version 1.0
+ * @since 30/03/2023
  */
 public class ParametreWrapper {
 
+    /**
+     * Variable recuperant la liste des parametres
+     */
     @JsonProperty("documents")
     private List<Parametre> parametres;
 

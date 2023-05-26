@@ -1,0 +1,12 @@
+-------------------------------------------------------------------------------
+Test set: vue.FirstScreenVueTest
+-------------------------------------------------------------------------------
+Tests run: 4, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 145.859 s <<< FAILURE! - in vue.FirstScreenVueTest
+testProgressBar  Time elapsed: 107.741 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <false> but was: <true>
+	at vue.FirstScreenVueTest.testProgressBar(FirstScreenVueTest.java:52)
+
+testErrorLoading  Time elapsed: 37.217 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <false> but was: <true>
+	at vue.FirstScreenVueTest.testErrorLoading(FirstScreenVueTest.java:70)
+

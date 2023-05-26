@@ -16,31 +16,31 @@ import java.util.Objects;
  *  <h1> Database </h1>
  *
  * <p>
- *     Cette classe est la couche d'accès aux données
- *     Elle permet de faire des requêtes http sur notre BDD en passant par l'API de MongoDB Atlas
+ *     Cette classe est la couche d'acces aux donnees
+ *     Elle permet de faire des requetes http sur notre BDD en passant par l'API de MongoDB Atlas
  * </p>
  *
- * @Author1: Marine
- * @Author2: Céline (pour le body de la requête)
- * @Author3: Mathilde (pour la création de l'API MongoDB et la récupération de l'API KEY)
- * @Version: 1.0
- * @since: 10/03/2023
+ * @author Marine
+ * @author Celine (pour le body de la requete)
+ * @author Mathilde (pour la creation de l'API MongoDB et la recuperation de l'API KEY)
+ * @version 1.0
+ * @since 10/03/2023
  */
 public class Database {
     private static final OkHttpClient client = new OkHttpClient().newBuilder().build();
     private static final MediaType mediaType = MediaType.parse("application/json");
 
     /**
-     * Cette méthode lance une requête http POST sur l'url de notre BDD pour récupérer des données avec aggregate
-     * L'objectif est de récupérer une liste d'objet Paramètre(ex: anglais) dont on
-     * pourra récupérer la somme des exemplaires et la somme des prêts
-     * selon le Type de paramètre choisi
+     * Cette methode lance une requete http POST sur l'url de notre BDD pour recuperer des donnees avec aggregate
+     * L'objectif est de recuperer une liste d'objet Parametre(ex: anglais) dont on
+     * pourra recuperer la somme des exemplaires et la somme des prets
+     * selon le Type de parametre choisi
      * et de les match par type de document
      *
-     * Elle convertie notamment les types enums en string pour la création du body de la requête
-     * @Author: Mathilde & Céline
-     * @return une List<Parametre> serialisée de la réponse en json de la requête
-     * @param typeParam : le paramètre choisi (ex: LANGUE)
+     * Elle convertit notamment les types enums en string pour la creation du body de la requete
+     * @author Mathilde & Celine
+     * @return une List<Parametre> serialisee de la reponse en json de la requete
+     * @param typeParam : le parametre choisi (ex: LANGUE)
      * @param typeDeDocEnum : le type de document sur lequel on veut se centrer uniquement (ex: LIVRE)
      * */
     public static List<Parametre> getParamByTypeDeDoc(ParametreType typeParam, TypeDeDocGrouping typeDeDocEnum, Mode sortBy) throws IOException {
@@ -75,11 +75,13 @@ public class Database {
     }
 
     /**
-     * Cette méthode crée le body d'une requête correspondant aux params définis
-     * @Author: Celine & Marine
-     * @param valGroup : valeur sur laquelle on va regrouper nos données (le type de paramètre choisi)
-     * @param typeDeDocGroupMatch : valeur avec laquelle on va match nos données (le type de document). Cette chaîne de caractères inclus la liste des type de documents regroupé dans un type global (voir enum)
-     * @param sort : valeur par ordre duquel on va trier les données (offre ou demande)
+     * Cette methode cree le body d'une requete correspondant aux params definis.
+     * On fait un pretaitement avec de l'aggregation MongoDB afin de ne recuperer que les donnees qui nous interressent.
+     * On aura une limite de 100 pour eviter de charger des donnees inutiles sachant qu'on affichera que les premiers. 
+     * @author Celine & Marine
+     * @param valGroup : valeur sur laquelle on va regrouper nos donnees (le type de parametre choisi)
+     * @param typeDeDocGroupMatch : valeur avec laquelle on va match nos donnees (le type de document). Cette chaîne de caracteres inclus la liste des type de documents regroupe dans un type global (voir enum)
+     * @param sort : valeur par ordre duquel on va trier les donnees selon le mode choisi (offre ou demande)
      * */
     public static RequestBody getRequestBody(String valGroup, String typeDeDocGroupMatch, String sort){
         String valMatch;
@@ -128,10 +130,10 @@ public class Database {
     }
 
     /**
-     * Cette méthode associe en sérialisant les données du json (éléments de la liste récupérée) à une liste de paramètres du modèle
-     * @Author: Marine
-     * @param json : contenu de la liste récupérée par la requête en json
-     * @param type : le type de paramètre des paramètres de la liste
+     * Cette methode associe en serialisant les donnees du json (elements de la liste recuperee) a une liste de parametres du modele
+     * @author Marine
+     * @param json : contenu de la liste recuperee par la requete en json
+     * @param type : le type de parametre des parametres de la liste
      *
      * */
     public static List<Parametre> serializeParam(String json, ParametreType type) throws IOException{
