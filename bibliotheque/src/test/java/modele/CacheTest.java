@@ -27,12 +27,20 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class CacheTest {
 
+    /**
+     * Verifie que si la limite est au dessus du nombre de valeur, on renvoie bien ce qui est dedans sans erreur
+     *
+     */
     @Test
     public void testGetLimitOverListSize() {
         assertDoesNotThrow(() -> Cache.get(ParametreType.LANGUE, TypeDeDocGrouping.NO_TYPE, Mode.EMPRUNTS,Integer.MAX_VALUE));
         assertEquals(new ArrayList<>() , Cache.get(ParametreType.LANGUE, TypeDeDocGrouping.NO_TYPE, Mode.EMPRUNTS,5));
     }
 
+    /**
+     * Verifie que si la liste est vide, elle est renvoyee et ne lance pas d'erreurs
+     *
+     */
     @Test
     public void testGetOnEmptyCache() {
         Cache.clearCache();
@@ -40,6 +48,10 @@ public class CacheTest {
         assertEquals(new ArrayList<>() , Cache.get(ParametreType.LANGUE, TypeDeDocGrouping.NO_TYPE, Mode.EMPRUNTS,5));
     }
 
+    /**
+     * Verifie que le cache se vide bien avec la fonction clear meme si il y avait des valeurs dedans
+     *
+     */
     @Test
     public void testClearCache() throws IOException {
         Parametre p = new Parametre();
@@ -54,6 +66,11 @@ public class CacheTest {
         Cache.clearCache();
         assertEquals(new ArrayList<>(), Cache.get(ParametreType.AUTEUR, TypeDeDocGrouping.LIVRES, Mode.EXEMPLAIRES, 1));
     }
+
+    /**
+     * Verification du remplissage du cache de différentes manieres
+     *
+     */
 
     @Test
     public void testPutCacheNbExemplaires() throws IOException {
@@ -119,6 +136,10 @@ public class CacheTest {
         assertEquals(2, Cache.get(ParametreType.AUTEUR, TypeDeDocGrouping.LIVRES, Mode.EMPRUNTS, 1).get(0).getTotalPrets());
     }
 
+    /**
+     * Verifie que le cache ne se met pas en erreur si une valeur nulle est rentree
+     *
+     */
     @Test
     public void testPutVide() throws IOException {
         Cache.clearCache();
@@ -131,6 +152,7 @@ public class CacheTest {
         assertEquals(0, Cache.get(ParametreType.AUTEUR, TypeDeDocGrouping.LIVRES, Mode.EMPRUNTS, 1).get(0).getTotalPrets());
     }
 
+
     @Test
     public void testGetTypeDiff() throws IOException {
         Cache.clearCache();
@@ -142,6 +164,11 @@ public class CacheTest {
         Cache.put(ParametreType.AUTEUR, TypeDeDocGrouping.LIVRES, lEx, lEm);
         assertEquals(new ArrayList<>(), Cache.get(ParametreType.LANGUE, TypeDeDocGrouping.LIVRES, Mode.EMPRUNTS, 1));
     }
+
+    /**
+     * Verifie qu'on ne peut pas get si tous les parametres ne sont pas remplis
+     *
+     */
 
     @Test
     public void testGetTypeNull() throws IOException {
