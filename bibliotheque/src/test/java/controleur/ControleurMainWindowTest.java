@@ -2,6 +2,7 @@ package controleur;
 
 import controleur.firstscreen.ControleurFirstScreen;
 import controleur.mainWindow.ControleurMainWindow;
+import controleur.mainWindow.ObserverMainWindow;
 import controleur.menu.ControleurMenu;
 import dao.Database;
 import modele.Cache;
@@ -9,6 +10,7 @@ import modele.parametre.Parametre;
 import modele.parametre.ParametreType;
 import modele.utils.Mode;
 import modele.utils.TypeDeDocGrouping;
+import modele.utils.TypeGraph;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -49,9 +51,63 @@ public class ControleurMainWindowTest {
      */
     @Test
     public void testControleurMenuSetCurrentMode() {
-        ControleurMenu menuTest = new ControleurMenu();
-        menuTest.setCurrentMode(Mode.EXEMPLAIRES);
-        assertEquals(Mode.EXEMPLAIRES, menuTest.getCurrentMode());
+        ControleurMainWindow mainTest = new ControleurMainWindow(Mode.EMPRUNTS);
+        mainTest.setCurrentMode(Mode.EXEMPLAIRES);
+        assertEquals(Mode.EXEMPLAIRES, mainTest.getCurrentMode());
     }
 
+    /**
+     * Verifie que l'observer se met bien à jour
+     *
+     */
+    /*@Test
+    public void testControleurMainSetObserver() {
+        ControleurMainWindow mainTest = new ControleurMainWindow(Mode.EXEMPLAIRES);
+        mainTest.registerObserver(ObserverMainWindow.choisir());
+        assertEquals(Mode.EXEMPLAIRES, mainTest.getCurrentMode());
+    }*/
+
+    /**
+     * Verifie que le setter du type de doc change bien le type enregistre
+     *
+     */
+    @Test
+    public void testControleurMainSetTypeDeDocGrouping() {
+        ControleurMainWindow mainTest = new ControleurMainWindow(Mode.EXEMPLAIRES);
+        mainTest.setTypeDeDocGrouping(TypeDeDocGrouping.LIVRES);
+        assertEquals(TypeDeDocGrouping.LIVRES, mainTest.getTypeDeDocGrouping());
+    }
+
+    /**
+     * Verifie que le setter de la limite change bien la limite enregistre
+     *
+     */
+    @Test
+    public void testControleurMainSetLimite() {
+        ControleurMainWindow mainTest = new ControleurMainWindow(Mode.EXEMPLAIRES);
+        mainTest.setLimite(7);
+        assertEquals(7, mainTest.getLimite());
+    }
+
+    /**
+     * Verifie que le setter du type de graph change bien le graph enregistre
+     *
+     */
+    @Test
+    public void testControleurMainSetTypeGraph() {
+        ControleurMainWindow mainTest = new ControleurMainWindow(Mode.EXEMPLAIRES);
+        mainTest.setTypeGraph(TypeGraph.HISTOGRAMMES);
+        assertEquals(TypeGraph.HISTOGRAMMES, mainTest.getTypeGraph());
+    }
+
+    /**
+     * Verifie que le setter du parametre type change bien le parametre enregistre
+     *
+     */
+    @Test
+    public void testControleurMainSetTypeParametre() {
+        ControleurMainWindow mainTest = new ControleurMainWindow(Mode.EXEMPLAIRES);
+        mainTest.setParametreType(ParametreType.GENRE);
+        assertEquals(ParametreType.GENRE, mainTest.getParametreType());
+    }
 }

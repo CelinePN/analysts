@@ -31,6 +31,8 @@ public class ControleurMainWindow {
     private Mode currentMode;
     private ParametreType parametreType;
     private TypeDeDocGrouping typeDeDocGrouping;
+
+
     private final List<ObserverMainWindow> observers;
     private TypeGraph typeGraph;
 
@@ -46,6 +48,7 @@ public class ControleurMainWindow {
     public void registerObserver(ObserverMainWindow observer) {
         this.observers.add(observer);
     }
+    public List<ObserverMainWindow> getObservers() { return observers; }
 
     public TypeDeDocGrouping getTypeDeDocGrouping() {
         return typeDeDocGrouping;
