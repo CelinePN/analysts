@@ -20,7 +20,16 @@ import java.util.List;
  * @version 1.0
  *
  **/
-
+/**
+ *
+ * Classe pour afficher un graphique de type Camembert
+ * a partir de la liste de parametre recuperee de nos donnees
+ *
+ * @author  Alice Hue
+ * @version 1.0
+ * @since   2023-03-30
+ *
+ **/
 public class Camembert extends JPanel {
 
     public Camembert(List<Parametre> liste, Mode sortBy) {
