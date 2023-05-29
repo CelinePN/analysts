@@ -12,9 +12,9 @@ import java.util.List;
  *
  * </p>
  *
- * @Author: Mathilde
- * @Version: 1.0
- * @since: 09/05/2023
+ * @author Mathilde
+ * @version 1.0
+ * @since 09/05/2023
  */
 
 

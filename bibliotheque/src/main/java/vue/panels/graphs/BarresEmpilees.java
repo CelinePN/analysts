@@ -11,22 +11,6 @@ import java.awt.*;
 import java.util.List;
 
 public class BarresEmpilees extends JPanel {
-
-    public BarresEmpilees() {
-
-        // Création des données
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-
-        // Création du graphique en barres empilées
-        JFreeChart chart = ChartFactory.createStackedBarChart(
-                "Graphique par défaut ", // Titre du graphique
-                "Catégories", // Titre de l'axe des abscisses
-                "Valeurs", // Titre de l'axe des ordonnées
-                dataset // Données à afficher
-        );
-
-    }
-
     public BarresEmpilees(List<Parametre> listeExemplaires, List<Parametre> listeEmprunts) {
         String typeParam = listeExemplaires.get(0).getType_param().getString();
 

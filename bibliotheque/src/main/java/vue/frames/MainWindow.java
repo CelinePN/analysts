@@ -29,23 +29,19 @@ import static modele.utils.Mode.BOTH;
  *  <h1> MainWindow Vue </h1>
  *
  * <p>
- *      Cette classe permet l'affichage de la fenêtre principale (mainwindow) avec les graphiques.
- *      A l'aide des boutons, elle gère les interactions avec l'utilisateur.
+ *      Cette classe permet l'affichage de la fenetre principale (mainwindow) avec les graphiques.
+ *      A l'aide des boutons, elle gere les interactions avec l'utilisateur.
  * </p>
  *
- * @Author: Alice et Mathilde
- * @Version: 1.0
- * @since: 09/05/2023
+ * @author Alice
+ * @author Mathilde
+ * @version 1.0
+ * @since 09/05/2023
  */
 
 public class MainWindow extends JFrame implements ObserverMainWindow {
-    // Déclaration des composants de la fenêtre
-    private JPanel panelLeft, panelRight;
+    private final JPanel panelRight;
     private JRadioButton btnCamembert, btnHistogramme, btnBarresEmpilees;
-    private ButtonGroup buttonGroup;
-    private JButton btnValider;
-    private JButton btnRetour;
-    private JLabel labelTop;
     private final ControleurMainWindow controleurMainWindow;
 
    //Constructeur de la MainWindow
@@ -63,29 +59,29 @@ public class MainWindow extends JFrame implements ObserverMainWindow {
         this.controleurMainWindow.registerObserver(this);
 
         // Label en haut
-        labelTop = new JLabel("Les documents des bibliothèques de Paris");
+        JLabel labelTop = new JLabel("Les documents des bibliothèques de Paris");
         labelTop.setHorizontalAlignment(JLabel.CENTER);
 
         // Boutons à gauche
-        buttonGroup = new ButtonGroup();
+        ButtonGroup buttonGroup = new ButtonGroup();
         if(controleurMainWindow.getCurrentMode()==BOTH){
             btnBarresEmpilees = new JRadioButton("Barres Empilées");
-            buttonGroup.add(btnBarresEmpilees);
             btnBarresEmpilees.setSelected(true);
-
-
+            controleurMainWindow.setTypeGraph(TypeGraph.BARRES_EMPILEES);
+            buttonGroup.add(btnBarresEmpilees);
         }
         else{
             btnCamembert = new JRadioButton("Camembert");
             btnCamembert.setSelected(true);
+            controleurMainWindow.setTypeGraph(TypeGraph.CAMEMBERTS);
             btnHistogramme = new JRadioButton("Histogramme");
             buttonGroup.add(btnCamembert);
             buttonGroup.add(btnHistogramme);
         }
 
 
-        btnValider = new JButton("Valider");
-        btnRetour = new JButton("Retour Menu");
+        JButton btnValider = new JButton("Valider");
+        JButton btnRetour = new JButton("Retour Menu");
 
 
         // Label en haut
@@ -95,16 +91,18 @@ public class MainWindow extends JFrame implements ObserverMainWindow {
 
         // Boutons déroulants en haut
         JComboBox<TypeDeDocGrouping> comboBoxPartType = new JComboBox<>(TypeDeDocGrouping.values());
-        comboBoxPartType.setSelectedIndex(0);
         JComboBox<ParametreType> comboBoxParametre = new JComboBox<>(ParametreType.values());
-        comboBoxParametre.setSelectedIndex(0);
         String[] limit = {"1", "5", "10", "20"};
         JComboBox<String> comboBoxLimite = new JComboBox<>(limit);
+
+        //initialisation des boutons selectionnes dans le controleur
+        comboBoxPartType.setSelectedIndex(0);
+        comboBoxParametre.setSelectedIndex(0);
         comboBoxLimite.setSelectedIndex(0);
+
         controleurMainWindow.setTypeDeDocGrouping((TypeDeDocGrouping) comboBoxPartType.getSelectedItem());
         controleurMainWindow.setParametreType((ParametreType) comboBoxParametre.getSelectedItem());
         controleurMainWindow.setLimite(1);
-        controleurMainWindow.setTypeGraph(TypeGraph.CAMEMBERTS);
 
         //Gestion des événements des composants
         if(controleurMainWindow.getCurrentMode()==BOTH) {
@@ -137,7 +135,7 @@ public class MainWindow extends JFrame implements ObserverMainWindow {
         comboBoxLimite.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int selectedOption = Integer.parseInt( (String)comboBoxLimite.getSelectedItem());
+                int selectedOption = Integer.parseInt( (String) Objects.requireNonNull(comboBoxLimite.getSelectedItem()));
 
                 controleurMainWindow.setLimite(selectedOption);
             }
@@ -180,7 +178,8 @@ public class MainWindow extends JFrame implements ObserverMainWindow {
         JLabel labelTypeGraph = new JLabel("Type de graphique");
 
         // Panel à gauche
-        panelLeft = new JPanel(new GridLayout(5, 1));
+        // Déclaration des composants de la fenêtre
+        JPanel panelLeft = new JPanel(new GridLayout(5, 1));
         panelLeft.setBorder(BorderFactory.createEmptyBorder(25, 25, 25, 25));
         panelLeft.add(labelTypeGraph);
 

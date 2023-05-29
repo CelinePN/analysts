@@ -7,41 +7,16 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.CategoryLabelPositions;
-import org.jfree.chart.labels.CategoryItemLabelGenerator;
-import org.jfree.chart.labels.XYItemLabelGenerator;
 import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.data.category.DefaultCategoryDataset;
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 import org.jfree.chart.labels.StandardCategoryItemLabelGenerator;
-import org.jfree.chart.renderer.category.CategoryItemRenderer;
 
 
 public class Histogramme extends JPanel {
 
-    //ajouter un histogramme par défaut (voir classe histogramme)
-
-    public Histogramme() {
-        // Création des données
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-
-        // Création du graphique en barres
-        JFreeChart chart = ChartFactory.createBarChart(
-                "Graphique par défaut", // Titre du graphique
-                "Catégories", // Titre de l'axe des abscisses
-                "Valeurs", // Titre de l'axe des ordonnées
-                dataset // Données à afficher
-        );
-        chart.getLegend().setVisible(true);
-        // Création du panel contenant le graphique
-        ChartPanel chartPanel = new ChartPanel(chart);
-        chartPanel.setPreferredSize(new Dimension(500, 270));
-
-        this.setLayout(new BorderLayout());
-        this.add(chartPanel, BorderLayout.CENTER);
-
-    }
     public Histogramme(List<Parametre> liste, Mode mode) {
         String typeParam = liste.get(0).getType_param().getString();
         this.setLayout(new BorderLayout());

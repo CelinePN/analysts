@@ -31,9 +31,9 @@ import java.util.Objects;
  *
  * </p>
  *
- * @Author: Alice et Mathilde
- * @Version: 1.0
- * @since: 09/05/2023
+ * @author Alice et Mathilde
+ * @version 1.0
+ * @since 09/05/2023
  */
 
 public class Menu extends JFrame implements ObserverMenu {
