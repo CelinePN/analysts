@@ -207,8 +207,8 @@ public class MainWindow extends JFrame implements ObserverMainWindow {
         ImageIcon imageIcon = new ImageIcon(Objects.requireNonNull(classLoader.getResource("enfant.png")));
         image = imageIcon.getImage();
         // Redimensionner l'image en utilisant getScaledInstance()
-        int newWidth = 100; // Nouvelle largeur souhaitée
-        int newHeight = 100; // Nouvelle hauteur souhaitée
+        int newWidth = 90; // Nouvelle largeur souhaitée
+        int newHeight = 90; // Nouvelle hauteur souhaitée
         Image resizedImage = image.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
 
         // Créer un nouvel ImageIcon à partir de l'image redimensionnée
