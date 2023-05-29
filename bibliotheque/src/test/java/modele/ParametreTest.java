@@ -18,9 +18,9 @@ public class ParametreTest {
      *     Cette classe permet de tester la classe parametre
      * </p>
      *
-     * @Author: Celine
-     * @Version: 1.0
-     * @since: 25/05/2023
+     * @author : Celine
+     * @version : 1.0
+     * @since : 25/05/2023
      */
 
     /**

@@ -26,9 +26,9 @@ import java.util.Map;
  *     Cette classe permet de tester la classe ControleurMenu
  * </p>
  *
- * @Author: Celine
- * @Version: 1.0
- * @since: 13/05/2023
+ * @author : Celine
+ * @version : 1.0
+ * @since : 13/05/2023
  */
 
 
@@ -37,7 +37,6 @@ public class ControleurMenuTest {
 
     /**
      * Verifie que le controleur menu se creer correctement
-     *@return un booleen en fonction de si les deux parties sont identiques ou non
      *
      */
     @Test
@@ -48,7 +47,6 @@ public class ControleurMenuTest {
 
     /**
      * Verifie que le setter du mode change bien le mode enregistre
-     *@return un booleen en fonction de si les deux parties sont identiques ou non
      *
      */
     @Test

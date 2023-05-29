@@ -1,14 +1,22 @@
 package controleur.menu;
 
-
-import controleur.firstscreen.ObserverFirstScreen;
-import vue.frames.MainWindow;
-import vue.frames.Menu;
 import modele.utils.Mode;
-
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
+
+/**
+ *  <h1> MainWindow Controleur </h1>
+ *
+ * <p>
+ *      Cette classe gère les intéractions du menu.
+ *
+ * </p>
+ *
+ * @Author: Mathilde
+ * @Version: 1.0
+ * @since: 09/05/2023
+ */
+
 
 public class ControleurMenu {
 
@@ -37,6 +45,7 @@ public class ControleurMenu {
 
     public void selectioner() {
         if (this.getCurrentMode()!=null) {
+
             for (ObserverMenu observer : observers) {
                 observer.fenetrefermer(this.getCurrentMode());
             }

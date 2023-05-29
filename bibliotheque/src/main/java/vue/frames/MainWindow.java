@@ -25,7 +25,21 @@ import java.util.Objects;
 
 import static modele.utils.Mode.BOTH;
 
+/**
+ *  <h1> MainWindow Vue </h1>
+ *
+ * <p>
+ *      Cette classe permet l'affichage de la fenêtre principale (mainwindow) avec les graphiques.
+ *      A l'aide des boutons, elle gère les interactions avec l'utilisateur.
+ * </p>
+ *
+ * @Author: Alice et Mathilde
+ * @Version: 1.0
+ * @since: 09/05/2023
+ */
+
 public class MainWindow extends JFrame implements ObserverMainWindow {
+    // Déclaration des composants de la fenêtre
     private JPanel panelLeft, panelRight;
     private JRadioButton btnCamembert, btnHistogramme, btnBarresEmpilees;
     private ButtonGroup buttonGroup;
@@ -34,14 +48,15 @@ public class MainWindow extends JFrame implements ObserverMainWindow {
     private JLabel labelTop;
     private final ControleurMainWindow controleurMainWindow;
 
-    //essayer de séparer le constructeurs en fonctions expliquées
+   //Constructeur de la MainWindow
     public MainWindow(Mode mode) {
         super("Les bibliothèques de PARIS"); // Titre de la fenêtre
-        //ICON
+        //Création et affichage de l'ICON
         ClassLoader classLoader2 = getClass().getClassLoader();
         ImageIcon icon = new ImageIcon(Objects.requireNonNull(classLoader2.getResource("livreB.jpg")));
         setIconImage(icon.getImage());
 
+        //Initialisation du controleur pour la fenètre principale
         this.controleurMainWindow = new ControleurMainWindow(mode);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
@@ -52,7 +67,6 @@ public class MainWindow extends JFrame implements ObserverMainWindow {
         labelTop.setHorizontalAlignment(JLabel.CENTER);
 
         // Boutons à gauche
-
         buttonGroup = new ButtonGroup();
         if(controleurMainWindow.getCurrentMode()==BOTH){
             btnBarresEmpilees = new JRadioButton("Barres Empilées");
@@ -92,6 +106,7 @@ public class MainWindow extends JFrame implements ObserverMainWindow {
         controleurMainWindow.setLimite(1);
         controleurMainWindow.setTypeGraph(TypeGraph.CAMEMBERTS);
 
+        //Gestion des événements des composants
         if(controleurMainWindow.getCurrentMode()==BOTH) {
 
             btnBarresEmpilees.addActionListener(new ActionListener() {
@@ -201,7 +216,7 @@ public class MainWindow extends JFrame implements ObserverMainWindow {
         //setPreferredSize(new Dimension(1200, 250));
         setVisible(true);
     }
-
+    // Mathode pour revenir au menu principal
     private void retourMenu(){
         Menu menu = new Menu();
         menu.setVisible(true);
@@ -220,6 +235,7 @@ public class MainWindow extends JFrame implements ObserverMainWindow {
         JOptionPane.showMessageDialog(null, "Choisir les différents paramètres");
     }
 
+    //Méthode pour afficher le graphique choisi par l'utilisateur (Histogramme ou Camembert) si celui-ci a précédement appuyé sur Offre ou Demande
     @Override
     public void updateGraphPanel(List<Parametre> liste, TypeGraph typeGraph, Mode currentmode) {
         if(panelRight.getComponentCount()!=0){
@@ -241,6 +257,7 @@ public class MainWindow extends JFrame implements ObserverMainWindow {
 
     }
 
+    //Méthode pour afficher le graphique barre empillé si l'utilisateur a appuyé sur le bouton Comparaison Offre/Demande
     @Override
     public void updateGraphBarre(List<Parametre> listeexemplaire, List<Parametre> listeemprunt) {
         if(panelRight.getComponentCount()!=0){
