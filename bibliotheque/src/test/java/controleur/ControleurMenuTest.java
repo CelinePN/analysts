@@ -37,7 +37,6 @@ public class ControleurMenuTest {
 
     /**
      * Verifie que le controleur menu se creer correctement
-     *
      */
     @Test
     public void testConstructeurControleurMenu() {

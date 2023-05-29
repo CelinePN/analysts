@@ -20,11 +20,6 @@ public class ControleurFirstScreen {
     private List<Parametre> listeEmprunts = new ArrayList<>();
     Thread thread;
 
-    public Thread getThread() {
-        return thread;
-    }
-
-
     public ControleurFirstScreen() {
         this.isDataLoaded = false;
         this.observers = new ArrayList<>();

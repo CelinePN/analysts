@@ -5,11 +5,15 @@ import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import vue.frames.MainWindow;
 
+import static modele.parametre.ParametreType.LANGUE;
+import static modele.utils.TypeDeDocGrouping.NO_TYPE;
+import static org.junit.jupiter.api.Assertions.*;
+
 /**
- *  <h1> Test FirstScreen </h1>
+ *  <h1> Test MainWindow </h1>
  *
  * <p>
- *     Cette classe permet de tester la classe FirstScreen et les donnees recuperees
+ *     Cette classe permet de tester l'affichage de la classe MainWindow
  * </p>
  *
  * @author : Marine
@@ -18,47 +22,27 @@ import vue.frames.MainWindow;
  */
 
 public class MainWindowTest {
-    private MainWindow mainWindow;
 
     /**
-     * Test d'affichage visuellement que la fenêtre se lance correctement avec graphique par defaut
-     */
-    public static void main(String[] args) {
-        new MainWindow(Mode.EXEMPLAIRES);
-    }
-
-    /**
-     * Verifie que la fenêtre se lance avec les attributs visibles aux bonnes places
+     * Verifie que la fenêtre se lance avec les attributs visibles aux bonnes places selon le mode
      * Verifie que par defaut, la fenêtre lance un graphique par defaut
      */
-    @Before
-    public void initTest(){
-        this.mainWindow = new MainWindow(Mode.EXEMPLAIRES);
+
+    @Test
+    public void testInitDemande() {
+        MainWindow mainWindow = new MainWindow(Mode.EXEMPLAIRES);
+        assertTrue(mainWindow.getBtnCamembert().isSelected());
+        assertEquals(1, mainWindow.getComboBoxLimite().getSelectedItem());
+        assertEquals(LANGUE, mainWindow.getComboBoxParametre().getSelectedItem());
+        assertEquals(NO_TYPE, mainWindow.getComboBoxType().getSelectedItem());
     }
     @Test
-    public void testInitView() throws InterruptedException {
-        /*firstScreenEco.initView();
-        assertNotNull(firstScreenEco.getContentPane());
-        assertNotNull(firstScreenEco.getPanelError());
-        assertNotNull(firstScreenEco.getPanelError());*/
+    public void testInitComparaison() {
+        MainWindow mainWindow = new MainWindow(Mode.BOTH);
+        assertTrue(mainWindow.getBtnBarresEmpilees().isSelected());
+        assertEquals(1, mainWindow.getComboBoxLimite().getSelectedItem());
+        assertEquals(LANGUE, mainWindow.getComboBoxParametre().getSelectedItem());
+        assertEquals(NO_TYPE, mainWindow.getComboBoxType().getSelectedItem());
     }
 
-    /**
-     * Verifie que le graphique s'affiche correctement avec les bonnes donnees
-     */
-    @Test
-    public void testCamembert() {
-        /*firstScreenEco.initView();
-        assertNotNull(firstScreenEco.getContentPane());
-        assertNotNull(firstScreenEco.getPanelError());
-        assertNotNull(firstScreenEco.getPanelError());*/
-    }
-
-    /**
-     * couper le wifi pour faire ce test
-     */
-    @Test
-    public void testErrorLoading(){
-
-    }
 }

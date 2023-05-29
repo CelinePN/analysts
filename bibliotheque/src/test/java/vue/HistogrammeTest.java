@@ -13,13 +13,13 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- *  <h1> Test FirstScreen </h1>
+ *  <h1> Test Histogramme </h1>
  *
  * <p>
- *     Cette classe permet de tester la classe FirstScreen et les donnees recuperees
+ *     Cette classe permet de tester fonctionnellement la classe Histogramme
  * </p>
  *
- * @author : Marine
+ * @author : Alice
  * @version : 2.0
  * @since : 01/04/2023
  */
@@ -43,7 +43,7 @@ public class HistogrammeTest {
                 }
 
                 JFrame frame = new JFrame();
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Fermer la fenêtre en cliquant sur la croix
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.setSize(550, 350); // Taille de la fenêtre
                 frame.setLocationRelativeTo(null);
 

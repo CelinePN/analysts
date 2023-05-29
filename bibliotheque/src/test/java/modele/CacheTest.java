@@ -175,7 +175,7 @@ public class CacheTest {
         Cache.clearCache();
         Parametre p = new Parametre();
         Exception exception = assertThrows(IllegalArgumentException.class, () -> Cache.get(null, TypeDeDocGrouping.LIVRES, Mode.EMPRUNTS, 1));
-        assertEquals("Erreur: Les parametres ne peuvent pas être null", exception.getMessage());
+        assertEquals("Erreur: Les paramètres ne peuvent pas être null", exception.getMessage());
     }
 
     @Test
@@ -188,14 +188,14 @@ public class CacheTest {
         lEm.add(p);
         Cache.put(ParametreType.AUTEUR, TypeDeDocGrouping.LIVRES, lEx, lEm);
         Exception exception = assertThrows(IllegalArgumentException.class, () -> Cache.get(ParametreType.AUTEUR, null, Mode.EMPRUNTS, 1));
-        assertEquals("Erreur: Les parametres ne peuvent pas être null", exception.getMessage());
+        assertEquals("Erreur: Les paramètres ne peuvent pas être null", exception.getMessage());
     }
     @Test
     public void testGetModeNull() throws IOException {
         Cache.clearCache();
         Parametre p = new Parametre();
         Exception exception = assertThrows(IllegalArgumentException.class, () -> Cache.get(ParametreType.AUTEUR, TypeDeDocGrouping.LIVRES, null, 1));
-        assertEquals("Erreur: Les parametres ne peuvent pas être null", exception.getMessage());
+        assertEquals("Erreur: Les paramètres ne peuvent pas être null", exception.getMessage());
     }
 
     @Test

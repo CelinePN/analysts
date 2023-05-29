@@ -17,7 +17,7 @@ import java.util.Objects;
  *  <h1> Test Barres Empilees </h1>
  *
  * <p>
- *     Cette classe permet de tester la classe BarresEmpilees
+ *     Cette classe permet de tester fonctionnellement la classe BarresEmpilees
  * </p>
  *
  * @author : Alice
@@ -29,7 +29,7 @@ import java.util.Objects;
 public class BarresEmpileesTest {
 
     /**
-     * Test d'affichage visuellement que la fenêtre se lance correctement avec graphique par defaut
+     * Test d'affichage visuellement que la fenêtre se lance correctement avec le graphique voulu
      */
     public static void main(String[] args) {
         test1();

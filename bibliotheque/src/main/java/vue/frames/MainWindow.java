@@ -338,4 +338,28 @@ public class MainWindow extends JFrame implements ObserverMainWindow {
         panelRight.add(jPanel3, BorderLayout.CENTER);
         panelRight.revalidate();
     }
+
+    public JRadioButton getBtnCamembert() {
+        return btnCamembert;
+    }
+
+    public JRadioButton getBtnHistogramme() {
+        return btnHistogramme;
+    }
+
+    public JRadioButton getBtnBarresEmpilees() {
+        return btnBarresEmpilees;
+    }
+
+    public JComboBox<String> getComboBoxLimite() {
+        return comboBoxLimite;
+    }
+
+    public JComboBox<ParametreType> getComboBoxParametre() {
+        return comboBoxParametre;
+    }
+
+    public JComboBox<TypeDeDocGrouping> getComboBoxType() {
+        return comboBoxType;
+    }
 }

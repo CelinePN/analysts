@@ -14,13 +14,13 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- *  <h1> Test FirstScreen </h1>
+ *  <h1> Test Camembert </h1>
  *
  * <p>
- *     Cette classe permet de tester la classe FirstScreen et les donnees recuperees
+ *     Cette classe permet de tester fonctionnellement la classe Camembert
  * </p>
  *
- * @author : Marine
+ * @author : Alice
  * @version : 2.0
  * @since : 01/04/2023
  */
@@ -28,7 +28,7 @@ import java.util.Objects;
 public class CamembertTest {
 
     /**
-     * Test d'affichage visuellement que la fenêtre se lance correctement avec graphique par defaut
+     * Test d'affichage visuellement que la fenêtre se lance correctement avec le graphique demande
      */
     public static void main(String[] args) throws IOException, InterruptedException {
         test1();

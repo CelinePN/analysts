@@ -1,12 +1,17 @@
 package vue;
 
+import modele.utils.Mode;
+import org.junit.jupiter.api.Test;
+import vue.frames.MainWindow;
 import vue.frames.Menu;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  *  <h1> Test Menu </h1>
  *
  * <p>
- *     Cette classe permet de tester la classe FirstScreen et les donnees recuperees
+ *     Cette classe permet de tester la classe Menu selon le mode selectionne
  * </p>
  *
  * @author : Alice
@@ -14,14 +19,24 @@ import vue.frames.Menu;
  * @since : 01/04/2023
  */
 
-//tester de lancer la classe
 
 public class MenuTest {
 
     public static void main(String[] args) {
-
         new Menu();
     }
 
+    @Test
+    public void testButtonClick() {
+        Menu menu = new Menu();
+        menu.getBtnDemande().doClick();
+        assertEquals(Mode.EMPRUNTS, menu.getControleurMenu().getCurrentMode());
+    }
+
+    @Test
+    public void testInitView() {
+        Menu menu = new Menu();
+        assertNotNull(menu.getContentPane());
+    }
 
 }

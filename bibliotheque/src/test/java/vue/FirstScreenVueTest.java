@@ -48,11 +48,14 @@ public class FirstScreenVueTest {
             }
         }
          assertEquals(100, firstScreen.getProgressBar().getValue());
+         assertTrue(firstScreen.getPanelMain().isVisible());
     }
 
+
     /**
-     * couper le wifi pour faire ce test
-     */
+     * Couper le wifi pour faire ce test
+     **/
+    /*
     @Test
     public void testErrorLoading(){
         firstScreen.getControleurFirstScreen().loadData();
@@ -65,6 +68,6 @@ public class FirstScreenVueTest {
                 e.printStackTrace();
             }
         }
-        assertTrue(firstScreen.getProgressBar().isVisible());
-    }
+        assertTrue(firstScreen.getPanelError().isVisible());
+    }*/
 }

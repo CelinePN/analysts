@@ -202,5 +202,24 @@ public class Menu extends JFrame implements ObserverMenu {
         this.dispose();
     }
 
+    public JButton getBtnValider() {
+        return btnValider;
+    }
+
+    public JRadioButton getBtnOffre() {
+        return btnOffre;
+    }
+
+    public JRadioButton getBtnDemande() {
+        return btnDemande;
+    }
+
+    public JRadioButton getBtnComparaison() {
+        return btnComparaison;
+    }
+
+    public ControleurMenu getControleurMenu() {
+        return controleurMenu;
+    }
 
 }

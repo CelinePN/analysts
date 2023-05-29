@@ -32,6 +32,8 @@ import java.util.Objects;
 
 public class FirstScreen extends JFrame implements ObserverFirstScreen {
     private JProgressBar progressBar;
+    private JPanel panelMain;
+    private JPanel panelError;
     private final CardLayout cardLayout;
     private final ControleurFirstScreen controleurFirstScreen;
 
@@ -68,7 +70,7 @@ public class FirstScreen extends JFrame implements ObserverFirstScreen {
      */
     public void initView(){
         //init main panel
-        JPanel panelMain = new JPanel(new BorderLayout(10, 10));
+        panelMain = new JPanel(new BorderLayout(10, 10));
         panelMain.setBackground(Color.WHITE);
         DesignGridLayout layout = new DesignGridLayout(panelMain);
         JLabel loadingLabel = new JLabel("Veuillez patienter, nous chargeons les données pour vous...");
@@ -88,7 +90,7 @@ public class FirstScreen extends JFrame implements ObserverFirstScreen {
 
 
         //init panelError
-        JPanel panelError = new JPanel();
+        panelError = new JPanel();
         panelError.setBackground(Color.WHITE); //ajout d'une couleur de fond
         panelError.setBorder(BorderFactory.createLineBorder(Color.GRAY)); //ajout d'une bordure
         DesignGridLayout layoutError = new DesignGridLayout(panelError);
@@ -154,6 +156,14 @@ public class FirstScreen extends JFrame implements ObserverFirstScreen {
 
     public static void main(String[] args) {
         new FirstScreen();
+    }
+
+    public JPanel getPanelMain() {
+        return panelMain;
+    }
+
+    public JPanel getPanelError() {
+        return panelError;
     }
 
 }
