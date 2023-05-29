@@ -20,7 +20,7 @@ import java.util.List;
  *      contrôle des données pour la mainwindow.
  * </p>
  *
- * @author Mathilde et Marine
+ * @author Mathilde
  * @version 1.0
  * @since 09/05/2023
  */
