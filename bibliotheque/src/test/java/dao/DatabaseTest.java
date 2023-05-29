@@ -67,19 +67,19 @@ public class DatabaseTest {
     @Test
     public void testNullParam() throws IOException {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> Database.getParamByTypeDeDoc(null, TypeDeDocGrouping.NO_TYPE, Mode.EXEMPLAIRES));
-        assertEquals("Erreur: Les parametres ne peuvent pas être null", exception.getMessage());
+        assertEquals("Erreur: Les paramètres ne peuvent pas être null", exception.getMessage());
     }
 
     @Test
     public void testNullGroupBy() throws IOException {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> Database.getParamByTypeDeDoc(ParametreType.LANGUE, null, Mode.EXEMPLAIRES));
-        assertEquals("Erreur: Les parametres ne peuvent pas être null", exception.getMessage());
+        assertEquals("Erreur: Les paramètres ne peuvent pas être null", exception.getMessage());
     }
 
     @Test
     public void testNullSortBy() throws IOException {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> Database.getParamByTypeDeDoc(ParametreType.LANGUE, TypeDeDocGrouping.NO_TYPE, null));
-        assertEquals("Erreur: Les parametres ne peuvent pas être null", exception.getMessage());
+        assertEquals("Erreur: Les paramètres ne peuvent pas être null", exception.getMessage());
     }
 
     /**
