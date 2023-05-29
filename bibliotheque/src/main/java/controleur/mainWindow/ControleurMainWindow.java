@@ -31,12 +31,8 @@ public class ControleurMainWindow {
     private Mode currentMode;
     private ParametreType parametreType;
     private TypeDeDocGrouping typeDeDocGrouping;
-
-
     private final List<ObserverMainWindow> observers;
     private TypeGraph typeGraph;
-
-
     private int limite;
 
 
