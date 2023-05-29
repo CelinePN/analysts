@@ -21,10 +21,10 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *  <h1> Test FirstScreen Controleur </h1>
+ *  <h1> Test MainWindow Controleur </h1>
  *
  * <p>
- *     Cette classe permet de tester la classe FirstScreen et les donnees recuperees
+ *     Cette classe permet de tester la classe MainWindow et les donnees recuperees
  * </p>
  *
  * @author : Celine
@@ -36,7 +36,7 @@ import java.util.Map;
 
 public class ControleurMainWindowTest {
     /**
-     * Verifie que le controleur menu se creer correctement avec un mode
+     * Verifie que le controleur MainWindow se crée correctement avec un mode
      *
      */
     @Test

@@ -1,16 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: dao.DatabaseTest
 -------------------------------------------------------------------------------
-Tests run: 9, Failures: 3, Errors: 0, Skipped: 0, Time elapsed: 9.798 s <<< FAILURE! - in dao.DatabaseTest
-testNullSortBy  Time elapsed: 0.014 s  <<< FAILURE!
-org.opentest4j.AssertionFailedError: expected: <Erreur: Les parametres ne peuvent pas être null> but was: <Erreur: Les paramètres ne peuvent pas être null>
-	at dao.DatabaseTest.testNullSortBy(DatabaseTest.java:82)
-
-testNullGroupBy  Time elapsed: 0.001 s  <<< FAILURE!
-org.opentest4j.AssertionFailedError: expected: <Erreur: Les parametres ne peuvent pas être null> but was: <Erreur: Les paramètres ne peuvent pas être null>
-	at dao.DatabaseTest.testNullGroupBy(DatabaseTest.java:76)
-
-testNullParam  Time elapsed: 0.002 s  <<< FAILURE!
-org.opentest4j.AssertionFailedError: expected: <Erreur: Les parametres ne peuvent pas être null> but was: <Erreur: Les paramètres ne peuvent pas être null>
-	at dao.DatabaseTest.testNullParam(DatabaseTest.java:70)
-
+Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 9.795 s - in dao.DatabaseTest

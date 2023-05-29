@@ -32,7 +32,7 @@ public class MainWindowTest {
     public void testInitDemande() {
         MainWindow mainWindow = new MainWindow(Mode.EXEMPLAIRES);
         assertTrue(mainWindow.getBtnCamembert().isSelected());
-        assertEquals(1, mainWindow.getComboBoxLimite().getSelectedItem());
+        assertEquals("1", mainWindow.getComboBoxLimite().getSelectedItem());
         assertEquals(LANGUE, mainWindow.getComboBoxParametre().getSelectedItem());
         assertEquals(NO_TYPE, mainWindow.getComboBoxType().getSelectedItem());
     }
@@ -40,7 +40,7 @@ public class MainWindowTest {
     public void testInitComparaison() {
         MainWindow mainWindow = new MainWindow(Mode.BOTH);
         assertTrue(mainWindow.getBtnBarresEmpilees().isSelected());
-        assertEquals(1, mainWindow.getComboBoxLimite().getSelectedItem());
+        assertEquals("1", mainWindow.getComboBoxLimite().getSelectedItem());
         assertEquals(LANGUE, mainWindow.getComboBoxParametre().getSelectedItem());
         assertEquals(NO_TYPE, mainWindow.getComboBoxType().getSelectedItem());
     }
