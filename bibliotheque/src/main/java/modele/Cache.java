@@ -31,6 +31,9 @@ import java.util.Map;
  */
 public class Cache {
 
+    /***
+     * Une liste d'exemplaires ou d'emprunts est un dictionnaire en deux dimensions, avec deux cles une de type parametre et une de type typededoc
+     */
     public static Map<ParametreType, Map<TypeDeDocGrouping, List<Parametre>>> cacheMapExemplaires = new HashMap<>();
     public static Map<ParametreType, Map<TypeDeDocGrouping, List<Parametre>>> cacheMapEmprunts = new HashMap<>();
 
@@ -55,12 +58,13 @@ public class Cache {
     }
 
     /**
-     * @return une liste de parametres
+     * @return une liste de parametres, liste vide si aucune liste n'est trouvee pour les cles choisies
      * @param key1: le type de parametre
      * @param key2: le type de document
      * @param limit: le nombre de parametres que l'on veut recuperer
      * @param sortBy: selon si on veut recuperer le cache de l'offre (exemplaires) ou de la demande (emprunts)
      * Recupere une liste dans le cache selon ses parametres
+     *
      */
     public static List<Parametre> get(ParametreType key1, TypeDeDocGrouping key2, Mode sortBy, int limit) {
         if(key1 == null || key2 == null || sortBy == null){

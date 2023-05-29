@@ -38,7 +38,8 @@ public class Database {
      * et de les match par type de document
      *
      * Elle convertit notamment les types enums en string pour la creation du body de la requete
-     * @author Mathilde & Celine
+     * @author Mathilde
+     * @author Celine
      * @return une List<Parametre> serialisee de la reponse en json de la requete
      * @param typeParam : le parametre choisi (ex: LANGUE)
      * @param typeDeDocEnum : le type de document sur lequel on veut se centrer uniquement (ex: LIVRE)
@@ -77,11 +78,11 @@ public class Database {
     /**
      * Cette methode cree le body d'une requete correspondant aux params definis.
      * On fait un pretaitement avec de l'aggregation MongoDB afin de ne recuperer que les donnees qui nous interressent.
-     * On aura une limite de 100 pour eviter de charger des donnees inutiles sachant qu'on affichera que les premiers. 
+     * On aura une limite de 100 pour eviter de charger des donnees inutiles sachant qu'on affichera que les premiers.
      * @author Celine & Marine
      * @param valGroup : valeur sur laquelle on va regrouper nos donnees (le type de parametre choisi)
      * @param typeDeDocGroupMatch : valeur avec laquelle on va match nos donnees (le type de document). Cette chaîne de caracteres inclus la liste des type de documents regroupe dans un type global (voir enum)
-     * @param sort : valeur par ordre duquel on va trier les donnees selon le mode choisi (offre ou demande)
+     * @param sort : valeur par ordre duquel on va trier (par ordre decroissant de valeurs: du plus grand au plus petit) les donnees selon le mode choisi (offre ou demande). Comme on ne prend que les premieres donnees il faut preciser lordre du tri car les 10 premiers en offre ne sont pas necessairement les memes 10 premiers en demande
      * */
     public static RequestBody getRequestBody(String valGroup, String typeDeDocGroupMatch, String sort){
         String valMatch;

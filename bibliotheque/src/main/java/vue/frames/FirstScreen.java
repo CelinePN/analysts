@@ -12,15 +12,14 @@ import java.util.Objects;
 
 
 /**
- *  <h1> FirstScreenEco </h1>
+ *  <h1> FirstScreen </h1>
  *
  * <p>
- *  Ecran de lancement et de chargement des donneés de l'application
- *  Permet de remplir les données chargées dans un cache pour y avoir accès en tout temps une fois le réseau coupé
  *
- *  Contrairement à la classe FirstScreenSpeed, dans cette classe, la requête vers la BDD est plus économique
- *  et écologique puisqu'elle pré-traite les données en amont dans la reqûete. Ce pré-traitement est chronophage
- *  et l'appel dure environ 2minutes.
+ *  Ecran de lancement et de chargement des donnees de l'application
+ *  Permet de remplir les donnees chargees dans un cache pour y avoir acces en tout temps meme sans reseau
+ *
+ *  L'appel dure environ 1min30.
  *
  *
  * </p>
@@ -28,7 +27,9 @@ import java.util.Objects;
  * @author Alice (pour la vue)
  * @author Marine (pour les actions)
  * @Version: 2.0
- * @since: 09/05/2023
+ * @since 10/04/2023
+
+
  */
 
 public class FirstScreen extends JFrame implements ObserverFirstScreen {
@@ -38,7 +39,8 @@ public class FirstScreen extends JFrame implements ObserverFirstScreen {
 
 
     /**
-     * Constructeur : initialisation de la fenêtre et lancement du chargement des données
+     * Constructeur : initialisation de la fenetre et lancement du chargement des donnees
+     * Creation d'un controleur associe
      */
     public FirstScreen() {
         super("Ecran de chargement"); // Titre de la fenêtre
@@ -54,7 +56,7 @@ public class FirstScreen extends JFrame implements ObserverFirstScreen {
         cardLayout.show(getContentPane(), "main");
         this.setResizable(false);
         this.pack();
-        this.setLocationRelativeTo(null); // Centrer la fenêtre sur l'écran
+        this.setLocationRelativeTo(null); // Centrer la fenêtre sur l'ecran
         setVisible(true); // Rendre la fenêtre visible
 
         this.controleurFirstScreen.loadData();
@@ -62,10 +64,10 @@ public class FirstScreen extends JFrame implements ObserverFirstScreen {
     }
 
     /**
-     * initialisaiton des vues de la fenêtre
+     * initialisation des vues de la fenetre
      */
     public void initView(){
-        //init panelMain
+        //init main panel
         JPanel panelMain = new JPanel(new BorderLayout(10, 10));
         panelMain.setBackground(Color.WHITE);
         DesignGridLayout layout = new DesignGridLayout(panelMain);
@@ -73,7 +75,7 @@ public class FirstScreen extends JFrame implements ObserverFirstScreen {
         loadingLabel.setFont(new Font("Roboto", Font.PLAIN, 16)); // changement de la police
         loadingLabel.setForeground(new Color(53, 152, 220)); // changement de la couleur du texte
         layout.row().center().add(loadingLabel);
-        layout.row().center().add(new JLabel(new ImageIcon(getClass().getClassLoader().getResource("53836.gif")))).withOwnRowWidth();
+        layout.row().center().add(new JLabel(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("53836.gif"))))).withOwnRowWidth();
         this.progressBar = new JProgressBar();
         this.progressBar.setPreferredSize(new Dimension(200, 20));
         this.progressBar.setStringPainted(true); // afficher la chaîne de caractères sous la barre de progression
@@ -109,7 +111,7 @@ public class FirstScreen extends JFrame implements ObserverFirstScreen {
 
 
     /**
-     * fonction permettant de relancer le chargement des données du début si une erreur est survenue
+     * fonction permettant de relancer le chargement des donnees du debut si une erreur est survenue
      */
 
 
@@ -127,6 +129,9 @@ public class FirstScreen extends JFrame implements ObserverFirstScreen {
         this.cardLayout.show(this.getContentPane(), "error");
     }
 
+    /**
+     * gestion du chargement complet des donnees
+     */
     @Override
     public void loadingSuccess() {
         Menu menu = new Menu();

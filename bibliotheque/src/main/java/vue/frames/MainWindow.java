@@ -269,7 +269,7 @@ public class MainWindow extends JFrame implements ObserverMainWindow {
         return controleurMainWindow;
     }
 
-
+    //Méthode permettant d'afficher des Messages Box
     @Override
     public void choisir() {
         JOptionPane.showMessageDialog(null, "Choisir les différents paramètres");
