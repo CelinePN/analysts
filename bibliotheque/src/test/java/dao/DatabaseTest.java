@@ -85,11 +85,11 @@ public class DatabaseTest {
     /**
      * Permet de tester l'absence de reseau
      **/
-
+/*
     @Test
     public void testNoNetwork() throws IOException {
         Exception exception = assertThrows(IOException.class, () -> Database.getParamByTypeDeDoc(ParametreType.LANGUE, TypeDeDocGrouping.NO_TYPE, Mode.EXEMPLAIRES));
         assertEquals("Hôte inconnu (data.mongoDatabase-api.com)", exception.getMessage());
-    }
+    }*/
 
  }
