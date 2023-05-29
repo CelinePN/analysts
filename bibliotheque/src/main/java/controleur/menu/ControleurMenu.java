@@ -8,13 +8,13 @@ import java.util.List;
  *  <h1> MainWindow Controleur </h1>
  *
  * <p>
- *      Cette classe gère les intéractions du menu.
+ *      Cette classe gere les interactions du menu.
  *
  * </p>
  *
- * @Author: Mathilde
- * @Version: 1.0
- * @since: 09/05/2023
+ * @author Mathilde
+ * @version 1.0
+ * @since 09/05/2023
  */
 
 
@@ -43,6 +43,10 @@ public class ControleurMenu {
         this.currentMode = currentMode;
     }
 
+    /**
+     * Methode permettant de selectionner le mode pour les graphiques de la mainWindow
+     * @author Mathilde
+     */
     public void selectioner() {
         if (this.getCurrentMode()!=null) {
 

@@ -1,23 +1,10 @@
-
 package vue.frames;
 
-/**
- * Menu extends JFrame
- * Dans le menu, un layout
- * Sur le layout 2 JPanel
- * 1 JPanel: add tous les boutons
- * 1 JPanel: 1 photo
- * et 1 bouton valider
- */
-
 import javax.swing.*;
-
 import controleur.menu.ControleurMenu;
 import controleur.menu.ObserverMenu;
-
 import modele.utils.Mode;
 import net.java.dev.designgridlayout.DesignGridLayout;
-
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Objects;
@@ -31,21 +18,28 @@ import java.util.Objects;
  *
  * </p>
  *
+
  * @author Alice (pour la vue)
- * @author ? (pour les actions)
- * @Version: 3.0
- * @since: 29/05/2023
+ * @author Mathilde (pour les actions)
+ * @version 3.0
+ * @since 29/05/2023
  */
 
 public class Menu extends JFrame implements ObserverMenu {
-    private JPanel panel1, panel2;
-    private JLabel jLabelImage;
-    private Image image;
+    private final JButton btnValider;
+    private final JRadioButton btnOffre, btnDemande, btnComparaison;
     private final ControleurMenu controleurMenu;
 
 
+    /**
+     * Creation du constructeur du menu avec l'initialisation des vues
+     * @author Alice
+     */
     public Menu() {
         super("Menu");
+        this.controleurMenu = new ControleurMenu();
+        this.controleurMenu.registerObserver(this);
+
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
@@ -61,9 +55,6 @@ public class Menu extends JFrame implements ObserverMenu {
             e.printStackTrace();
         }
 
-        this.controleurMenu = new ControleurMenu();
-        this.controleurMenu.registerObserver(this);
-
         // Titre au centre en haut
         JLabel labelTitre = new JLabel("Bienvenue dans le menu des bibliothèques de Paris");
         Font titleFont = new Font("Roboto", Font.BOLD, 24); // Utilisation de la police Roboto
@@ -73,9 +64,9 @@ public class Menu extends JFrame implements ObserverMenu {
         add(labelTitre, BorderLayout.NORTH);
 
         // Initialisation des boutons radio avec une couleur de fond personnalisée
-        JRadioButton btnDemande = new JRadioButton("Demande");
-        JRadioButton btnOffre = new JRadioButton("Offre");
-        JRadioButton btnComparaison = new JRadioButton("Comparaison Offre/Demande");
+        btnDemande = new JRadioButton("Demande");
+        btnOffre = new JRadioButton("Offre");
+        btnComparaison = new JRadioButton("Comparaison Offre/Demande");
         ButtonGroup buttonGroup = new ButtonGroup();
         buttonGroup.add(btnDemande);
         buttonGroup.add(btnOffre);
@@ -86,13 +77,71 @@ public class Menu extends JFrame implements ObserverMenu {
 
 
         // Initialisation du bouton "Valider" avec une couleur de fond et une police personnalisées
-        JButton btnValider = new JButton("Valider");
+        btnValider = new JButton("Valider");
         btnValider.setBackground(new Color(53, 152, 220));
         btnValider.setForeground(Color.WHITE);
         Font btnFont = new Font("Roboto", Font.BOLD, 14); // Utilisation de la police Roboto
         btnValider.setFont(btnFont);
 
+        // Ajout des boutons radio et du bouton "Valider" au panel1
+        JLabel labelExplication = new JLabel("Que voulez-vous regarder?");
+        Font labelFont = new Font("Roboto", Font.BOLD, 15); // Création d'une nouvelle police avec une taille de 24 points
+        labelExplication.setFont(labelFont); // Appliquer la nouvelle police à la JLabel
+        labelExplication.setPreferredSize(new Dimension(400, 50)); // Définir une taille personnalisée pour la JLabel (largeur de 400 pixels, hauteur de 50 pixels)
 
+        JPanel panel1 = new JPanel(new GridLayout(5, 1)); // Augmentation du nombre de lignes pour inclure le label
+        panel1.setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
+        panel1.add(labelExplication); // Ajout du label
+        panel1.add(btnDemande);
+        panel1.add(btnOffre);
+        panel1.add(btnComparaison);
+        panel1.add(btnValider);
+
+        //Ajout de l'icone
+        ClassLoader classLoader2 = getClass().getClassLoader();
+        ImageIcon icon = new ImageIcon(Objects.requireNonNull(classLoader2.getResource("livreB.jpg")));
+        setIconImage(icon.getImage());
+
+        // Ajout de l'image label au panel2
+        ClassLoader classLoader = getClass().getClassLoader();
+        ImageIcon imageIcon = new ImageIcon(Objects.requireNonNull(classLoader.getResource("menu.JPG")));
+        Image image = imageIcon.getImage();
+
+        // Redimensionner l'image en utilisant getScaledInstance()
+        int newWidth = 350; // Nouvelle largeur souhaitée
+        int newHeight = 350; // Nouvelle hauteur souhaitée
+        Image resizedImage = image.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
+
+        // Créer un nouvel ImageIcon à partir de l'image redimensionnée
+        ImageIcon resizedIcon = new ImageIcon(resizedImage);
+        JLabel jLabelImage = new JLabel(resizedIcon);
+
+
+        JPanel panel2 = new JPanel(new BorderLayout());
+        panel2.setVisible(true);
+        panel2.setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
+        panel2.add(jLabelImage);
+
+        gestionEvents();
+
+        // Ajout des panels au frame avec DesignGridLayout
+        JPanel contentPanel = new JPanel();
+        DesignGridLayout layout = new DesignGridLayout(contentPanel);
+        layout.row().center().add(labelTitre);
+        layout.row().grid().add(new JScrollPane(panel1)).add(new JScrollPane(panel2));
+        add(contentPanel, BorderLayout.CENTER);
+
+        pack();
+        setLocationRelativeTo(null); // Centrer la fenêtre sur l'écran
+        setVisible(true);
+
+    }
+
+    /**
+     * Gestion des clics sur les boutons dans le controleur
+     * @author Mathilde
+     */
+    void gestionEvents(){
         btnValider.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -124,73 +173,27 @@ public class Menu extends JFrame implements ObserverMenu {
                 controleurMenu.setCurrentMode(Mode.BOTH);
             }
         });
-
-
-        // Ajout des boutons radio et du bouton "Valider" au panel1
-        JLabel labelExplication = new JLabel("Que voulez-vous regarder?");
-        Font labelFont = new Font("Roboto", Font.BOLD, 15); // Création d'une nouvelle police avec une taille de 24 points
-        labelExplication.setFont(labelFont); // Appliquer la nouvelle police à la JLabel
-        labelExplication.setPreferredSize(new Dimension(400, 50)); // Définir une taille personnalisée pour la JLabel (largeur de 400 pixels, hauteur de 50 pixels)
-
-        panel1 = new JPanel(new GridLayout(5, 1)); // Augmentation du nombre de lignes pour inclure le label
-        panel1.setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
-        panel1.add(labelExplication); // Ajout du label
-        panel1.add(btnDemande);
-        panel1.add(btnOffre);
-        panel1.add(btnComparaison);
-        panel1.add(btnValider);
-
-        //Ajout de l'icone
-        ClassLoader classLoader2 = getClass().getClassLoader();
-        ImageIcon icon = new ImageIcon(Objects.requireNonNull(classLoader2.getResource("livreB.jpg")));
-        setIconImage(icon.getImage());
-
-        // Ajout de l'image label au panel2
-        ClassLoader classLoader = getClass().getClassLoader();
-        ImageIcon imageIcon = new ImageIcon(Objects.requireNonNull(classLoader.getResource("menu.JPG")));
-        image = imageIcon.getImage();
-
-        // Redimensionner l'image en utilisant getScaledInstance()
-        int newWidth = 350; // Nouvelle largeur souhaitée
-        int newHeight = 350; // Nouvelle hauteur souhaitée
-        Image resizedImage = image.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
-
-        // Créer un nouvel ImageIcon à partir de l'image redimensionnée
-        ImageIcon resizedIcon = new ImageIcon(resizedImage);
-        jLabelImage = new JLabel(resizedIcon);
-
-
-        panel2 = new JPanel(new BorderLayout());
-        panel2.setVisible(true);
-        panel2.setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
-        panel2.add(jLabelImage);
-
-
-        // Ajout des panels au frame avec DesignGridLayout
-        JPanel contentPanel = new JPanel();
-        DesignGridLayout layout = new DesignGridLayout(contentPanel);
-        layout.row().center().add(labelTitre);
-        layout.row().grid().add(new JScrollPane(panel1)).add(new JScrollPane(panel2));
-        add(contentPanel, BorderLayout.CENTER);
-
-        pack();
-        setLocationRelativeTo(null); // Centrer la fenêtre sur l'écran
-        setVisible(true);
-
     }
 
     public static void main(String[] args) {
         new Menu();
     }
 
-    // Méthode affichant un message (pop up) lorsque l'utilisateur n'a pas choisi sa catégorie
+    /**
+     * Methode affichant un message (pop up) lorsque l'utilisateur n'a pas choisi sa categorie
+     * @author Mathilde
+     * */
     @Override
     public void choisir() {
         JOptionPane.showMessageDialog(null, "Choisir une catégorie");
     }
 
 
-    //Méthode permettant de fermer le fenètre du menu
+    /**
+     * Methode permettant de fermer le fenetre du menu
+     * @author Mathilde
+     * @param mode
+     */
     @Override
     public void fenetrefermer(Mode mode) {
         MainWindow mainWindow = new MainWindow(mode);

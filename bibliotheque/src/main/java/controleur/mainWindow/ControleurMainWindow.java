@@ -20,9 +20,9 @@ import java.util.List;
  *      contrôle des données pour la mainwindow.
  * </p>
  *
- * @Author: Mathilde et Marine
- * @Version: 1.0
- * @since: 09/05/2023
+ * @author Mathilde
+ * @version 1.0
+ * @since 09/05/2023
  */
 
 
@@ -31,12 +31,8 @@ public class ControleurMainWindow {
     private Mode currentMode;
     private ParametreType parametreType;
     private TypeDeDocGrouping typeDeDocGrouping;
-
-
     private final List<ObserverMainWindow> observers;
     private TypeGraph typeGraph;
-
-
     private int limite;
 
 
