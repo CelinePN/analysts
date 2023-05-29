@@ -20,7 +20,7 @@ import java.util.List;
  *      contrôle des données pour la mainwindow.
  * </p>
  *
- * @author Mathilde et Marine
+ * @author Mathilde
  * @version 1.0
  * @since 09/05/2023
  */
@@ -44,7 +44,6 @@ public class ControleurMainWindow {
     public void registerObserver(ObserverMainWindow observer) {
         this.observers.add(observer);
     }
-    public List<ObserverMainWindow> getObservers() { return observers; }
 
     public TypeDeDocGrouping getTypeDeDocGrouping() {
         return typeDeDocGrouping;
@@ -86,7 +85,10 @@ public class ControleurMainWindow {
         this.currentMode = currentMode;
     }
 
-    public void valider() {
+    /**
+     * Gestion de la validation des parametres. En fonction de tous les boutons selectionnes, met a jour la vue en consequence
+     */
+    public void valider() throws Exception {
         if (this.getParametreType() != null && this.getLimite() != 0 && this.getTypeDeDocGrouping() != null && this.getTypeGraph() != null) {
             if (this.getCurrentMode() == Mode.BOTH) {
                 List<Parametre> listeemprunt = Cache.get(this.getParametreType(), this.getTypeDeDocGrouping(), Mode.EMPRUNTS, this.getLimite());
@@ -104,14 +106,10 @@ public class ControleurMainWindow {
                     }
                 }
             }
-
         }
-        else {
-            for (ObserverMainWindow observer : observers) {
-                observer.choisir();
-            }
+        else{
+            throw new Exception("Les parametres ne sont pas initialisés");
         }
-
     }
 }
 

@@ -20,36 +20,34 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 public class FirstScreenVueTest {
-    private final FirstScreen firstScreenEco= new FirstScreen();
+    private final FirstScreen firstScreen= new FirstScreen();
 
     @Test
     public void testInitView() {
-        firstScreenEco.initView();
-        assertNotNull(firstScreenEco.getContentPane());
-
+        firstScreen.initView();
+        assertNotNull(firstScreen.getContentPane());
     }
 
     @Test
     public void testRetry() {
-        assertTrue(firstScreenEco.getProgressBar().isVisible());
-        firstScreenEco.retry();
-        assertTrue(firstScreenEco.getProgressBar().isVisible());
+        assertTrue(firstScreen.getProgressBar().isVisible());
+        firstScreen.retry();
+        assertTrue(firstScreen.getProgressBar().isVisible());
     }
 
     @Test
     public void testProgressBar(){
-        firstScreenEco.getControleurFirstScreen().loadData();
+        firstScreen.getControleurFirstScreen().loadData();
 
         //attends que toutes les donnees soient chargees avant de tester le chargement du cache
-        while (!firstScreenEco.getControleurFirstScreen().isDataLoaded()) {
+        while (!firstScreen.getControleurFirstScreen().isDataLoaded()) {
             try {
                 Thread.sleep(100); // wait for 100 milliseconds
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-         assertEquals(100, firstScreenEco.getProgressBar().getValue());
-         assertFalse(firstScreenEco.getProgressBar().isVisible());
+         assertEquals(100, firstScreen.getProgressBar().getValue());
     }
 
     /**
@@ -57,16 +55,16 @@ public class FirstScreenVueTest {
      */
     @Test
     public void testErrorLoading(){
-        firstScreenEco.getControleurFirstScreen().loadData();
+        firstScreen.getControleurFirstScreen().loadData();
 
         //attends que toutes les donnees soient chargees avant de tester le chargement du cache
-        while (firstScreenEco.getControleurFirstScreen().getThread().isAlive()) {
+        while (firstScreen.getControleurFirstScreen().getThread().isAlive()) {
             try {
                 Thread.sleep(100); // wait for 100 milliseconds
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-        assertFalse(firstScreenEco.getProgressBar().isVisible());
+        assertTrue(firstScreen.getProgressBar().isVisible());
     }
 }

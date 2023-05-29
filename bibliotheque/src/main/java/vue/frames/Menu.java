@@ -192,7 +192,7 @@ public class Menu extends JFrame implements ObserverMenu {
     /**
      * Methode permettant de fermer le fenetre du menu
      * @author Mathilde
-     * @param mode
+     * @param mode : mode choisi (offre demande ou comparaison)
      */
     @Override
     public void fenetrefermer(Mode mode) {

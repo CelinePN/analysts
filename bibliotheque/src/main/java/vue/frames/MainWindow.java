@@ -50,7 +50,7 @@ public class MainWindow extends JFrame implements ObserverMainWindow {
     /**
      * Constructeur de la fenetre MainWindow avec un panel bouton et un panel graphique
      * @author Alice
-     * @param mode
+     * @param mode : le mode qu'on a choisi (demande ou offre ou comparaison)
      */
     public MainWindow(Mode mode) {
         super("Les bibliothèques de PARIS"); // Titre de la fenêtre
@@ -173,7 +173,13 @@ public class MainWindow extends JFrame implements ObserverMainWindow {
         gestionEvents();
 
         add(contentPanel, BorderLayout.CENTER);
-        controleurMainWindow.valider();
+        try{
+            controleurMainWindow.valider();
+        }
+        catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
+
         pack();
         setLocationRelativeTo(null); // Centrer la fenêtre sur l'écran
         setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -266,8 +272,12 @@ public class MainWindow extends JFrame implements ObserverMainWindow {
         btnValider.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-                controleurMainWindow.valider();
+                try{
+                    controleurMainWindow.valider();
+                }
+                catch(Exception exception) {
+                    System.out.println(exception.getMessage());
+                }
             }
         });
         btnRetour.addActionListener(new ActionListener() {
@@ -278,7 +288,10 @@ public class MainWindow extends JFrame implements ObserverMainWindow {
         });
     }
 
-    //Méthode permettant d'afficher des Messages Box
+    /**
+     * Methode permettant d'afficher des Messages Box si rien n'est selectionne
+     * @author Mathilde
+     */
     @Override
     public void choisir() {
         JOptionPane.showMessageDialog(null, "Choisir les différents paramètres");
@@ -287,9 +300,9 @@ public class MainWindow extends JFrame implements ObserverMainWindow {
     /**
      * Methode pour mettre a jour le panel avec le graphique selectionne
      * @author Mathilde
-     * @param liste
-     * @param typeGraph
-     * @param currentmode
+     * @param liste : liste de parametre a afficher sur le graphique
+     * @param typeGraph : type de graphique choisi (offre, demande ou comparaison)
+     * @param currentmode : mode choisi (offre, demande ou comparaison)
      */
     @Override
     public void updateGraphPanel(List<Parametre> liste, TypeGraph typeGraph, Mode currentmode) {
@@ -324,7 +337,5 @@ public class MainWindow extends JFrame implements ObserverMainWindow {
         BarresEmpilees jPanel3 = new BarresEmpilees(listeexemplaire,listeemprunt);
         panelRight.add(jPanel3, BorderLayout.CENTER);
         panelRight.revalidate();
-
     }
-
 }
