@@ -1,9 +1,7 @@
 package controleur.mainWindow;
 
 import modele.parametre.Parametre;
-import modele.parametre.ParametreType;
 import modele.utils.Mode;
-import modele.utils.TypeDeDocGrouping;
 import modele.utils.TypeGraph;
 
 import java.util.List;

@@ -18,15 +18,13 @@ import java.util.Objects;
  *
  *  Ecran de lancement et de chargement des donnees de l'application
  *  Permet de remplir les donnees chargees dans un cache pour y avoir acces en tout temps meme sans reseau
- *
  *  L'appel dure environ 1min30.
- *
  *
  * </p>
  *
  * @author Alice (pour la vue)
- * @author Marine (pour les actions)
- * @Version: 2.0
+ * @author Marine (pour le lien avec le controleur)
+ * @version 2.0
  * @since 10/04/2023
 
 
@@ -39,8 +37,9 @@ public class FirstScreen extends JFrame implements ObserverFirstScreen {
 
 
     /**
-     * Constructeur : initialisation de la fenetre et lancement du chargement des donnees
-     * Creation d'un controleur associe
+     * Constructeur : initialisation de la fenetre et instanciation du controleur
+     * Lancement du chargement des donnees
+     * @author Marine
      */
     public FirstScreen() {
         super("Ecran de chargement"); // Titre de la fenêtre
@@ -64,7 +63,8 @@ public class FirstScreen extends JFrame implements ObserverFirstScreen {
     }
 
     /**
-     * initialisation des vues de la fenetre
+     * Initialisation des vues de la fenetre
+     * @author Alice
      */
     public void initView(){
         //init main panel
@@ -108,13 +108,6 @@ public class FirstScreen extends JFrame implements ObserverFirstScreen {
         this.add(panelError, "error");
     }
 
-
-
-    /**
-     * fonction permettant de relancer le chargement des donnees du debut si une erreur est survenue
-     */
-
-
     public JProgressBar getProgressBar() {
         return progressBar;
     }
@@ -124,13 +117,18 @@ public class FirstScreen extends JFrame implements ObserverFirstScreen {
         this.progressBar.setValue(val);
     }
 
+    /**
+     * Fonction affichant une erreur en cas de perte de connexion
+     * @author Marine
+     */
     @Override
     public void loadingFailed() {
         this.cardLayout.show(this.getContentPane(), "error");
     }
 
     /**
-     * gestion du chargement complet des donnees
+     * Gestion du chargement complet des donnees
+     * @author Marine
      */
     @Override
     public void loadingSuccess() {
@@ -141,6 +139,10 @@ public class FirstScreen extends JFrame implements ObserverFirstScreen {
         dispose();
     }
 
+    /**
+     * Gestion de la vue pour la reconnexion
+     * @author Marine
+     */
     @Override
     public void retry() {
         this.cardLayout.show(this.getContentPane(), "main");
