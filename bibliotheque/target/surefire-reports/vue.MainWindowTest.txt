@@ -1,4 +1,12 @@
 -------------------------------------------------------------------------------
 Test set: vue.MainWindowTest
 -------------------------------------------------------------------------------
-Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 s - in vue.MainWindowTest
+Tests run: 2, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 0.629 s <<< FAILURE! - in vue.MainWindowTest
+testInitDemande  Time elapsed: 0.466 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: java.lang.Integer@41aaedaa<1> but was: java.lang.String@303a5119<1>
+	at vue.MainWindowTest.testInitDemande(MainWindowTest.java:35)
+
+testInitComparaison  Time elapsed: 0.162 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: java.lang.Integer@41aaedaa<1> but was: java.lang.String@303a5119<1>
+	at vue.MainWindowTest.testInitComparaison(MainWindowTest.java:43)
+
