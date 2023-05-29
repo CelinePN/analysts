@@ -17,10 +17,18 @@ import java.util.List;
 import org.jfree.chart.labels.StandardCategoryItemLabelGenerator;
 import org.jfree.chart.renderer.category.CategoryItemRenderer;
 
+    /**
+     *
+     * Classe pour afficher un graphique de type Histogramme
+     * à partir de la liste de paramètre récupérée de nos données
+     *
+     * @author  Alice Hué
+     * @version 1.0
+     * @since   2023-03-30
+     *
+     **/
 
 public class Histogramme extends JPanel {
-
-    //ajouter un histogramme par défaut (voir classe histogramme)
 
     public Histogramme() {
         // Création des données

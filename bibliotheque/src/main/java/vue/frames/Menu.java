@@ -31,18 +31,14 @@ import java.util.Objects;
  *
  * </p>
  *
- * @Author: Alice et Mathilde
- * @Version: 1.0
- * @since: 09/05/2023
+ * @author Alice (pour la vue)
+ * @author ? (pour les actions)
+ * @Version: 3.0
+ * @since: 29/05/2023
  */
 
 public class Menu extends JFrame implements ObserverMenu {
     private JPanel panel1, panel2;
-    public  JRadioButton btnDemande;
-    public  JRadioButton btnOffre;
-    public  JRadioButton btnComparaison;
-    private ButtonGroup buttonGroup;
-    private JButton btnValider;
     private JLabel jLabelImage;
     private Image image;
     private final ControleurMenu controleurMenu;
@@ -53,30 +49,49 @@ public class Menu extends JFrame implements ObserverMenu {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
+        // Personnalisation des couleurs du look and feel Nimbus
+        UIManager.put("nimbusBase", new Color(240, 240, 240)); // Couleur de base
+        UIManager.put("nimbusLightBackground", new Color(255, 255, 255)); // Fond clair
+        UIManager.put("control", new Color(225, 225, 225)); // Couleur des contrôles
+
+        // Utilisation du look and feel Nimbus
+        try {
+            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         this.controleurMenu = new ControleurMenu();
         this.controleurMenu.registerObserver(this);
 
         // Titre au centre en haut
         JLabel labelTitre = new JLabel("Bienvenue dans le menu des bibliothèques de Paris");
-        Font titleFont = new Font("Georgia", Font.BOLD, 20);
+        Font titleFont = new Font("Roboto", Font.BOLD, 24); // Utilisation de la police Roboto
         labelTitre.setFont(titleFont);
-        labelTitre.setForeground(Color.BLUE);
+        labelTitre.setForeground(new Color(53, 152, 220));
         labelTitre.setHorizontalAlignment(JLabel.CENTER);
         add(labelTitre, BorderLayout.NORTH);
 
-        // Initialisation des boutons radio
-        btnDemande = new JRadioButton("Demande");
-        btnOffre = new JRadioButton("Offre");
-        btnComparaison = new JRadioButton("Comparaison Offre/Demande");
-        buttonGroup = new ButtonGroup();
+        // Initialisation des boutons radio avec une couleur de fond personnalisée
+        JRadioButton btnDemande = new JRadioButton("Demande");
+        JRadioButton btnOffre = new JRadioButton("Offre");
+        JRadioButton btnComparaison = new JRadioButton("Comparaison Offre/Demande");
+        ButtonGroup buttonGroup = new ButtonGroup();
         buttonGroup.add(btnDemande);
         buttonGroup.add(btnOffre);
         buttonGroup.add(btnComparaison);
+        btnDemande.setBackground(new Color(53, 152, 220));
+        btnOffre.setBackground(new Color(53, 152, 220));
+        btnComparaison.setBackground(new Color(53, 152, 220));
 
-        // Initialisation du bouton "Valider"
-        btnValider = new JButton("Valider");
-        btnValider.setBackground(Color.BLUE);
+
+        // Initialisation du bouton "Valider" avec une couleur de fond et une police personnalisées
+        JButton btnValider = new JButton("Valider");
+        btnValider.setBackground(new Color(53, 152, 220));
         btnValider.setForeground(Color.WHITE);
+        Font btnFont = new Font("Roboto", Font.BOLD, 14); // Utilisation de la police Roboto
+        btnValider.setFont(btnFont);
+
 
         btnValider.addActionListener(new ActionListener() {
             @Override
@@ -113,6 +128,10 @@ public class Menu extends JFrame implements ObserverMenu {
 
         // Ajout des boutons radio et du bouton "Valider" au panel1
         JLabel labelExplication = new JLabel("Que voulez-vous regarder?");
+        Font labelFont = new Font("Roboto", Font.BOLD, 15); // Création d'une nouvelle police avec une taille de 24 points
+        labelExplication.setFont(labelFont); // Appliquer la nouvelle police à la JLabel
+        labelExplication.setPreferredSize(new Dimension(400, 50)); // Définir une taille personnalisée pour la JLabel (largeur de 400 pixels, hauteur de 50 pixels)
+
         panel1 = new JPanel(new GridLayout(5, 1)); // Augmentation du nombre de lignes pour inclure le label
         panel1.setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
         panel1.add(labelExplication); // Ajout du label
@@ -128,7 +147,7 @@ public class Menu extends JFrame implements ObserverMenu {
 
         // Ajout de l'image label au panel2
         ClassLoader classLoader = getClass().getClassLoader();
-        ImageIcon imageIcon = new ImageIcon(Objects.requireNonNull(classLoader.getResource("menu.png")));
+        ImageIcon imageIcon = new ImageIcon(Objects.requireNonNull(classLoader.getResource("menu.JPG")));
         image = imageIcon.getImage();
 
         // Redimensionner l'image en utilisant getScaledInstance()
@@ -154,19 +173,9 @@ public class Menu extends JFrame implements ObserverMenu {
         layout.row().grid().add(new JScrollPane(panel1)).add(new JScrollPane(panel2));
         add(contentPanel, BorderLayout.CENTER);
 
-
-        // Ajout d'une marge autour de la fenêtre pour centrer
-        Insets insets = Toolkit.getDefaultToolkit().getScreenInsets(getGraphicsConfiguration());
-        int horizontalInsets = insets.left + insets.right;
-        int verticalInsets = insets.top + insets.bottom;
-        int windowWidth = imageIcon.getIconWidth() + horizontalInsets;
-        int windowHeight = imageIcon.getIconHeight() + labelTitre.getPreferredSize().height + panel1.getPreferredSize().height + verticalInsets;
-        //setPreferredSize(new Dimension(windowWidth, windowHeight));
         pack();
         setLocationRelativeTo(null); // Centrer la fenêtre sur l'écran
         setVisible(true);
-        //Bloquer taille de la fenetre
-        setResizable(false);
 
     }
 

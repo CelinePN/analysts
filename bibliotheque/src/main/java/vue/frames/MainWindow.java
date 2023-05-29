@@ -25,6 +25,7 @@ import java.util.Objects;
 
 import static modele.utils.Mode.BOTH;
 
+
 /**
  *  <h1> MainWindow Vue </h1>
  *
@@ -33,9 +34,10 @@ import static modele.utils.Mode.BOTH;
  *      A l'aide des boutons, elle gère les interactions avec l'utilisateur.
  * </p>
  *
- * @Author: Alice et Mathilde
- * @Version: 1.0
- * @since: 09/05/2023
+ * @author Alice (pour la vue)
+ * @author Mathilde (pour les actions)
+ * @Version: 3.0
+ * @since: 29/05/2023
  */
 
 public class MainWindow extends JFrame implements ObserverMainWindow {
@@ -47,10 +49,12 @@ public class MainWindow extends JFrame implements ObserverMainWindow {
     private JButton btnRetour;
     private JLabel labelTop;
     private final ControleurMainWindow controleurMainWindow;
+    private Image image;
 
    //Constructeur de la MainWindow
     public MainWindow(Mode mode) {
         super("Les bibliothèques de PARIS"); // Titre de la fenêtre
+
         //Création et affichage de l'ICON
         ClassLoader classLoader2 = getClass().getClassLoader();
         ImageIcon icon = new ImageIcon(Objects.requireNonNull(classLoader2.getResource("livreB.jpg")));
@@ -61,10 +65,6 @@ public class MainWindow extends JFrame implements ObserverMainWindow {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
         this.controleurMainWindow.registerObserver(this);
-
-        // Label en haut
-        labelTop = new JLabel("Les documents des bibliothèques de Paris");
-        labelTop.setHorizontalAlignment(JLabel.CENTER);
 
         // Boutons à gauche
         buttonGroup = new ButtonGroup();
@@ -85,13 +85,34 @@ public class MainWindow extends JFrame implements ObserverMainWindow {
 
 
         btnValider = new JButton("Valider");
+        btnValider.setBackground(new Color(53, 152, 220));
+        btnValider.setForeground(Color.WHITE);
+        Font btnFont = new Font("Roboto", Font.BOLD, 14); // Utilisation de la police Roboto
+        btnValider.setFont(btnFont);
         btnRetour = new JButton("Retour Menu");
+        btnRetour.setBackground(new Color(53, 152, 220));
+        btnRetour.setForeground(Color.WHITE);
+        btnRetour.setFont(btnFont);
 
 
         // Label en haut
+        labelTop = new JLabel("Les documents des bibliothèques de Paris");
+        int topLabelVerticalPadding = 10;
+        labelTop.setBorder(BorderFactory.createEmptyBorder(topLabelVerticalPadding, 20, topLabelVerticalPadding, 20));
+        labelTop.setHorizontalAlignment(JLabel.CENTER);
+        Font titleFont = new Font("Roboto", Font.BOLD, 20); // Utilisation de la police Roboto
+        labelTop.setFont(titleFont);
+
+        Font labelFont = new Font("Roboto", Font.BOLD, 13); // Utilisation de la police Roboto
         JLabel labelParametre = new JLabel("Type de document");
+        labelParametre.setFont(labelFont);
+
         JLabel labelType = new JLabel("Catégorie");
+        labelType.setFont(labelFont);
+
         JLabel labelLimite = new JLabel("Nombre max.");
+        labelLimite.setFont(labelFont);
+
 
         // Boutons déroulants en haut
         JComboBox<TypeDeDocGrouping> comboBoxPartType = new JComboBox<>(TypeDeDocGrouping.values());
@@ -178,22 +199,42 @@ public class MainWindow extends JFrame implements ObserverMainWindow {
 
         // Label à gauche
         JLabel labelTypeGraph = new JLabel("Type de graphique");
+        Font titleFont1 = new Font("Roboto", Font.BOLD, 16); // Utilisation de la police Roboto
+        labelTypeGraph.setFont(titleFont1);
+
+        // Ajout de l'image label au panel2
+        ClassLoader classLoader = getClass().getClassLoader();
+        ImageIcon imageIcon = new ImageIcon(Objects.requireNonNull(classLoader.getResource("enfant.png")));
+        image = imageIcon.getImage();
+        // Redimensionner l'image en utilisant getScaledInstance()
+        int newWidth = 100; // Nouvelle largeur souhaitée
+        int newHeight = 100; // Nouvelle hauteur souhaitée
+        Image resizedImage = image.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
+
+        // Créer un nouvel ImageIcon à partir de l'image redimensionnée
+        ImageIcon resizedIcon = new ImageIcon(resizedImage);
+        JLabel jLabelImage = new JLabel(resizedIcon);
 
         // Panel à gauche
         panelLeft = new JPanel(new GridLayout(5, 1));
-        panelLeft.setBorder(BorderFactory.createEmptyBorder(25, 25, 25, 25));
+        panelLeft.setBorder(BorderFactory.createEmptyBorder(25, 20, 25, 10));
         panelLeft.add(labelTypeGraph);
 
-        if(controleurMainWindow.getCurrentMode()==BOTH) {
+        if (controleurMainWindow.getCurrentMode() == BOTH) {
             panelLeft.add(btnBarresEmpilees);
-        }
-        else{
+        } else {
             panelLeft.add(btnCamembert);
             panelLeft.add(btnHistogramme);
         }
 
-        panelLeft.add(btnValider);
-        panelLeft.add(btnRetour);
+        JPanel buttonsPanel = new JPanel(new FlowLayout());
+        buttonsPanel.add(btnValider);
+        buttonsPanel.add(btnRetour);
+        panelLeft.add(buttonsPanel);
+
+        // Ajoutez l'imageLabel en bas du panelLeft
+        panelLeft.add(jLabelImage);
+
 
 
         // Panel à droite
@@ -213,10 +254,9 @@ public class MainWindow extends JFrame implements ObserverMainWindow {
         pack();
         setLocationRelativeTo(null); // Centrer la fenêtre sur l'écran
         setExtendedState(JFrame.MAXIMIZED_BOTH);
-        //setPreferredSize(new Dimension(1200, 250));
         setVisible(true);
     }
-    // Mathode pour revenir au menu principal
+    // Méthode pour revenir au menu principal
     private void retourMenu(){
         Menu menu = new Menu();
         menu.setVisible(true);

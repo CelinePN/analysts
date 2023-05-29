@@ -25,9 +25,10 @@ import java.util.Objects;
  *
  * </p>
  *
- * @Author: Marine
- * @Version: 1.0
- * @since: 10/04/2023
+ * @author Alice (pour la vue)
+ * @author Marine (pour les actions)
+ * @Version: 2.0
+ * @since: 09/05/2023
  */
 
 public class FirstScreen extends JFrame implements ObserverFirstScreen {
@@ -69,8 +70,8 @@ public class FirstScreen extends JFrame implements ObserverFirstScreen {
         panelMain.setBackground(Color.WHITE);
         DesignGridLayout layout = new DesignGridLayout(panelMain);
         JLabel loadingLabel = new JLabel("Veuillez patienter, nous chargeons les données pour vous...");
-        loadingLabel.setFont(new Font("Georgia", Font.PLAIN, 16)); // changement de la police
-        loadingLabel.setForeground(Color.BLUE); // changement de la couleur du texte
+        loadingLabel.setFont(new Font("Roboto", Font.PLAIN, 16)); // changement de la police
+        loadingLabel.setForeground(new Color(53, 152, 220)); // changement de la couleur du texte
         layout.row().center().add(loadingLabel);
         layout.row().center().add(new JLabel(new ImageIcon(getClass().getClassLoader().getResource("53836.gif")))).withOwnRowWidth();
         this.progressBar = new JProgressBar();

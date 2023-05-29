@@ -10,6 +10,17 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
+    /**
+     *
+     * Classe pour afficher un graphique de type Barres Empilées
+     * à partir de la liste de paramètre récupérée de nos données
+     *
+     * @author  Alice Hué
+     * @version 1.0
+     * @since   2023-03-30
+     *
+     **/
+
 public class BarresEmpilees extends JPanel {
 
     public BarresEmpilees() {
