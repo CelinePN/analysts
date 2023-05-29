@@ -10,8 +10,7 @@ import modele.utils.TypeDeDocGrouping;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
 
-import static modele.utils.TypeDeDocGrouping.FILMS;
-import static modele.utils.TypeDeDocGrouping.NO_TYPE;
+import static modele.utils.TypeDeDocGrouping.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.IOException;
@@ -84,8 +83,10 @@ public class FirstScreenControleurTest {
                 e.printStackTrace();
             }
         }
-        assertEquals(cacheTestEmprunts.get(ParametreType.LANGUE).get(NO_TYPE), Cache.get(ParametreType.LANGUE, NO_TYPE, Mode.EMPRUNTS, Integer.MAX_VALUE));
-        assertEquals(cacheTestExemplaires.get(ParametreType.AUTEUR).get(TypeDeDocGrouping.FILMS), Cache.get(ParametreType.AUTEUR, FILMS, Mode.EXEMPLAIRES, Integer.MAX_VALUE));
+        assertEquals(cacheTestEmprunts.get(ParametreType.LANGUE).get(NO_TYPE).get(0).getTotalPrets(), Cache.get(ParametreType.LANGUE, NO_TYPE, Mode.EMPRUNTS, Integer.MAX_VALUE).get(0).getTotalPrets());
+        assertEquals(cacheTestExemplaires.get(ParametreType.AUTEUR).get(TypeDeDocGrouping.FILMS).get(0).getTotalExemplaires(), Cache.get(ParametreType.AUTEUR, FILMS, Mode.EXEMPLAIRES, Integer.MAX_VALUE).get(0).getTotalExemplaires());
+        assertEquals(cacheTestEmprunts.get(ParametreType.GENRE).get(LIVRES).get(5).getTotalPrets(), Cache.get(ParametreType.GENRE, LIVRES, Mode.EMPRUNTS, Integer.MAX_VALUE).get(5).getTotalPrets());
+        assertEquals(cacheTestExemplaires.get(ParametreType.TYPE_DE_DOC).get(MUSIQUE).get(3).getTotalExemplaires(), Cache.get(ParametreType.TYPE_DE_DOC, MUSIQUE, Mode.EXEMPLAIRES, Integer.MAX_VALUE).get(3).getTotalExemplaires());
     }
 
     void remplitCache(){

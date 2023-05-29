@@ -17,9 +17,9 @@ import org.jfree.chart.labels.StandardCategoryItemLabelGenerator;
     /**
      *
      * Classe pour afficher un graphique de type Histogramme
-     * à partir de la liste de paramètre récupérée de nos données
+     * à partir de la liste de paramètre récupérée de nos donnees
      *
-     * @author  Alice Hué
+     * @author  Alice Hue
      * @version 1.0
      * @since   2023-03-30
      *

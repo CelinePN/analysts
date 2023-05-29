@@ -11,6 +11,18 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *  <h1> FirstScreen Controleur </h1>
+ *
+ * <p>
+ *      Cette classe est le controleur qui gere l'ecran de chargement des donnees
+ * </p>
+ *
+ * @author Marine
+ * @version 3.0
+ * @since 15/05/2023
+ */
+
 public class ControleurFirstScreen {
 
     private boolean isDataLoaded;
@@ -19,6 +31,10 @@ public class ControleurFirstScreen {
     private List<Parametre> listeExemplaires = new ArrayList<>();
     private List<Parametre> listeEmprunts = new ArrayList<>();
     Thread thread;
+
+    /**
+     * Constructeur: initialise le chargement a false et initiallise les observers
+     */
 
     public ControleurFirstScreen() {
         this.isDataLoaded = false;
@@ -32,10 +48,12 @@ public class ControleurFirstScreen {
 
     /**
      * Chargement des données:
-     * On commence par vider le cache au cas où il ait commencé à être rempli et interrompu
      * Création d'un thread dans lequel on parcourt les caches, on fait une requête et on remplit le cache avec la liste chargée
      * Gestion de l'exception: si une erreur est survenue dans la requête, on affiche un message d'erreur et une possibilité de réeessayer
      * si aucune exception n'est levée, le thread se finit par le lancement du menu
+     *
+     * Avant de faire une requete pour remplir le cache, on verifie que le cache n'est pas deja rempli, notammenet si une coupure reseau a arrete le chargement en cours
+     * Si le cache est deja rempli pour la valeur souhaite, on ne fait pas d'appel, sinon on remplit avec un appel en base
      */
 
     public void loadData() {
@@ -94,6 +112,10 @@ public class ControleurFirstScreen {
     public void setDataLoaded(boolean dataLoaded) {
         isDataLoaded = dataLoaded;
     }
+
+    /**
+     * Retente le chargement des donnees
+     */
 
     public void retry(){
         for(ObserverFirstScreen observer : observers){

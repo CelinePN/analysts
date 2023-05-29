@@ -77,7 +77,7 @@ public class FirstScreen extends JFrame implements ObserverFirstScreen {
         loadingLabel.setFont(new Font("Roboto", Font.PLAIN, 16)); // changement de la police
         loadingLabel.setForeground(new Color(53, 152, 220)); // changement de la couleur du texte
         layout.row().center().add(loadingLabel);
-        layout.row().center().add(new JLabel(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("53836.gif"))))).withOwnRowWidth();
+        layout.row().center().add(new JLabel(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("sablier.gif"))))).withOwnRowWidth();
         this.progressBar = new JProgressBar();
         this.progressBar.setPreferredSize(new Dimension(200, 20));
         this.progressBar.setStringPainted(true); // afficher la chaîne de caractères sous la barre de progression
